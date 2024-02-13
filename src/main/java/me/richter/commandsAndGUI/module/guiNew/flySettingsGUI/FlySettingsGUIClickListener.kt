@@ -1,0 +1,105 @@
+package me.richter.commandsAndGUI.module.guiNew.flySettingsGUI
+
+import me.richter.commandsAndGUI.Main
+import me.richter.commandsAndGUI.items.FlySettingsItems
+import me.richter.commandsAndGUI.items.GeneralItems
+import me.richter.commandsAndGUI.module.guiNew.mainGUI.MainGUI
+import org.bukkit.Bukkit
+import org.bukkit.event.EventHandler
+import org.bukkit.event.Listener
+import org.bukkit.event.inventory.InventoryClickEvent
+
+class FlySettingsGUIClickListener: Listener {
+    @EventHandler
+    fun inventoryClickEvent(event: InventoryClickEvent) {
+        if(event.currentItem == null) return
+        val player = Bukkit.getPlayer(event.whoClicked.uniqueId) ?: return
+        val inventory = Main.guiFlySettingsMap[player.uniqueId]
+        if(event.clickedInventory != inventory) { return }
+
+        when (event.currentItem) {
+            FlySettingsItems().skala0off() -> {
+                FlySettingsGUI().reset(player)
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala0on())
+                player.flySpeed = 0.000f
+                event.isCancelled = true
+            }
+            FlySettingsItems().skala0on() -> {}
+
+            FlySettingsItems().skala25off() -> {
+                FlySettingsGUI().reset(player)
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala25on())
+                player.flySpeed = 0.025f
+                event.isCancelled = true
+            }
+            FlySettingsItems().skala25on() -> {}
+
+            FlySettingsItems().skala50off() -> {
+                FlySettingsGUI().reset(player)
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala50on())
+                player.flySpeed = 0.050F
+                event.isCancelled = true
+            }
+            FlySettingsItems().skala50on() -> {}
+
+            FlySettingsItems().skala75off() -> {
+                FlySettingsGUI().reset(player)
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala75Oon())
+                player.flySpeed = 0.075F
+                event.isCancelled = true
+            }
+            FlySettingsItems().skala75Oon() -> {}
+
+            FlySettingsItems().skala100off() -> {
+                FlySettingsGUI().reset(player)
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala100on())
+                player.flySpeed = 0.100F
+                event.isCancelled = true
+            }
+            FlySettingsItems().skala100on() -> {}
+
+            FlySettingsItems().skala125off() -> {
+                FlySettingsGUI().reset(player)
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala125On())
+                player.flySpeed = 0.250F
+                event.isCancelled = true
+            }
+            FlySettingsItems().skala125On() -> {}
+
+            FlySettingsItems().skala150off() -> {
+                FlySettingsGUI().reset(player)
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala150on())
+                player.flySpeed = 0.500F
+                event.isCancelled = true
+            }
+            FlySettingsItems().skala150on() -> {}
+
+            FlySettingsItems().skala175off() -> {
+                FlySettingsGUI().reset(player)
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala175on())
+                player.flySpeed = 0.750F
+                event.isCancelled = true
+            }
+            FlySettingsItems().skala175on() -> {}
+
+            FlySettingsItems().skala200off() -> {
+                FlySettingsGUI().reset(player)
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala100on())
+                player.flySpeed = 1.000F
+                event.isCancelled = true
+            }
+            FlySettingsItems().skala100on() -> {}
+
+            GeneralItems().itemGuiBack() -> {
+                MainGUI().open(player)
+                event.isCancelled = true
+            }
+            GeneralItems().itemGuiClose() -> {
+                player.closeInventory()
+                event.isCancelled = true
+            }
+
+        }
+        event.isCancelled = true
+    }
+}
