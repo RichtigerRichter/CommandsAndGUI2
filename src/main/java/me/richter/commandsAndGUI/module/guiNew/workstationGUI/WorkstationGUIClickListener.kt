@@ -2,11 +2,9 @@ package me.richter.commandsAndGUI.module.guiNew.workstationGUI
 
 import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.items.GeneralItems
-import me.richter.commandsAndGUI.items.MainItems
 import me.richter.commandsAndGUI.items.OpenWorkstationsItems
 import me.richter.commandsAndGUI.module.guiNew.mainGUI.MainGUI
 import me.richter.commandsAndGUI.module.workstations.OpenWorkFun
-import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener

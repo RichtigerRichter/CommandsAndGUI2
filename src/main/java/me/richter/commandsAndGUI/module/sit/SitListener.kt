@@ -1,14 +1,10 @@
 package me.richter.commandsAndGUI.module.sit
 
 import me.richter.commandsAndGUI.Main
-import net.kyori.adventure.text.Component
 import org.bukkit.entity.Entity
-import org.bukkit.entity.LivingEntity
-import org.bukkit.entity.Player
-import org.bukkit.event.vehicle.VehicleExitEvent
-import org.bukkit.event.player.PlayerToggleSneakEvent
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerToggleSneakEvent
 
 class SitListener : Listener {
     @EventHandler

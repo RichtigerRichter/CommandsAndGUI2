@@ -1,6 +1,5 @@
 package me.richter.commandsAndGUI.module.sit
 
-import me.richter.commandsAndGUI.module.backpack.BackpackManager
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.command.Command

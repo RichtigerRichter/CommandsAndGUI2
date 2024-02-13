@@ -1,7 +1,6 @@
 //Todo [todo] mehr konfigurierbares machen
 package me.richter.commandsAndGUI.files
 
-import me.richter.commandsAndGUI.items.OpenWorkstationsItems
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 

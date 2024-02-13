@@ -1,11 +1,7 @@
 package me.richter.commandsAndGUI.module.guiNew
 
-import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.items.GeneralItems
-import net.kyori.adventure.text.Component
-import org.bukkit.Bukkit
 import org.bukkit.Material
-import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 
 class GUIMiscFuns {

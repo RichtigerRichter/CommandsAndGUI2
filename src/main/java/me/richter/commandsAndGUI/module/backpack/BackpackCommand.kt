@@ -3,7 +3,6 @@ package me.richter.commandsAndGUI.module.backpack
 import me.richter.commandsAndGUI.files.ConfigFile.IsModuleEnabled
 import me.richter.commandsAndGUI.files.MessagesFile.Message
 import net.kyori.adventure.text.Component
-import org.apache.commons.lang3.ObjectUtils.Null
 import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor

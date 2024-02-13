@@ -8,7 +8,6 @@ import me.richter.commandsAndGUI.module.guiNew.GUIMiscFuns
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
-import org.bukkit.inventory.Inventory
 
 class WorkstationGUI {
     fun open (player: Player) {
