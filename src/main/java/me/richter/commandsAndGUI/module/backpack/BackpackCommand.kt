@@ -49,7 +49,7 @@ class BackpackCommand: CommandExecutor, TabCompleter {
                 if (BackpackManager().delete(args[1])) {
                     sender.sendMessage(Component.text(Message.backpackDeleted))
                 } else {
-                    sender.sendMessage("did not delete (bidde bei richter melden, weil eigentlich sollte das nicht passieren -_- )")
+                    sender.sendMessage("did not delete (bidde bei richter melden, weil das eigentlich nicht passieren sollte -_- )")
                 }
 
             }

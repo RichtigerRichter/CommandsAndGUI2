@@ -23,6 +23,11 @@ import me.richter.commandsAndGUI.module.vanish.VanishCommand
 import me.richter.commandsAndGUI.module.vanish.VanishManager
 import me.richter.commandsAndGUI.module.workstations.OpenCommand
 import me.richter.commandsAndGUI.module.worldManager.WorldGUICommand
+import org.bukkit.Material
+import org.bukkit.Registry
+import org.bukkit.Registry.*
+import org.bukkit.block.Biome
+import org.bukkit.block.Block
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
@@ -32,6 +37,8 @@ import java.util.*
 class Main : JavaPlugin() {
 
     companion object {
+        val plugin = this
+
         val guiMainMap: MutableMap<UUID, Inventory> = mutableMapOf()
         val guiFlySettingsMap: MutableMap<UUID, Inventory> = mutableMapOf()
         val guiWorkstationMap: MutableMap<UUID, Inventory> = mutableMapOf()
@@ -84,7 +91,7 @@ class Main : JavaPlugin() {
         getCommand("fly")!!.setExecutor(FlyCommand())
         getCommand("jump")!!.setExecutor(JumpCommand())
         getCommand("GUI")!!.setExecutor(GUICommand())
-        getCommand("worldManager")!!.setExecutor(WorldGUICommand())
+        getCommand("worldManager")!!.setExecutor(WorldGUICommand(this))
         getCommand("setup")!!.setExecutor(SetupCommand())
         getCommand("god")!!.setExecutor(GodCommand())
         getCommand("vanish")!!.setExecutor(VanishCommand(this))
