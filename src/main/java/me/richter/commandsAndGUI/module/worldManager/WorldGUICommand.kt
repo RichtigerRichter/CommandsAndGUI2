@@ -2,8 +2,6 @@ package me.richter.commandsAndGUI.module.worldManager
 
 import me.richter.commandsAndGUI.files.ConfigFile
 import me.richter.commandsAndGUI.files.MessagesFile
-import me.richter.commandsAndGUI.Funs
-import me.richter.commandsAndGUI.Main
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.TriState
 import org.bukkit.Bukkit

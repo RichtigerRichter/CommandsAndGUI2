@@ -1,6 +1,5 @@
 package me.richter.commandsAndGUI.module.vanish
 
-import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.MessagesFile
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit

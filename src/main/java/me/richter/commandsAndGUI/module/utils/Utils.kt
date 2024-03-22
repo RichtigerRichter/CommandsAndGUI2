@@ -1,13 +1,11 @@
 package me.richter.commandsAndGUI.module.utils
 
 import io.papermc.paper.event.player.AsyncChatEvent
-import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.MessagesFile
 import net.kyori.adventure.text.Component
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
-import kotlin.math.max
 
 class Utils(private val plugin: JavaPlugin) : Listener {
     @EventHandler

@@ -1,7 +1,6 @@
 package me.richter.commandsAndGUI.module.utils
 
 import org.bukkit.Bukkit
-import org.bukkit.plugin.java.JavaPlugin
 
 class MinecraftVersion {
 

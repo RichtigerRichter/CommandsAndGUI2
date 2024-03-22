@@ -1,17 +1,12 @@
 package me.richter.commandsAndGUI.module.heal
 
-import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.ConfigFile
 import me.richter.commandsAndGUI.files.ConfigFile.IsModuleEnabled
 import me.richter.commandsAndGUI.files.MessagesFile.Message
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.attribute.Attribute
-import org.bukkit.command.Command
-import org.bukkit.command.CommandExecutor
-import org.bukkit.command.CommandSender
-import org.bukkit.command.ConsoleCommandSender
-import org.bukkit.command.TabCompleter
+import org.bukkit.command.*
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -58,7 +53,7 @@ class HealCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComplete
 
     override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {
         if (command.name.equals("heal", ignoreCase = true)) {
-            if (!ConfigFile.IsModuleEnabled.godmode) { sender.sendMessage(Message.moduleNotEnabled); return mutableListOf() }
+            if (!IsModuleEnabled.godmode) { sender.sendMessage(Message.moduleNotEnabled); return mutableListOf() }
 
             val completions = mutableListOf<String>()
             if (args.isEmpty()) {return completions}

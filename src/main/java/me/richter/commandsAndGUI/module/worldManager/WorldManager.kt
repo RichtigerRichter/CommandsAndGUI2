@@ -106,7 +106,7 @@ class WorldManager(plugin: JavaPlugin) {
         //TODO getAllIntitWorldNames adden
 
         for (world in initWorldCreator.keys) {
-            stringWorlds.add(world.toString())
+            stringWorlds.add(world)
         }
         return stringWorlds
     }

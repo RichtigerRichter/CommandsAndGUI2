@@ -1,6 +1,5 @@
 package me.richter.commandsAndGUI.module.workstations
 
-import net.kyori.adventure.text.Component
 import org.bukkit.entity.Player
 
 class OpenWorkFun {
