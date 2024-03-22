@@ -1,6 +1,5 @@
 package me.richter.commandsAndGUI.module.heal
 
-import me.richter.commandsAndGUI.files.ConfigFile
 import me.richter.commandsAndGUI.files.ConfigFile.IsModuleEnabled
 import me.richter.commandsAndGUI.files.MessagesFile.Message
 import net.kyori.adventure.text.Component
@@ -12,7 +11,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class HealCommand(private val plugin: JavaPlugin) : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, alias: String, args: Array<out String>): Boolean {
-        if (IsModuleEnabled.heal) { sender.sendMessage(Message.moduleNotEnabled); return true }
+        if (!IsModuleEnabled.heal) { sender.sendMessage(Message.moduleNotEnabled); return true }
 
         if (sender is ConsoleCommandSender) {
             println("\u001Bc")
@@ -46,7 +45,7 @@ class HealCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComplete
         sender.health = sender.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
         sender.foodLevel = 20
         sender.saturation = 20F
-        //todo nachicht adden
+        sender.sendMessage(Component.text(Message.youGotHealed))
 
         return true
     }

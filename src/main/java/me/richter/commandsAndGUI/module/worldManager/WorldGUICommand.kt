@@ -41,7 +41,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
         }
 
         if (args.size == 2 && args[0] == "saveAsPreset") {
-            //TODO
+            //Todo saveAsPreset
         }
 
         if (args.size == 2 && args[0] == "create") {
@@ -68,7 +68,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
             WorldManager(plugin).setSeed(args[1], args[3])
         }
         /*Todo
-        if (args[0] == "edit" && args[2] == "flatMapLayers"/*TODO && type == FLAT*/) {
+        if (args[0] == "edit" && args[2] == "flatMapLayers"/*Todo && type == FLAT*/) {
             val biome = args[3]
             var layers = ""
             var layer: String
@@ -155,7 +155,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
             if (args.size == 3 && args[0] == "edit") {
                 completions.add("seed")
                 completions.add("type")
-                //todo if (/*TODO type == FLAT*/true) { completions.add("flatMapLayers") }
+                //Todo if (/*Todo type == FLAT*/true) { completions.add("flatMapLayers") }
                 completions.add("generateStructures")
                 completions.add("hardcore")
                 completions.add("keepSpawnChunksLoaded")
@@ -197,8 +197,8 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
                 return completions.filter { it.startsWith(args[3], ignoreCase = true) }.toMutableList()
             }
             /*
-            if (args.size == 4 && args[2] == "flatMapLayers"/*TODO && type == FLAT*/) {
-                //TODO layer system ausdenken
+            if (args.size == 4 && args[2] == "flatMapLayers"/*Todo && type == FLAT*/) {
+                //Todo layer system ausdenken
                 //{"layers": [{"block": "stone", "height": 1}, {"block": "grass_block", "height": 1}], "biome":"plains"}
                 //z.B. => plains 1 stone 5 grass_block
                 completions.add("[biome]")
@@ -208,8 +208,8 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
 
                 return completions.filter { it.startsWith(args[3], ignoreCase = true) }.toMutableList()
             }
-            if (args.size > 4 && Funs().isEven(args.size) && args[2] == "flatMapLayers"/*TODO && type == FLAT*/) {
-                //TODO layer system ausdenken
+            if (args.size > 4 && Funs().isEven(args.size) && args[2] == "flatMapLayers"/*Todo && type == FLAT*/) {
+                //Todo layer system ausdenken
                 //{"layers": [{"block": "stone", "height": 1}, {"block": "grass_block", "height": 1}], "biome":"plains"}
                 //z.B. => plains stone 5 grass_block 7
                 completions.add("[height]")
@@ -217,8 +217,8 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
 
                 return completions.filter { it.startsWith(args[args.size - 1], ignoreCase = true) }.toMutableList()
             }
-            if (args.size > 4 && Funs().isOdd(args.size) && args[2] == "flatMapLayers"/*TODO && type == FLAT*/) {
-                //TODO layer system ausdenken
+            if (args.size > 4 && Funs().isOdd(args.size) && args[2] == "flatMapLayers"/*Todo && type == FLAT*/) {
+                //Todo layer system ausdenken
                 //{"layers": [{"block": "stone", "height": 1}, {"block": "grass_block", "height": 1}], "biome":"plains"}
                 //z.B. => plains stone 5 grass_block 7
                 completions.add("[block]")

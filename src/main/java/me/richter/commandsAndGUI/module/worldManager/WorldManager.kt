@@ -69,7 +69,7 @@ class WorldManager(plugin: JavaPlugin) {
     }
 
     fun deleteWorld(name: String) {
-        // TODO: Implement world deletion logic
+        // Todo: Implement world deletion logic
     }
 
     fun isFlatType(worldName: String): Boolean {

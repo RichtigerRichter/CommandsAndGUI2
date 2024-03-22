@@ -17,31 +17,33 @@ class ConfigFile {
         file = File(dir, "config.yml")
         if (!file.exists()) {
             file.createNewFile()
+
+            config = YamlConfiguration.loadConfiguration(this.file)
+
+            //enabling or disabling modules
+            config.set("------Modules------", "------Modules------")
+            config.set("BackpackModule", true)
+            config.set("FlyModule", true)
+            config.set("GodmodeModule", true)
+            config.set("GuiModule", true)
+            config.set("WorldManager", true)
+            config.set("VanishModule", true)
+            config.set("JumpModule", true)
+            config.set("HealModule", true)
+            config.set("SetupCommand", true)
+            config.set("---------Workstations---------", true)
+            config.set("Workbench", true)
+            config.set("Enchanting", true)
+            config.set("Stonecutter", true)
+            config.set("CartographyTable", true)
+            config.set("Anvil", true)
+            config.set("SmithingTable", true)
+            config.set("Grindstone", true)
+            config.set("Loom", true)
+
+            config.save(file)
         }
-        config = YamlConfiguration.loadConfiguration(this.file)
 
-        //enabling or disabling modules
-        config.addDefault("------Modules------", "------Modules------")
-        config.addDefault("BackpackModule", true)
-        config.addDefault("FlyModule", true)
-        config.addDefault("GodmodeModule", true)
-        config.addDefault("GuiModule", true)
-        config.addDefault("WorldManager", true)
-        config.addDefault("VanishModule", true)
-        config.addDefault("JumpModule", true)
-        config.addDefault("HealModule", true)
-        config.addDefault("SetupCommand", true)
-        config.addDefault("---------Workstations---------", true)
-        config.addDefault("Workbench", true)
-        config.addDefault("Enchanting", true)
-        config.addDefault("Stonecutter", true)
-        config.addDefault("CartographyTable", true)
-        config.addDefault("Anvil", true)
-        config.addDefault("SmithingTable", true)
-        config.addDefault("Grindstone", true)
-        config.addDefault("Loom", true)
-
-        config.save(file)
 
         config = YamlConfiguration.loadConfiguration(this.file)
     }
