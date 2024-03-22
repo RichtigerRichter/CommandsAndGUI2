@@ -1,5 +1,6 @@
 package me.richter.commandsAndGUI.module.vanish
 
+import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.MessagesFile
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
@@ -12,6 +13,7 @@ import java.io.IOException
 class VanishManager(private val plugin: JavaPlugin) {
     private val pluginFolder = File("./plugins/CommandsAndGUI")
     private val vanishedFile = File(pluginFolder, "vanishedPlayers.yml")
+
 
     init {
         // Ensure the plugin folder exists

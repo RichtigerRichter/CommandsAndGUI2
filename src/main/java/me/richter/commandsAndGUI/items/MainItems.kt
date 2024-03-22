@@ -48,7 +48,7 @@ class MainItems {
         return ItemBuilder().itemBuilder(
             Material.ENCHANTED_GOLDEN_APPLE,
             "Godmode",
-            "Click the dye below to toggle Godmode",
+            "Click the dye below to toggle Godmode\nClick this Enchanted Golden Apple to heal your self",
             100
         )
     }

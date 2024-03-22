@@ -1,4 +1,4 @@
-package me.richter.commandsAndGUI.module.guiNew.mainGUI
+package me.richter.commandsAndGUI.module.gui.mainGUI
 
 import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.MessagesFile
@@ -10,6 +10,7 @@ import me.richter.commandsAndGUI.module.guiNew.workstationGUI.WorkstationGUI
 import me.richter.commandsAndGUI.module.vanish.VanishManager
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
+import org.bukkit.attribute.Attribute
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
@@ -46,7 +47,11 @@ class MainGUIClickListener(private val plugin: JavaPlugin): Listener {
                 player.sendMessage(Component.text(MessagesFile.Message.flyingEnabled))
                 event.clickedInventory!!.setItem(event.slot, MainItems().itemGuiFlightOn()) }
 
-            MainItems().itemGuiGodmodeLogo() -> {}
+            MainItems().itemGuiGodmodeLogo() -> {
+                player.health = player.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
+                player.foodLevel = 20
+                player.saturation = 20F
+            }
             MainItems().itemGuiGodmodeOn() -> {
                 player.isInvulnerable = false
                 player.sendMessage(Component.text(MessagesFile.Message.godDisabled))

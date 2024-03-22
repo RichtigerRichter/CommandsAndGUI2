@@ -13,11 +13,11 @@ import org.bukkit.entity.Player
 
 class FlyCommand : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.fly) { sender.sendMessage(Message.moduleNotEnabled); return false }
+        if (!ConfigFile.IsModuleEnabled.fly) { sender.sendMessage(Message.moduleNotEnabled); return true }
 
 
         if (args.isEmpty()) {
-            if (sender !is Player) return false
+            if (sender !is Player) return true
             // Code wenn ohne argumente
             if (sender.allowFlight) {
                 sender.allowFlight = false
@@ -81,9 +81,11 @@ class FlyCommand : CommandExecutor, TabCompleter {
                     } else {
                         sender.sendMessage(Component.text(Message.setFlySpeedFor(targetFlySpeedArg.toString(), targetPlayerName)))
                     }
-                } else
+                } else {
                     sender.sendMessage(Component.text(Message.flySpeed0to10))
-                return false
+                    return true
+                }
+
             }
         }
         return false
@@ -110,7 +112,7 @@ class FlyCommand : CommandExecutor, TabCompleter {
                 return completions.filter { it.startsWith(args[1], ignoreCase = true) }.toMutableList()
             }
 
-            if (args.size == 3) {
+            if (args.size == 3 && args[1] == "speed") {
                 completions.add("01")
                 completions.add("02")
                 completions.add("03")

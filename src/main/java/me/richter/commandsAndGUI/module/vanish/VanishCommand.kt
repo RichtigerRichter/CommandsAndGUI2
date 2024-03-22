@@ -3,6 +3,7 @@
 
 package me.richter.commandsAndGUI.module.vanish
 
+import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.ConfigFile
 import me.richter.commandsAndGUI.files.MessagesFile.Message
 import net.kyori.adventure.text.Component
@@ -16,16 +17,17 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class VanishCommand(private val plugin: JavaPlugin) : CommandExecutor, TabCompleter {
 
-    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.vanish) { sender.sendMessage(Message.moduleNotEnabled); return false }
 
-        if (sender !is Player) return false
+    override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
+        if (!ConfigFile.IsModuleEnabled.vanish) { sender.sendMessage(Message.moduleNotEnabled); return true }
+
+        if (sender !is Player) return true
         VanishManager(plugin).toggle(sender)
 
         if (VanishManager(plugin).get(sender)) {
             if (args.size > 1) {return false}
             if (args.isEmpty()) {return false}
-            if (args[0] != "fakeDisconnect") {return false}
+            if (args[0] != "fakeDisconnect") {return true}
             for (player in Bukkit.getOnlinePlayers()) {
 
                 val language = player.locale().language
@@ -39,7 +41,7 @@ class VanishCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComple
         if (!VanishManager(plugin).get(sender)) {
             if (args.size > 1) {return false}
             if (args.isEmpty()) {return false}
-            if (args[0] != "fakeDisconnect") {return false}
+            if (args[0] != "fakeDisconnect") {return true}
             for (player in Bukkit.getOnlinePlayers()) {
                 val language = player.locale().language
                 when (language) {

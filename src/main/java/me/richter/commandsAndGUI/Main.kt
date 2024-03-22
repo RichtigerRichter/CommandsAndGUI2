@@ -6,11 +6,12 @@ import me.richter.commandsAndGUI.module.backpack.BackpackCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackManager
 import me.richter.commandsAndGUI.module.fly.FlyCommand
 import me.richter.commandsAndGUI.module.godmode.GodCommand
+import me.richter.commandsAndGUI.module.gui.mainGUI.MainGUIClickListener
 import me.richter.commandsAndGUI.module.guiNew.GUICloseListener
 import me.richter.commandsAndGUI.module.guiNew.GUICommand
 import me.richter.commandsAndGUI.module.guiNew.flySettingsGUI.FlySettingsGUIClickListener
-import me.richter.commandsAndGUI.module.guiNew.mainGUI.MainGUIClickListener
 import me.richter.commandsAndGUI.module.guiNew.workstationGUI.WorkstationGUIClickListener
+import me.richter.commandsAndGUI.module.heal.HealCommand
 import me.richter.commandsAndGUI.module.jump.JumpCommand
 import me.richter.commandsAndGUI.module.sit.SitCommand
 import me.richter.commandsAndGUI.module.sit.SitListener
@@ -22,12 +23,9 @@ import me.richter.commandsAndGUI.module.vanish.PlayerQuitEvent
 import me.richter.commandsAndGUI.module.vanish.VanishCommand
 import me.richter.commandsAndGUI.module.vanish.VanishManager
 import me.richter.commandsAndGUI.module.workstations.OpenCommand
+import me.richter.commandsAndGUI.module.worldGuard2.BreakListener
 import me.richter.commandsAndGUI.module.worldManager.WorldGUICommand
-import org.bukkit.Material
-import org.bukkit.Registry
-import org.bukkit.Registry.*
-import org.bukkit.block.Biome
-import org.bukkit.block.Block
+import org.bukkit.WorldCreator
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
@@ -37,7 +35,7 @@ import java.util.*
 class Main : JavaPlugin() {
 
     companion object {
-        val plugin = this
+
 
         val guiMainMap: MutableMap<UUID, Inventory> = mutableMapOf()
         val guiFlySettingsMap: MutableMap<UUID, Inventory> = mutableMapOf()
@@ -45,6 +43,7 @@ class Main : JavaPlugin() {
 
         val sitMap: MutableMap<Player, Entity> = mutableMapOf()
 
+        val initWorldCreator: MutableMap<String, WorldCreator> = mutableMapOf()
 
         val BackpackMap: MutableMap<String, Inventory> = mutableMapOf()
         val vanishedPlayersMap: MutableMap<UUID, Boolean> = mutableMapOf()
@@ -53,6 +52,7 @@ class Main : JavaPlugin() {
 
     override fun onEnable() {
         // Plugin startup logic
+
         registerCommands()
         registerListeners()
 
@@ -61,8 +61,15 @@ class Main : JavaPlugin() {
         VanishManager(this).create()
         BackpackManager().load()
 
+        printPluginInfo()
         logger.info("CommandsAndGUI has been Loaded")
 
+        if (!server.minecraftVersion.startsWith("1")) {
+            logger.warning("THIS PLUGIN IS ONLY MADE FOR MINECRAFT VERSIONS 1.x.x IF THE SERVER IS RUNNING ON A NEWER VERSION PLEASE CONTACT THE PLUGIN DEV SINCE THE VERSION CHECKS WON'T WORK")
+        }
+    }
+
+    private fun printPluginInfo() {
         val reset = "\u001B[0m"
 
         val shadow = "\u001B[90m"
@@ -98,6 +105,8 @@ class Main : JavaPlugin() {
         getCommand("workstation")!!.setExecutor(OpenCommand())
         getCommand("backpack")!!.setExecutor(BackpackCommand())
         getCommand("sit")!!.setExecutor(SitCommand())
+        getCommand("heal")!!.setExecutor(HealCommand(this))
+
     }
 
     private fun registerListeners() {
@@ -110,6 +119,7 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(JoinQuitEvent(), this)
         server.pluginManager.registerEvents(Utils(this), this)
         server.pluginManager.registerEvents(SitListener(), this)
+        server.pluginManager.registerEvents(BreakListener(), this)
     }
 
     override fun onDisable() {

@@ -13,10 +13,10 @@ import org.bukkit.entity.Player
 
 class GodCommand : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.godmode) { sender.sendMessage(Message.moduleNotEnabled); return false }
+        if (!ConfigFile.IsModuleEnabled.godmode) { sender.sendMessage(Message.moduleNotEnabled); return true }
 
         if (args.isEmpty()) {
-            if (sender !is Player) return false
+            if (sender !is Player) return true
             // Code wenn ohne argumente
             if (sender.isInvulnerable) {
                 sender.isInvulnerable = false
@@ -25,9 +25,9 @@ class GodCommand : CommandExecutor, TabCompleter {
                 sender.isInvulnerable = true
                 sender.sendMessage(Component.text(Message.godEnabled))
             }
-            return true
-
+            return false
         }
+
         val targetPlayer = Bukkit.getPlayer(args[0])
         if (targetPlayer == null) {
             sender.sendMessage(

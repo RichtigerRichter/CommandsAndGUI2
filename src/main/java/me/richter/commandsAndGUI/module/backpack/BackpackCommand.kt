@@ -12,14 +12,14 @@ import org.bukkit.entity.Player
 
 class BackpackCommand: CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, alias: String, args: Array<out String>): Boolean {
-        if (!IsModuleEnabled.backpack) { sender.sendMessage(Message.moduleNotEnabled); return false }
+        if (!IsModuleEnabled.backpack) { sender.sendMessage(Message.moduleNotEnabled); return true }
 
-        if (sender !is Player) { return true }
+        if (sender !is Player) { return false }
         if (args.size >= 2) {
 
             if (args[0] == "open") {
                 if (!BackpackManager().isValidBackpack(args[1])) {
-                    sender.sendMessage(Component.text(Message.backpackDontExists))
+                    sender.sendMessage(Component.text(Message.backpackDoesntExists))
                     return false
                 }
                 if (!BackpackManager().isAllowedPlayer(args[1], sender)) {
@@ -37,7 +37,7 @@ class BackpackCommand: CommandExecutor, TabCompleter {
 
             if (args[0] == "delete") {
                 if (!BackpackManager().isValidBackpack(args[1])) {
-                    sender.sendMessage(Component.text(Message.backpackDontExists))
+                    sender.sendMessage(Component.text(Message.backpackDoesntExists))
                     return false
                 }
 
@@ -56,7 +56,7 @@ class BackpackCommand: CommandExecutor, TabCompleter {
 
             if (args[0] == "playerAdd") {
                 if (!BackpackManager().isValidBackpack(args[1])) {
-                    sender.sendMessage(Component.text(Message.backpackDontExists))
+                    sender.sendMessage(Component.text(Message.backpackDoesntExists))
                     return false
                 }
                 if (!BackpackManager().isOwner(args[1], sender)) {
@@ -68,8 +68,8 @@ class BackpackCommand: CommandExecutor, TabCompleter {
                 val maxSize = args.size
                 var size = 2
                 while (size < maxSize) {
-                    val player = Bukkit.getPlayer(args[size]) ?: return false
-                    if (BackpackManager().isAllowedPlayer(args[1], player)) { return false }
+                    val player = Bukkit.getPlayer(args[size]) ?: return true
+                    if (BackpackManager().isAllowedPlayer(args[1], player)) { return true }
 
                     allowedPlayers.add(player)
 
@@ -81,7 +81,7 @@ class BackpackCommand: CommandExecutor, TabCompleter {
 
             if (args[0] == "playerRemove") {
                 if (!BackpackManager().isValidBackpack(args[1])) {
-                    sender.sendMessage(Component.text(Message.backpackDontExists))
+                    sender.sendMessage(Component.text(Message.backpackDoesntExists))
                     return false
                 }
                 if (!BackpackManager().isOwner(args[1], sender)) {
@@ -103,12 +103,13 @@ class BackpackCommand: CommandExecutor, TabCompleter {
 
             if (args[0] == "playersList") {
                 if (!BackpackManager().isValidBackpack(args[1])) {
-                    sender.sendMessage(Component.text(Message.backpackDontExists))
+                    sender.sendMessage(Component.text(Message.backpackDoesntExists))
                     return false
                 }
                 if (!BackpackManager().isOwner(args[1], sender)) {
                     sender.sendMessage(Component.text(Message.youAreNotAllowedToOpenThisBackpack))
-                    return false }
+                    return false
+                }
 
                 val allowedPlayers: MutableList<String> = BackpackManager().allPlayersAllowedToOpenBackpack(args[1])
 
@@ -116,7 +117,7 @@ class BackpackCommand: CommandExecutor, TabCompleter {
             }
 
         }
-        return true
+        return false
     }
 
     override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {

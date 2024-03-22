@@ -1,24 +1,62 @@
 package me.richter.commandsAndGUI.module.worldManager
 
+import net.kyori.adventure.util.TriState
 import org.bukkit.Bukkit
 import org.bukkit.GameRule
 import org.bukkit.World
 import org.bukkit.WorldCreator
+import org.bukkit.WorldType
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+import me.richter.commandsAndGUI.Main.Companion.initWorldCreator
 
 class WorldManager(plugin: JavaPlugin) {
 
     private val server = plugin.server
 
-    fun createWorld(name: String) {
+    fun initWorld(name: String) {
+        initWorldCreator[name] = WorldCreator(name)
+        server.logger.info(initWorldCreator[name].toString())
+    }
+
+    fun setSeed(name: String, seed: String) {
+        initWorldCreator[name] = initWorldCreator[name]?.seed(seed.toLong())!!
+    }
+
+    fun setKeepSpawnChunksLoaded(name: String, set: TriState) {
+        initWorldCreator[name] = initWorldCreator[name]?.keepSpawnLoaded(set)!!
+
+    }
+
+    fun setHardcore(name: String, set: Boolean) {
+        initWorldCreator[name] = initWorldCreator[name]?.hardcore(set)!!
+    }
+
+    fun setGenerateStructures(name: String, set: Boolean) {
+        initWorldCreator[name] = initWorldCreator[name]?.generateStructures(set)!!
+    }
+
+    fun setType(name: String, type: String) {
+        val wType = WorldType.getByName(type)!!
+        initWorldCreator[name] = initWorldCreator[name]?.type(wType)!!
+    }
+
+    fun setFlatLayers(name: String, layers: String, biome: String): String {
+        val generatorSettings = "{\"layers\": [$layers], \"biome\":\"$biome\"}"
+        initWorldCreator[name] = initWorldCreator[name]?.generatorSettings(generatorSettings)!!
+        return generatorSettings
+    }
+
+    fun createWorld(name: String): String {
+        val creator = initWorldCreator[name]!!
+        server.createWorld(creator)
+        initWorldCreator.remove(name)
+        return creator.toString()
+        /*
         val worldCreator = WorldCreator(name)
         worldCreator.generatorSettings("{\"layers\": [{\"block\": \"stone\", \"height\": 1}, {\"block\": \"grass_block\", \"height\": 1}], \"biome\":\"plains\"}")
         val world = server.createWorld(worldCreator)
-    }
-
-    fun deleteWorld(name: String) {
-        // TODO: Implement world deletion logic
+         */
     }
 
     fun joinWorld(player: Player, name: String) {
@@ -28,6 +66,27 @@ class WorldManager(plugin: JavaPlugin) {
         } else {
             player.sendMessage("World $name does not exist.")
         }
+    }
+
+    fun deleteWorld(name: String) {
+        // TODO: Implement world deletion logic
+    }
+
+    fun isFlatType(worldName: String): Boolean {
+        val worldGenerator = initWorldCreator[worldName] ?: return false
+        return worldGenerator.type().toString() == "FLAT"
+    }
+
+    fun getChangedGameRules(worldName: String): String {
+        val world: World = Bukkit.getWorld(worldName) ?: return "there is no world with that name"
+        val allGameRules = world.gameRules
+        var changedRules = ""
+        for (gameRule in allGameRules) {
+            if (world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>) != world.getGameRuleDefault(GameRule.getByName(gameRule) as GameRule<*>)) {
+                changedRules += "\n§e$gameRule: §2${world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>)}"
+            }
+        }
+        return changedRules
     }
 
     fun getAllWorlds(): List<World> {
@@ -42,29 +101,13 @@ class WorldManager(plugin: JavaPlugin) {
         return stringWorlds
     }
 
-    fun getAllIntitWorld(): MutableList<World> {
-        //TODO getAllIntitWorld adden
-        return server.worlds
-    }
-
-    fun getAllIntitWorldNames(): MutableList<String> {
+    fun getAllInitWorldNames(): MutableList<String> {
         val stringWorlds = mutableListOf<String>()
         //TODO getAllIntitWorldNames adden
-        for (world in server.worlds) {
-            stringWorlds.add(world.name)
+
+        for (world in initWorldCreator.keys) {
+            stringWorlds.add(world.toString())
         }
         return stringWorlds
-    }
-
-    fun getChangedGameRules(worldName: String): String {
-        val world: World = Bukkit.getWorld(worldName) ?: return "there is no world with that name"
-        val allGameRules = world.gameRules
-        var changedRules = ""
-        for (gameRule in allGameRules) {
-            if (world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>) != world.getGameRuleDefault(GameRule.getByName(gameRule) as GameRule<*>)) {
-                changedRules += "\n§e$gameRule: §2${world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>)}"
-            }
-        }
-        return changedRules
     }
 }

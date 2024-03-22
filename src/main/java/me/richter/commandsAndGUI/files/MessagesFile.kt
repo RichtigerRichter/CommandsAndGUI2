@@ -16,45 +16,53 @@ class MessagesFile {
         file = File(dir, "messages.yml")
         if (!file.exists()) {
             file.createNewFile()
-
-            config = YamlConfiguration.loadConfiguration(this.file)
-            config.set("R", true)
-            config.set("B", false)
-
-            config.set("PREFIX", "§8[§aRichtigerStuff§8]§r")
-
-            config.set("flyingDisabled", "%PREFIX% Flying§7 disabled§r")
-            config.set("flyingEnabled", "%PREFIX% Flying§a enabled§r")
-            config.set("flyingDisabledFor", "%PREFIX% Flying§7 disabled§r for §6%PLAYER%§r")
-            config.set("flyingEnabledFor", "%PREFIX% Flying§a enabled§r for §6%PLAYER%§r")
-            config.set("flySpeed0to10", "%PREFIX% §4Fly speed has to be a number from §r0 §4to §r10§r")
-            config.set("setFlySpeed", "%PREFIX% Set your fly speed to §a%FlySpeed%§r (default is 1)")
-            config.set("getFlySpeed", "%PREFIX% Your current fly speed is §a%FlySpeed%§r (default is 1)")
-            config.set("setFlySpeedFor", "%PREFIX% Set fly speed of §6%PLAYER%§r to §a%FlySpeed%§r (default is 1)")
-            config.set("getFlySpeedFor", "%PREFIX% The current fly speed of §6%PLAYER%§r is §a%FlySpeed%§r (default is 1)")
-
-            config.set("godDisabled", "%PREFIX% Godmode§7 disabled§r")
-            config.set("godEnabled", "%PREFIX% Godmode§a enabled§r")
-
-            config.set("vanishDisabled", "%PREFIX% Vanish§7 disabled§r")
-            config.set("vanishEnabled", "%PREFIX% Vanish§a enabled§r")
-
-            config.set("playerDoesNotExist", "%PREFIX% §4player does not exist§r")
-
-            config.set("backpackAlredyExists", "%PREFIX% A Backpack with this name already Exists§r")
-            config.set("backpackCreated", "%PREFIX% Backpack Created§r")
-            config.set("backpackDeleted", "%PREFIX% Backpack Deleted§r")
-            config.set("backpackDontExists", "%PREFIX% A Backpack with this name does not Exist§r")
-            config.set("youAreNotAllowedToOpenThisBackpack", "%PREFIX% You are not allowed to open this Backpack§r")
-            config.set("youAreNotTheOwner", "%PREFIX% You are not the owner of this Backpack§r")
-
-            config.set("moduleNotEnabled", "%PREFIX% §cThis module is not enabled!§r")
-
-
-
-
-            config.save(this.file)
         }
+
+        config = YamlConfiguration.loadConfiguration(this.file)
+
+        config.addDefault("R", true)
+        config.addDefault("B", false)
+
+        config.addDefault("PREFIX", "§8[§aRichtigerStuff§8]§r")
+
+        config.addDefault("flyingDisabled", "%PREFIX% Flying§7 disabled§r")
+        config.addDefault("flyingEnabled", "%PREFIX% Flying§a enabled§r")
+        config.addDefault("flyingDisabledFor", "%PREFIX% Flying§7 disabled§r for §6%PLAYER%§r")
+        config.addDefault("flyingEnabledFor", "%PREFIX% Flying§a enabled§r for §6%PLAYER%§r")
+        config.addDefault("flySpeed0to10", "%PREFIX% §4Fly speed has to be a number from §r0 §4to §r10§r")
+        config.addDefault("setFlySpeed", "%PREFIX% Set your fly speed to §a%FlySpeed%§r (default is 1)")
+        config.addDefault("getFlySpeed", "%PREFIX% Your current fly speed is §a%FlySpeed%§r (default is 1)")
+        config.addDefault("setFlySpeedFor", "%PREFIX% Set fly speed of §6%PLAYER%§r to §a%FlySpeed%§r (default is 1)")
+        config.addDefault("getFlySpeedFor", "%PREFIX% The current fly speed of §6%PLAYER%§r is §a%FlySpeed%§r (default is 1)")
+
+        config.addDefault("godDisabled", "%PREFIX% Godmode§7 disabled§r")
+        config.addDefault("godEnabled", "%PREFIX% Godmode§a enabled§r")
+
+        config.addDefault("vanishDisabled", "%PREFIX% Vanish§7 disabled§r")
+        config.addDefault("vanishEnabled", "%PREFIX% Vanish§a enabled§r")
+
+        config.addDefault("playerDoesNotExist", "%PREFIX% §4player does not exist§r")
+
+        config.addDefault("backpackAlredyExists", "%PREFIX% A Backpack with this name already Exists§r")
+        config.addDefault("backpackCreated", "%PREFIX% Backpack Created§r")
+        config.addDefault("backpackDeleted", "%PREFIX% Backpack Deleted§r")
+        config.addDefault("backpackDontExists", "%PREFIX% A Backpack with this name does not Exist§r")
+        config.addDefault("youAreNotAllowedToOpenThisBackpack", "%PREFIX% You are not allowed to open this Backpack§r")
+        config.addDefault("youAreNotTheOwner", "%PREFIX% You are not the owner of this Backpack§r")
+
+        config.addDefault("moduleNotEnabled", "%PREFIX% §cThis module is not enabled!§r")
+
+        config.addDefault("initWorldManager", "%PREFIX% Initialized world creation§r")
+        config.addDefault("cratingWorld", "%PREFIX% Creating world...§r")
+        config.addDefault("finCratingWorld", "%PREFIX% Finished world creation§r")
+
+
+
+
+        config.save(this.file)
+
+
+
         config = YamlConfiguration.loadConfiguration(this.file)
     }
 
@@ -109,11 +117,14 @@ class MessagesFile {
         val backpackAlredyExists = config.getString("backpackAlredyExists")!!.replace("%PREFIX%", PREFIX)
         val backpackCreated = config.getString("backpackCreated")!!.replace("%PREFIX%", PREFIX)
         val backpackDeleted = config.getString("backpackDeleted")!!.replace("%PREFIX%", PREFIX)
-        val backpackDontExists = config.getString("backpackDontExists")!!.replace("%PREFIX%", PREFIX)
+        val backpackDoesntExists = config.getString("backpackDontExists")!!.replace("%PREFIX%", PREFIX)
         val youAreNotAllowedToOpenThisBackpack = config.getString("youAreNotAllowedToOpenThisBackpack")!!.replace("%PREFIX%", PREFIX)
         val youAreNotTheOwner = config.getString("youAreNotTheOwner")!!.replace("%PREFIX%", PREFIX)
         val moduleNotEnabled = config.getString("moduleNotEnabled")!!.replace("%PREFIX%", PREFIX)
 
+        val initWorldManager = config.getString("initWorldManager")!!.replace("%PREFIX%", PREFIX)
+        val cratingWorld = config.getString("cratingWorld")!!.replace("%PREFIX%", PREFIX)
+        val finCratingWorld = config.getString("finCratingWorld")!!.replace("%PREFIX%", PREFIX)
 
 
     }

@@ -1,45 +1,90 @@
 name: CommandsAndGUI
 version: '${project.version}'
 main: me.richter.commandsAndGUI.Main
-api-version: '1.20'
+api-version: '1.13'
 
 commands:
-  setup:
-    description: Executes the Setup Commands
-    permission: commandsAndGUI.setup
-
-  gui:
-    description: opens a gui
-    permission: commandsAndGUI.gui
-
-  worldManager:
-    permission: commandsAndGUI.worldManager
-
-  jump:
-    description: JUMP!
-    permission: commandsAndGUI.jump
-
-  god:
-    permission: commandsAndGUI.god
-
-  vanish:
-    permission: commandsAndGUI.vanish
+  backpack:
+    description: create, share, and use double chest sized backpacks
+    usage: digga schau halt ma die tab vorschläge an (viel zu faul die ganzen möglichkeiten hier hin zu schallern)
+    aliases: []
+    permission: commandsAndGUI.command.backpack
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.backpack permission)
 
   fly:
-    description: Toggle flight
-    permission: commandsAndGUI.fly
-    permission-message: You do not have the permission to execute this command (you need the "fly" permission)
-    ##aliases:
-    ##  - toggleflight
-    ##  - togglefly
-    ##  - f
+    description: allows you to fly or change the fly speed
+    usage: /<command> [speed/on/off] [speed 0-10]
+    aliases: []
+    permission: commandsAndGUI.command.fly
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.fly permission)
 
-  workstation:
-    permission: commandsAndGUI.dev
+  god:
+    description: makes you invincible
+    usage: /<command> [playerName]
+    aliases: []
+    permission: commandsAndGUI.command.god
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.god permission)
 
-  backpack:
-    permission: commandsAndGUI.backpack
+  gui:
+    description: opens the GUI of CommandAndGUI
+    usage: /<command>
+    aliases: []
+    permission: commandsAndGUI.command.gui
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.gui permission)
+
+
+  heal:
+    description: heal a player
+    usage: /<command> [playerName]
+    aliases: []
+    permission: commandsAndGUI.command.heal
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.heal permission)
+
+  jump:
+    description: make a player jump high
+    usage: /<command> [playerName]
+    aliases: []
+    permission: commandsAndGUI.command.jump
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.jump permission)
+
+  setup:
+    description: Executes the Setup Commands
+    usage: /<command>
+    aliases: []
+    permission: commandsAndGUI.command.setup
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.setup permission)
+
 
   sit:
-    description: is nen bissel broken, muss fixen
-    permission: commandsAndGUI.sit
+    description: is nen bissel broken, muss fixen, aber man kann sich setzen (wer hätte das gedacht)
+    usage: /<command>
+    aliases: []
+    permission: commandsAndGUI.command.sit
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.sit permission)
+
+
+  vanish:
+    description: makes you invisible to other players
+    usage: /<command> [fakeDisconnect]
+    aliases: []
+    permission: commandsAndGUI.command.vanish
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.vanish permission)
+
+  workstation:
+    description: opens a workstation like the crafting menu
+    usage: /<command> [workstation]
+    aliases: []
+    permission: commandsAndGUI.command.dev
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.dev permission)
+
+  worldManager:
+    description: is nen bissel SEHR broken, einfach nicht nutzen
+    usage: just dont
+    aliases: []
+    permission: commandsAndGUI.command.worldManager
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.worldManager permission)
+
+
+permissions:
+  commandsAndGUI.world.break:
+    default: true

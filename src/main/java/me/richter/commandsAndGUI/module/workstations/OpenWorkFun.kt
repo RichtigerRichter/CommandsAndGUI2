@@ -29,8 +29,6 @@ class OpenWorkFun {
         //op: Boolean
     ){
         player.openAnvil(player.location, true)
-        player.sendMessage(Component.text("nooooo"))
-
     }
 
 

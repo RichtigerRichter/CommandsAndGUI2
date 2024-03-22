@@ -13,14 +13,14 @@ import org.bukkit.util.Vector
 
 class JumpCommand : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.jump) { sender.sendMessage(Message.moduleNotEnabled); return false }
+        if (!ConfigFile.IsModuleEnabled.jump) { sender.sendMessage(Message.moduleNotEnabled); return true }
 
         if (args.isEmpty()) {
-            if (sender !is Player) return false
+            if (sender !is Player) return true
             // Code wenn ohne argumente
             sender.velocity = sender.velocity.add(Vector(0.0, 10.0, 0.0))
             sender.sendMessage(Component.text("$PREFIX You Jumped"))
-            return false
+            return true
         }
 
         val targetPlayer = Bukkit.getPlayer(args[0])
@@ -31,14 +31,14 @@ class JumpCommand : CommandExecutor {
         }
         // Code mit targetPlayer
         targetPlayer.velocity = targetPlayer.velocity.add(Vector(0.0, 10.0, 0.0))
-        if (targetPlayer == sender) {sender.sendMessage(Component.text("$PREFIX You Jumped"));return false}
+        if (targetPlayer == sender) { sender.sendMessage(Component.text("$PREFIX You Jumped")); return false }
 
         val targetPlayerC = args[0] //Name vom TARGET
 
         sender.sendMessage(Component.text("$PREFIX Made §6$targetPlayerC§r Jump"))
 
 
-        return false
+        return true
     }
 
 }

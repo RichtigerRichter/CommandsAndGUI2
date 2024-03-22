@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="CommandsAndGUI:jar">
+  <artifact type="jar" build-on-make="true" name="CommandsAndGUI-1.0.2:jar">
     <output-path>D:/Games/Minecraft/Minecraft Server/_1.20.2 plugin/plugins</output-path>
     <root id="archive" name="CommandsAndGUI.jar">
       <element id="module-output" name="CommandsAndGUI" />

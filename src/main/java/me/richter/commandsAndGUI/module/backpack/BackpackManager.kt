@@ -19,6 +19,8 @@ class BackpackManager {
             val backpackFile = File(pluginFolder, "$backpackName.yml")
             val config = YamlConfiguration.loadConfiguration(backpackFile)
 
+
+
             val allowedPlayers = mutableListOf<Player>()
             allowedPlayers.add(player)
 

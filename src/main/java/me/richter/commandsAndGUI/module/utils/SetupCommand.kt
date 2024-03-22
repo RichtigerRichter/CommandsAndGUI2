@@ -4,18 +4,22 @@ import me.richter.commandsAndGUI.files.ConfigFile
 import me.richter.commandsAndGUI.files.MessagesFile
 import me.richter.commandsAndGUI.files.MessagesFile.Message.PREFIX
 import net.kyori.adventure.text.Component
+import org.bukkit.Bukkit
 import org.bukkit.GameRule
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.plugin.java.JavaPlugin
 
 class SetupCommand : CommandExecutor {
+    val server = Bukkit.getServer()
+
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, arg: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.setup) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return false }
+        if (!ConfigFile.IsModuleEnabled.setup) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
 
-        if(sender !is Player) return false
+        if(sender !is Player) return true
         val world = sender.world
 
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
@@ -42,9 +46,11 @@ class SetupCommand : CommandExecutor {
         val doTraderSpawning = world.getGameRuleValue(GameRule.DO_TRADER_SPAWNING)
         sender.sendMessage(Component.text("$PREFIX DO_TRADER_SPAWNING set to $doTraderSpawning"))
 
+        if (MinecraftVersion().from("1.19.4")){
         world.setGameRule(GameRule.DO_VINES_SPREAD, false)
         val doVinesSpread = world.getGameRuleValue(GameRule.DO_VINES_SPREAD)
         sender.sendMessage(Component.text("$PREFIX DO_VINES_SPREAD set to $doVinesSpread"))
+        }
 
         world.setGameRule(GameRule.KEEP_INVENTORY, true)
         val keepInventory = world.getGameRuleValue(GameRule.KEEP_INVENTORY)
@@ -69,6 +75,6 @@ class SetupCommand : CommandExecutor {
         world.setStorm(false)
         sender.sendMessage(Component.text("$PREFIX Weather Cleared"))
 
-        return false
+        return true
     }
 }

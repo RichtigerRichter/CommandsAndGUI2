@@ -4,7 +4,7 @@ package me.richter.commandsAndGUI.files
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
-class ConfigFile {
+class WorldsFile {
     private val file: File
     private var config: YamlConfiguration
 
@@ -14,35 +14,16 @@ class ConfigFile {
             dir.mkdirs()
         }
 
-        file = File(dir, "config.yml")
+        file = File(dir, "worlds.yml")
         if (!file.exists()) {
             file.createNewFile()
+
+            config = YamlConfiguration.loadConfiguration(this.file)
+
+
+
+            config.save(file)
         }
-        config = YamlConfiguration.loadConfiguration(this.file)
-
-        //enabling or disabling modules
-        config.addDefault("------Modules------", "------Modules------")
-        config.addDefault("BackpackModule", true)
-        config.addDefault("FlyModule", true)
-        config.addDefault("GodmodeModule", true)
-        config.addDefault("GuiModule", true)
-        config.addDefault("WorldManager", true)
-        config.addDefault("VanishModule", true)
-        config.addDefault("JumpModule", true)
-        config.addDefault("HealModule", true)
-        config.addDefault("SetupCommand", true)
-        config.addDefault("---------Workstations---------", true)
-        config.addDefault("Workbench", true)
-        config.addDefault("Enchanting", true)
-        config.addDefault("Stonecutter", true)
-        config.addDefault("CartographyTable", true)
-        config.addDefault("Anvil", true)
-        config.addDefault("SmithingTable", true)
-        config.addDefault("Grindstone", true)
-        config.addDefault("Loom", true)
-
-        config.save(file)
-
         config = YamlConfiguration.loadConfiguration(this.file)
     }
 
@@ -57,7 +38,6 @@ class ConfigFile {
         val gui = config["GuiModule"] as Boolean
         val worldManager = config["WorldManager"] as Boolean
         val jump = config["JumpModule"] as Boolean
-        val heal = config["HealModule"] as Boolean
         val vanish = config["VanishModule"] as Boolean
         val workstation = config["---------Workstations---------"] as Boolean
         val setup = config["SetupCommand"] as Boolean
