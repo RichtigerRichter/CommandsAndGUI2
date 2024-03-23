@@ -12,7 +12,7 @@ class PlayerQuitEvent(private val plugin: JavaPlugin): Listener {
     @EventHandler
     fun playerLeaveEvent(event: PlayerQuitEvent){
         val player = event.player
-        if (VanishManager(plugin).get(player)) {
+        if (VanishManager(plugin).isVanished(player)) {
             VanishManager(plugin).set(player, true)
             event.quitMessage(Component.text(""))
         }else{

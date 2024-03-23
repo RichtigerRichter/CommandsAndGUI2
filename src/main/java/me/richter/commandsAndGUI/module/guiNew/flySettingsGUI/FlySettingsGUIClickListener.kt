@@ -44,11 +44,11 @@ class FlySettingsGUIClickListener: Listener {
 
             FlySettingsItems().skala75off() -> {
                 FlySettingsGUI().reset(player)
-                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala75Oon())
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala75on())
                 player.flySpeed = 0.075F
                 event.isCancelled = true
             }
-            FlySettingsItems().skala75Oon() -> {}
+            FlySettingsItems().skala75on() -> {}
 
             FlySettingsItems().skala100off() -> {
                 FlySettingsGUI().reset(player)
@@ -58,37 +58,37 @@ class FlySettingsGUIClickListener: Listener {
             }
             FlySettingsItems().skala100on() -> {}
 
-            FlySettingsItems().skala125off() -> {
+            FlySettingsItems().skala250off() -> {
                 FlySettingsGUI().reset(player)
-                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala125On())
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala250on())
                 player.flySpeed = 0.250F
                 event.isCancelled = true
             }
-            FlySettingsItems().skala125On() -> {}
+            FlySettingsItems().skala250on() -> {}
 
-            FlySettingsItems().skala150off() -> {
+            FlySettingsItems().skala500off() -> {
                 FlySettingsGUI().reset(player)
-                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala150on())
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala500on())
                 player.flySpeed = 0.500F
                 event.isCancelled = true
             }
-            FlySettingsItems().skala150on() -> {}
+            FlySettingsItems().skala500on() -> {}
 
-            FlySettingsItems().skala175off() -> {
+            FlySettingsItems().skala750off() -> {
                 FlySettingsGUI().reset(player)
-                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala175on())
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala750on())
                 player.flySpeed = 0.750F
                 event.isCancelled = true
             }
-            FlySettingsItems().skala175on() -> {}
+            FlySettingsItems().skala750on() -> {}
 
-            FlySettingsItems().skala200off() -> {
+            FlySettingsItems().skala1000off() -> {
                 FlySettingsGUI().reset(player)
-                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala100on())
+                event.clickedInventory!!.setItem(event.slot, FlySettingsItems().skala1000on())
                 player.flySpeed = 1.000F
                 event.isCancelled = true
             }
-            FlySettingsItems().skala100on() -> {}
+            FlySettingsItems().skala1000on() -> {}
 
             GeneralItems().itemGuiBack() -> {
                 MainGUI().open(player)

@@ -23,7 +23,7 @@ class VanishCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComple
         if (sender !is Player) return true
         VanishManager(plugin).toggle(sender)
 
-        if (VanishManager(plugin).get(sender)) {
+        if (VanishManager(plugin).isVanished(sender)) {
             if (args.size > 1) {return false}
             if (args.isEmpty()) {return false}
             if (args[0] != "fakeDisconnect") {return true}
@@ -35,9 +35,7 @@ class VanishCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComple
                     "de" -> {player.sendMessage(Component.text("§e${sender.name} hat das Spiel verlassen"))}
                 }
             }
-        }
-
-        if (!VanishManager(plugin).get(sender)) {
+        } else {
             if (args.size > 1) {return false}
             if (args.isEmpty()) {return false}
             if (args[0] != "fakeDisconnect") {return true}
@@ -49,6 +47,7 @@ class VanishCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComple
                 }
             }
         }
+
 
 
         return false

@@ -13,7 +13,7 @@ class PlayerJoinEvent(private val plugin: JavaPlugin): Listener {
     @EventHandler
     fun playerJoinEvent(event: PlayerJoinEvent) {
         val player = event.player
-        if (VanishManager(plugin).get(player)) {
+        if (VanishManager(plugin).isVanished(player)) {
             VanishManager(plugin).set(player, true)
             event.joinMessage(Component.text(""))
         }else{
@@ -22,7 +22,7 @@ class PlayerJoinEvent(private val plugin: JavaPlugin): Listener {
 
 
         for (onlinePlayer in Bukkit.getOnlinePlayers()){
-            if (VanishManager(plugin).get(onlinePlayer)) {
+            if (VanishManager(plugin).isVanished(onlinePlayer)) {
                 player.hidePlayer(plugin, onlinePlayer)
             }
         }

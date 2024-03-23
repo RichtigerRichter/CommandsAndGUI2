@@ -84,6 +84,9 @@ commands:
     permission: commandsAndGUI.command.worldManager
     permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.worldManager permission)
 
+  head:
+    description: gives head
+
 
 permissions:
   commandsAndGUI.world.break:

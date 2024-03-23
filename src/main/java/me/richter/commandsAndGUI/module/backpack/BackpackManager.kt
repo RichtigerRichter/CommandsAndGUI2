@@ -187,7 +187,7 @@ class BackpackManager {
 
             @Suppress("UNCHECKED_CAST")
             val allowedPlayers = config["allowedPlayers"] as? MutableList<Player>
-            if (allowedPlayers != null && allowedPlayers.contains(player)) {
+            if (allowedPlayers != null && allowedPlayers.contains(player) && !backpackName.contains(" ")) {
                 allBackpacks.add(backpackName)
             }
         }
@@ -203,8 +203,8 @@ class BackpackManager {
             val backpackFile = File(pluginFolder, "$backpackName.yml")
             val config = YamlConfiguration.loadConfiguration(backpackFile)
 
-            val allowedPlayer = config["owner"] as? Player
-            if (allowedPlayer == player) {
+            val owner = config["owner"] as? Player
+            if (owner == player && !backpackName.contains(" ")) {
                 allBackpacks.add(backpackName)
             }
         }

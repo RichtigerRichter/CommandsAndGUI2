@@ -84,7 +84,7 @@ class FlySettingsItems {
             100
         )
     }
-    fun skala75Oon(): ItemStack {
+    fun skala75on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
             "§l§a75% Fly Speed",
@@ -124,98 +124,98 @@ class FlySettingsItems {
             100
         )
     }
-    fun skala125Logo(): ItemStack {
+    fun skala250Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
-            "125% Fly Speed",
+            "250% Fly Speed",
             "",
             100
         )
     }
-    fun skala125On(): ItemStack {
+    fun skala250on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
-            "§l§a125% Fly Speed",
+            "§l§a250% Fly Speed",
             "",
             100
         )
     }
-    fun skala125off(): ItemStack {
+    fun skala250off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
-            "§7125% Fly Speed",
+            "§7250% Fly Speed",
             "",
             100
         )
     }
-    fun skala150Logo(): ItemStack {
+    fun skala500Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
-            "150% Fly Speed",
+            "500% Fly Speed",
             "",
             100
         )
     }
-    fun skala150on(): ItemStack {
+    fun skala500on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
-            "§l§a150% Fly Speed",
+            "§l§a500% Fly Speed",
             "",
             100
         )
     }
-    fun skala150off(): ItemStack {
+    fun skala500off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
-            "§7150% Fly Speed",
+            "§7500% Fly Speed",
             "",
             100
         )
     }
-    fun skala175Logo(): ItemStack {
+    fun skala750Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
-            "175% Fly Speed",
+            "750% Fly Speed",
             "",
             100
         )
     }
-    fun skala175on(): ItemStack {
+    fun skala750on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
-            "§l§a175% Fly Speed",
+            "§l§a750% Fly Speed",
             "",
             100
         )
     }
-    fun skala175off(): ItemStack {
+    fun skala750off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
-            "§7175% Fly Speed",
+            "§7750% Fly Speed",
             "",
             100
         )
     }
-    fun skala200Logo(): ItemStack {
+    fun skala1000Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
-            "200% Fly Speed",
+            "1000% Fly Speed",
             "",
             100
         )
     }
-    fun skala200on(): ItemStack {
+    fun skala1000on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
-            "§l§a200% Fly Speed",
+            "§l§a1000% Fly Speed",
             "",
             100
         )
     }
-    fun skala200off(): ItemStack {
+    fun skala1000off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
-            "§7200% Fly Speed",
+            "§71000% Fly Speed",
             "",
             100
         )

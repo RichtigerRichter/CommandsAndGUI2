@@ -51,7 +51,7 @@ class VanishManager(private val plugin: JavaPlugin) {
     }
 
 
-    fun get(player: Player): Boolean {
+    fun isVanished(player: Player): Boolean {
         val config = YamlConfiguration.loadConfiguration(vanishedFile)
 
         return !(!config.contains(player.name) || !config.getBoolean(player.name))

@@ -7,7 +7,9 @@ import me.richter.commandsAndGUI.items.MainItems
 import me.richter.commandsAndGUI.module.guiNew.GUIMiscFuns
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 
 class MainGUI {
     fun open(player: Player) {
@@ -48,6 +50,9 @@ class MainGUI {
         }
         if (!ConfigFile.IsModuleEnabled.vanish) inventory.setItem(25, GeneralItems().itemGuiUnavailable())
         if (!ConfigFile.IsModuleEnabled.vanish) inventory.setItem(34, GeneralItems().itemGuiUnavailable())
+
+
+
 
         inventory.setItem(49, GeneralItems().itemGuiClose())
 

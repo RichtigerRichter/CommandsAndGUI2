@@ -117,7 +117,7 @@ class BackpackCommand: CommandExecutor, TabCompleter {
             }
 
         }
-        return false
+        return true
     }
 
     override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {

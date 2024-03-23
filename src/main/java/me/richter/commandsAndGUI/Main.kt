@@ -15,6 +15,7 @@ import me.richter.commandsAndGUI.module.heal.HealCommand
 import me.richter.commandsAndGUI.module.jump.JumpCommand
 import me.richter.commandsAndGUI.module.sit.SitCommand
 import me.richter.commandsAndGUI.module.sit.SitListener
+import me.richter.commandsAndGUI.module.utils.HeadCommand
 import me.richter.commandsAndGUI.module.utils.JoinQuitEvent
 import me.richter.commandsAndGUI.module.utils.SetupCommand
 import me.richter.commandsAndGUI.module.utils.Utils
@@ -106,6 +107,7 @@ class Main : JavaPlugin() {
         getCommand("backpack")!!.setExecutor(BackpackCommand())
         getCommand("sit")!!.setExecutor(SitCommand())
         getCommand("heal")!!.setExecutor(HealCommand(this))
+        getCommand("head")!!.setExecutor(HeadCommand())
 
     }
 
