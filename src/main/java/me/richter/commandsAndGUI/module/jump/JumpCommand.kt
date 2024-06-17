@@ -18,7 +18,7 @@ class JumpCommand : CommandExecutor {
         if (args.isEmpty()) {
             if (sender !is Player) return true
             // Code wenn ohne argumente
-            sender.velocity = sender.velocity.add(Vector(0.0, 10.0, 0.0))
+            sender.velocity = sender.velocity.add(Vector(0.0, 1.0, 0.0))
             sender.sendMessage(Component.text("$PREFIX You Jumped"))
             return true
         }
