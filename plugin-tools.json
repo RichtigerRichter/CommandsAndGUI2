@@ -1,0 +1,12 @@
+{
+    "pluginName": "CommandsAndGUI",
+    "projectPath": "C:/Users/Richter/Documents/IntelliJ Projekte/Commands and GUI2",
+    "setNextVersion": "false",
+    "tidyFolders": ["D:/Games/Minecraft/Minecraft Server/_1.20.2 plugin/plugins"],
+    "copyFolders": ["D:/Games/Minecraft/Minecraft Server/_1.20.2 plugin/plugins"],
+    "sendServerCommand": "true",
+    "rconIP": "localhost",
+    "rconPort": "25575",
+    "rconPassword": "siis",
+    "rconCommand": "reload confirm"
+}
