@@ -1,4 +1,4 @@
-package me.richter.commandsAndGUI.module.gui.mainGUI
+package me.richter.commandsAndGUI.module.guiNew.mainGUI
 
 import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.MessagesFile

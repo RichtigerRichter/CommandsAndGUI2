@@ -7,9 +7,7 @@ import me.richter.commandsAndGUI.items.MainItems
 import me.richter.commandsAndGUI.module.guiNew.GUIMiscFuns
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
-import org.bukkit.Material
 import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
 
 class MainGUI {
     fun open(player: Player) {

@@ -23,7 +23,7 @@ class WorldGUI {
             val item = ItemBuilder().itemBuilder(
                 Material.GRASS_BLOCK,
                 worldName,
-                "§r" + "§e" + "seed: §2$seed" + "\n§e" + "difficulty: §2$worldDifficulty" + changedGameRuled,
+                "§r§eseed: §2$seed\n§edifficulty: §2$worldDifficulty$changedGameRuled",
                 1
                 )
 

@@ -6,7 +6,7 @@ import me.richter.commandsAndGUI.module.backpack.BackpackCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackManager
 import me.richter.commandsAndGUI.module.fly.FlyCommand
 import me.richter.commandsAndGUI.module.godmode.GodCommand
-import me.richter.commandsAndGUI.module.gui.mainGUI.MainGUIClickListener
+import me.richter.commandsAndGUI.module.guiNew.mainGUI.MainGUIClickListener
 import me.richter.commandsAndGUI.module.guiNew.GUICloseListener
 import me.richter.commandsAndGUI.module.guiNew.GUICommand
 import me.richter.commandsAndGUI.module.guiNew.flySettingsGUI.FlySettingsGUIClickListener
@@ -71,26 +71,26 @@ class Main : JavaPlugin() {
     }
 
     private fun printPluginInfo() {
-        val reset = "\u001B[0m"
+        val r = "\u001B[0m"
 
-        val shadow = "\u001B[90m"
-        val frame = "\u001B[34m"
-        val font = "\u001B[31m"
-        val test = "\u001B[97m"
+        val s = "\u001B[90m" //schatten => grau
+        val b = "\u001B[34m" //border => blau
+        val f = "\u001B[31m" //font => rot
+        val t = "\u001B[97m" //text => weiß
 
-        println("${frame}####################################################################################################$reset")
-        println("${frame}#                                                                                                  #$reset")
-        println("${frame}#  ${font}██████${shadow}╗ ${font}██${shadow}╗ ${font}██████${shadow}╗${font}██${shadow}╗  ${font}██${shadow}╗${font}████████${shadow}╗${font}███████${shadow}╗${font}██████${shadow}╗ ${font}██${shadow}╗${font}███████${shadow}╗    ${font}███████${shadow}╗${font}██${shadow}╗  ${font}██${shadow}╗${font}██${shadow}╗${font}████████${shadow}╗ ${frame}#$reset")
-        println("${frame}#  ${font}██${shadow}╔══${font}██${shadow}╗${font}██${shadow}║${font}██${shadow}╔════╝${font}██${shadow}║  ${font}██${shadow}║╚══${font}██${shadow}╔══╝${font}██${shadow}╔════╝${font}██${shadow}╔══${font}██${shadow}╗${font}██${shadow}║${font}██${shadow}╔════╝    ${font}██${shadow}╔════╝${font}██${shadow}║  ${font}██${shadow}║${font}██${shadow}║╚══${font}██${shadow}╔══╝ ${frame}#$reset")
-        println("${frame}#  ${font}██████${shadow}╔╝${font}██${shadow}║${font}██${shadow}║     ${font}███████${shadow}║   ${font}██${shadow}║   ${font}█████${shadow}╗  ${font}██████${shadow}╔╝╚═╝${font}███████${shadow}╗    ${font}███████${shadow}╗${font}███████${shadow}║${font}██${shadow}║   ${font}██${shadow}║    ${frame}#$reset")
-        println("${frame}#  ${font}██${shadow}╔══${font}██${shadow}╗${font}██${shadow}║${font}██${shadow}║     ${font}██${shadow}╔══${font}██${shadow}║   ${font}██${shadow}║   ${font}██${shadow}╔══╝  ${font}██${shadow}╔══${font}██${shadow}╗   ╚════${font}██${shadow}║    ╚════${font}██${shadow}║${font}██${shadow}╔══${font}██${shadow}║${font}██${shadow}║   ${font}██${shadow}║    ${frame}#$reset")
-        println("${frame}#  ${font}██${shadow}║  ${font}██${shadow}║${font}██${shadow}║╚${font}██████${shadow}╗${font}██${shadow}║  ${font}██${shadow}║   ${font}██${shadow}║   ${font}███████${shadow}╗${font}██${shadow}║  ${font}██${shadow}║   ${font}███████${shadow}║    ${font}███████${shadow}║${font}██${shadow}║  ${font}██${shadow}║${font}██${shadow}║   ${font}██${shadow}║    ${frame}#$reset")
-        println("${frame}#  ${shadow}╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚══════╝    ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ${frame}#$reset")
-        println("${frame}####################################################################################################$reset")
-        println("${frame}#      ${test}Plugin: CommandsAndGUI      ${frame}#       ${test}Version: 1.0       ${frame}#      ${test}Release: 16.11.2023 20:00     ${frame}#$reset")
-        println("${frame}####################################################################################################$reset")
-        println("${frame}# ${test}Download: https://github.com/RichtigerRichter/CommandsAndGUI/releases                            ${frame}#$reset")
-        println("${frame}####################################################################################################$reset")
+        println("${b}####################################################################################################$r")
+        println("${b}#                                                                                                  #$r")
+        println("${b}#  ${f}██████${s}╗ ${f}██${s}╗ ${f}██████${s}╗${f}██${s}╗  ${f}██${s}╗${f}████████${s}╗${f}███████${s}╗${f}██████${s}╗ ${f}██${s}╗${f}███████${s}╗    ${f}███████${s}╗${f}██${s}╗  ${f}██${s}╗${f}██${s}╗${f}████████${s}╗ ${b}#$r")
+        println("${b}#  ${f}██${s}╔══${f}██${s}╗${f}██${s}║${f}██${s}╔════╝${f}██${s}║  ${f}██${s}║╚══${f}██${s}╔══╝${f}██${s}╔════╝${f}██${s}╔══${f}██${s}╗${f}██${s}║${f}██${s}╔════╝    ${f}██${s}╔════╝${f}██${s}║  ${f}██${s}║${f}██${s}║╚══${f}██${s}╔══╝ ${b}#$r")
+        println("${b}#  ${f}██████${s}╔╝${f}██${s}║${f}██${s}║     ${f}███████${s}║   ${f}██${s}║   ${f}█████${s}╗  ${f}██████${s}╔╝╚═╝${f}███████${s}╗    ${f}███████${s}╗${f}███████${s}║${f}██${s}║   ${f}██${s}║    ${b}#$r")
+        println("${b}#  ${f}██${s}╔══${f}██${s}╗${f}██${s}║${f}██${s}║     ${f}██${s}╔══${f}██${s}║   ${f}██${s}║   ${f}██${s}╔══╝  ${f}██${s}╔══${f}██${s}╗   ╚════${f}██${s}║    ╚════${f}██${s}║${f}██${s}╔══${f}██${s}║${f}██${s}║   ${f}██${s}║    ${b}#$r")
+        println("${b}#  ${f}██${s}║  ${f}██${s}║${f}██${s}║╚${f}██████${s}╗${f}██${s}║  ${f}██${s}║   ${f}██${s}║   ${f}███████${s}╗${f}██${s}║  ${f}██${s}║   ${f}███████${s}║    ${f}███████${s}║${f}██${s}║  ${f}██${s}║${f}██${s}║   ${f}██${s}║    ${b}#$r")
+        println("${b}#  ${s}╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═╝   ╚══════╝    ╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ${b}#$r")
+        println("${b}####################################################################################################$r")
+        println("${b}#      ${t}Plugin: CommandsAndGUI      ${b}#       ${t}Version: 1.0       ${b}#      ${t}Release: 16.11.2023 20:00     ${b}#$r")
+        println("${b}####################################################################################################$r")
+        println("${b}# ${t}Download: https://github.com/RichtigerRichter/CommandsAndGUI/releases                            ${b}#$r")
+        println("${b}####################################################################################################$r")
 
     }
 
@@ -108,6 +108,7 @@ class Main : JavaPlugin() {
         getCommand("sit")!!.setExecutor(SitCommand())
         getCommand("heal")!!.setExecutor(HealCommand(this))
         getCommand("head")!!.setExecutor(HeadCommand())
+        //getCommand("disguise")!!.setExecutor(DisguiseCommand(this))
 
     }
 
@@ -122,6 +123,8 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(Utils(this), this)
         server.pluginManager.registerEvents(SitListener(), this)
         server.pluginManager.registerEvents(BreakListener(), this)
+        //server.pluginManager.registerEvents(DisguiseListener(this), this)
+
     }
 
     override fun onDisable() {

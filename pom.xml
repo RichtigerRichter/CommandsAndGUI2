@@ -110,6 +110,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>gravemc-repo</id>
+            <url>https://repo.gravemc.net/releases/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -134,6 +138,12 @@
             <groupId>net.kyori</groupId>
             <artifactId>adventure-text-minimessage</artifactId>
             <version>4.16.0</version>
+        </dependency>
+        <dependency>
+            <groupId>dev.iiahmed</groupId>
+            <artifactId>ModernDisguise</artifactId>
+            <version>2.5</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 </project>

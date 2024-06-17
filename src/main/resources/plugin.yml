@@ -32,7 +32,6 @@ commands:
     permission: commandsAndGUI.command.gui
     permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.gui permission)
 
-
   heal:
     description: heal a player
     usage: /<command> [playerName]
@@ -54,14 +53,12 @@ commands:
     permission: commandsAndGUI.command.setup
     permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.setup permission)
 
-
   sit:
     description: is nen bissel broken, muss fixen, aber man kann sich setzen (wer hätte das gedacht)
     usage: /<command>
     aliases: []
     permission: commandsAndGUI.command.sit
     permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.sit permission)
-
 
   vanish:
     description: makes you invisible to other players
@@ -86,6 +83,9 @@ commands:
 
   head:
     description: gives head
+    usage: /<command> [a minecraft texture url (textures.minecraft.net/texture/)]
+
+
 
 
 permissions:

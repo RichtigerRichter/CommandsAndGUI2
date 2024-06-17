@@ -40,6 +40,11 @@ class ConfigFile {
             config.set("SmithingTable", true)
             config.set("Grindstone", true)
             config.set("Loom", true)
+            config.set("Furnace", true)
+            config.set("BlastFurnace", true)
+            config.set("Brewing", true)
+            config.set("Smoker", true)
+
 
             config.save(file)
         }
@@ -71,6 +76,11 @@ class ConfigFile {
         val smithingTable = config["SmithingTable"] as Boolean
         val grindstone = config["Grindstone"] as Boolean
         val loom = config["Loom"] as Boolean
+        val furnace = config["Furnace"] as Boolean
+        val blastFurnace = config["BlastFurnace"] as Boolean
+        val brewing = config["Brewing"] as Boolean
+        val smoker = config["Smoker"] as Boolean
+
 
 
 

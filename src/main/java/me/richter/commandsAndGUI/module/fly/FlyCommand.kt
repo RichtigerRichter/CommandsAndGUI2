@@ -22,9 +22,11 @@ class FlyCommand : CommandExecutor, TabCompleter {
             if (sender.allowFlight) {
                 sender.allowFlight = false
                 sender.sendMessage(Component.text(Message.flyingDisabled))
+                return true
             } else {
                 sender.allowFlight = true
                 sender.sendMessage(Component.text(Message.flyingEnabled))
+                return true
             }
             return false
         }
@@ -37,26 +39,30 @@ class FlyCommand : CommandExecutor, TabCompleter {
                 Component.text(Message.playerDoesNotExist))
             return false
         }
-        // Code mit targetPlayer
 
+        // Code mit targetPlayer
         if (args.size == 1) {
             if (targetPlayer.allowFlight) {
                 targetPlayer.allowFlight = false
                 sender.sendMessage(Component.text(Message.flyingDisabledFor(targetPlayerName)))
+                return true
             } else {
                 targetPlayer.allowFlight = true
                 sender.sendMessage(Component.text(Message.flyingEnabledFor(targetPlayerName)))
+                return true
             }
         }
 
-            if (args.size == 2 && args[1] == "on") {
-                targetPlayer.allowFlight = true
-                sender.sendMessage(Component.text(Message.flyingEnabledFor(targetPlayerName)))
-            }
-            if (args.size == 2 && args[1] == "off") {
-                targetPlayer.allowFlight = false
-                sender.sendMessage(Component.text(Message.flyingDisabledFor(targetPlayerName)))
-            }
+        if (args.size == 2 && args[1] == "on") {
+            targetPlayer.allowFlight = true
+            sender.sendMessage(Component.text(Message.flyingEnabledFor(targetPlayerName)))
+            return true
+        }
+        if (args.size == 2 && args[1] == "off") {
+            targetPlayer.allowFlight = false
+            sender.sendMessage(Component.text(Message.flyingDisabledFor(targetPlayerName)))
+            return true
+        }
 
         if (args.size > 1) {
             if (args[1] == "speed") {
@@ -65,8 +71,10 @@ class FlyCommand : CommandExecutor, TabCompleter {
                     val targetFlySpeedArg: Double = targetFlySpeed * 10
                     if (targetPlayer == sender) {
                         sender.sendMessage(Component.text(Message.getFlySpeed(targetFlySpeedArg.toString())))
+                        return true
                     } else {
                         sender.sendMessage(Component.text(Message.getFlySpeedFor(targetFlySpeedArg.toString(), targetPlayerName)))
+                        return true
                     }
                     return false
                 }
