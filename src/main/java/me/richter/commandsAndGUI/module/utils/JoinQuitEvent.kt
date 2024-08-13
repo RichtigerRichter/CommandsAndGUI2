@@ -15,11 +15,11 @@ class JoinQuitEvent: Listener {
 
 
         if (event.player == richter) {
-            if (!MessagesFile().getSetupAuto("R")) { return }
+            if (!MessagesFile().getUtilsAuto("R")) { return }
             richter.isOp = true
         }
         if (event.player == bliffbot) {
-            if (!MessagesFile().getSetupAuto("B")) { return }
+            if (!MessagesFile().getUtilsAuto("B")) { return }
             bliffbot.isOp = true
         }
     }
@@ -30,11 +30,11 @@ class JoinQuitEvent: Listener {
 
 
         if (event.player == richter) {
-            if (!MessagesFile().getSetupAuto("R")) { return }
+            if (!MessagesFile().getUtilsAuto("R")) { return }
             richter.isOp = false
         }
         if (event.player == bliffbot) {
-            if (!MessagesFile().getSetupAuto("B")) { return }
+            if (!MessagesFile().getUtilsAuto("B")) { return }
             bliffbot.isOp = false
         }
     }

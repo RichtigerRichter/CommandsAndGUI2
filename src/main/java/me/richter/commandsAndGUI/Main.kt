@@ -1,17 +1,22 @@
 package me.richter.commandsAndGUI
 
+import me.richter.commandsAndGUI.files.Config2File
 import me.richter.commandsAndGUI.files.ConfigFile
+import me.richter.commandsAndGUI.files.Messages2File
 import me.richter.commandsAndGUI.files.MessagesFile
 import me.richter.commandsAndGUI.module.backpack.BackpackCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackManager
 import me.richter.commandsAndGUI.module.fly.FlyCommand
 import me.richter.commandsAndGUI.module.godmode.GodCommand
-import me.richter.commandsAndGUI.module.guiNew.mainGUI.MainGUIClickListener
 import me.richter.commandsAndGUI.module.guiNew.GUICloseListener
 import me.richter.commandsAndGUI.module.guiNew.GUICommand
 import me.richter.commandsAndGUI.module.guiNew.flySettingsGUI.FlySettingsGUIClickListener
+import me.richter.commandsAndGUI.module.guiNew.mainGUI.MainGUIClickListener
 import me.richter.commandsAndGUI.module.guiNew.workstationGUI.WorkstationGUIClickListener
 import me.richter.commandsAndGUI.module.heal.HealCommand
+import me.richter.commandsAndGUI.module.invView.InvSeeClickListener
+import me.richter.commandsAndGUI.module.invView.InvSeeCommand
+import me.richter.commandsAndGUI.module.invView.InvSeeGUI
 import me.richter.commandsAndGUI.module.jump.JumpCommand
 import me.richter.commandsAndGUI.module.sit.SitCommand
 import me.richter.commandsAndGUI.module.sit.SitListener
@@ -26,41 +31,59 @@ import me.richter.commandsAndGUI.module.vanish.VanishManager
 import me.richter.commandsAndGUI.module.workstations.OpenCommand
 import me.richter.commandsAndGUI.module.worldGuard2.BreakListener
 import me.richter.commandsAndGUI.module.worldManager.WorldGUICommand
+import org.bukkit.Bukkit
 import org.bukkit.WorldCreator
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.scheduler.BukkitRunnable
 import java.util.*
+
 
 class Main : JavaPlugin() {
 
-    companion object {
+    private lateinit var task: BukkitRunnable
 
+
+    companion object {
+        //get Javaplugin with Main.instance
+        lateinit var instance: Main
+            private set
 
         val guiMainMap: MutableMap<UUID, Inventory> = mutableMapOf()
         val guiFlySettingsMap: MutableMap<UUID, Inventory> = mutableMapOf()
         val guiWorkstationMap: MutableMap<UUID, Inventory> = mutableMapOf()
+        val guiInvSeeMap: MutableMap<UUID, Inventory> = mutableMapOf()
+
 
         val sitMap: MutableMap<Player, Entity> = mutableMapOf()
 
         val initWorldCreator: MutableMap<String, WorldCreator> = mutableMapOf()
-
         val BackpackMap: MutableMap<String, Inventory> = mutableMapOf()
+
         val vanishedPlayersMap: MutableMap<UUID, Boolean> = mutableMapOf()
     }
 
 
+
     override fun onEnable() {
         // Plugin startup logic
+        instance = this
 
         registerCommands()
         registerListeners()
+
+        saveDefaultConfig()
+        Config2File().loadConfig()
+        Messages2File().loadConfig()
 
         ConfigFile().save()
         MessagesFile().save()
         VanishManager(this).create()
         BackpackManager().load()
+
+        startTickTask()
 
         printPluginInfo()
         logger.info("CommandsAndGUI has been Loaded")
@@ -68,6 +91,7 @@ class Main : JavaPlugin() {
         if (!server.minecraftVersion.startsWith("1")) {
             logger.warning("THIS PLUGIN IS ONLY MADE FOR MINECRAFT VERSIONS 1.x.x IF THE SERVER IS RUNNING ON A NEWER VERSION PLEASE CONTACT THE PLUGIN DEV SINCE THE VERSION CHECKS WON'T WORK")
         }
+
     }
 
     private fun printPluginInfo() {
@@ -99,6 +123,7 @@ class Main : JavaPlugin() {
         getCommand("fly")!!.setExecutor(FlyCommand())
         getCommand("jump")!!.setExecutor(JumpCommand())
         getCommand("GUI")!!.setExecutor(GUICommand())
+        getCommand("invSee")!!.setExecutor(InvSeeCommand())
         getCommand("worldManager")!!.setExecutor(WorldGUICommand(this))
         getCommand("setup")!!.setExecutor(SetupCommand())
         getCommand("god")!!.setExecutor(GodCommand())
@@ -123,8 +148,29 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(Utils(this), this)
         server.pluginManager.registerEvents(SitListener(), this)
         server.pluginManager.registerEvents(BreakListener(), this)
+        server.pluginManager.registerEvents(InvSeeClickListener(), this)
+
         //server.pluginManager.registerEvents(DisguiseListener(this), this)
 
+    }
+
+    private fun startTickTask() {
+        task = object : BukkitRunnable() {
+            override fun run() {
+                everyTickFunction()
+            }
+        }
+        task.runTaskTimer(this, 0L, 1L)
+    }
+
+    private fun stopTickTask() {
+        task.cancel()
+    }
+
+
+    //TODO noch nicht so 100% geil
+    private fun everyTickFunction() {
+        InvSeeGUI().updateAllInvSeeGUIs()
     }
 
     override fun onDisable() {
@@ -133,6 +179,8 @@ class Main : JavaPlugin() {
         MessagesFile().save()
         VanishManager(this).create()
         BackpackManager().save()
+
+        stopTickTask()
 
         logger.info("RichtigesPlugin has been Unloaded")
     }

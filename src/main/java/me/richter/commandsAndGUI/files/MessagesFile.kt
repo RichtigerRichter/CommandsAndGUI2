@@ -19,6 +19,8 @@ class MessagesFile {
 
             config = YamlConfiguration.loadConfiguration(this.file)
 
+            config.addDefault("test", true)
+
             config.set("R", true)
             config.set("B", false)
 
@@ -57,6 +59,9 @@ class MessagesFile {
             config.set("cratingWorld", "%PREFIX% Creating world...§r")
             config.set("finCratingWorld", "%PREFIX% Finished world creation§r")
 
+            config.set("cannotInvSeeYourSelf", "%PREFIX% You can not InvSee yourself (mainly because im to lazy to fix some bugs)§r")
+
+
             config.save(this.file)
         }
 
@@ -75,35 +80,13 @@ class MessagesFile {
 
         val flyingDisabled = config.getString("flyingDisabled")!!.replace("%PREFIX%", PREFIX)
         val flyingEnabled = config.getString("flyingEnabled")!!.replace("%PREFIX%", PREFIX)
-        fun flyingDisabledFor(targetPlayer: String):String {
-            val flyingDisabledFor = config.getString("flyingDisabledFor")!!.replace("%PREFIX%", PREFIX)
-            return flyingDisabledFor.replace("%PLAYER%", targetPlayer)
-        }
-        fun flyingEnabledFor(targetPlayer: String):String {
-            val flyingEnabledFor = config.getString("flyingEnabledFor")!!.replace("%PREFIX%", PREFIX)
-            return flyingEnabledFor.replace("%PLAYER%", targetPlayer)
-        }
+        fun flyingDisabledFor(targetPlayer: String):String { return config.getString("flyingDisabledFor")!!.replace("%PREFIX%", PREFIX).replace("%PLAYER%", targetPlayer) }
+        fun flyingEnabledFor(targetPlayer: String):String { return config.getString("flyingEnabledFor")!!.replace("%PREFIX%", PREFIX).replace("%PLAYER%", targetPlayer) }
         val flySpeed0to10 = config.getString("flySpeed0to10")!!.replace("%PREFIX%", PREFIX)
-        fun setFlySpeed(flySpeed: String):String {
-            val setFlySpeed = config.getString("setFlySpeed")!!.replace("%PREFIX%", PREFIX)
-
-            return setFlySpeed.replace("%FlySpeed%", flySpeed)
-        }
-        fun getFlySpeed(flySpeed: String):String {
-            val getFlySpeed = config.getString("getFlySpeed")!!.replace("%PREFIX%", PREFIX)
-
-            return getFlySpeed.replace("%FlySpeed%", flySpeed)
-        }
-        fun setFlySpeedFor(flySpeed: String, targetPlayer: String):String {
-            val setFlySpeed = config.getString("setFlySpeedFor")!!.replace("%PREFIX%", PREFIX)
-
-            return setFlySpeed.replace("%FlySpeed%", flySpeed).replace("%PLAYER%", targetPlayer)
-        }
-        fun getFlySpeedFor(flySpeed: String, targetPlayer: String):String {
-            val getFlySpeed = config.getString("getFlySpeedFor")!!.replace("%PREFIX%", PREFIX)
-
-            return getFlySpeed.replace("%FlySpeed%", flySpeed).replace("%PLAYER%", targetPlayer)
-        }
+        fun setFlySpeed(flySpeed: String):String { return config.getString("setFlySpeed")!!.replace("%PREFIX%", PREFIX).replace("%FlySpeed%", flySpeed) }
+        fun getFlySpeed(flySpeed: String):String { return config.getString("getFlySpeed")!!.replace("%PREFIX%", PREFIX).replace("%FlySpeed%", flySpeed) }
+        fun setFlySpeedFor(flySpeed: String, targetPlayer: String):String { return config.getString("setFlySpeedFor")!!.replace("%PREFIX%", PREFIX).replace("%FlySpeed%", flySpeed).replace("%PLAYER%", targetPlayer) }
+        fun getFlySpeedFor(flySpeed: String, targetPlayer: String):String { return config.getString("getFlySpeedFor")!!.replace("%PREFIX%", PREFIX).replace("%FlySpeed%", flySpeed).replace("%PLAYER%", targetPlayer) }
 
         val godDisabled = config.getString("godDisabled")!!.replace("%PREFIX%", PREFIX)
         val godEnabled = config.getString("godEnabled")!!.replace("%PREFIX%", PREFIX)
@@ -127,24 +110,26 @@ class MessagesFile {
         val cratingWorld = config.getString("cratingWorld")!!.replace("%PREFIX%", PREFIX)
         val finCratingWorld = config.getString("finCratingWorld")!!.replace("%PREFIX%", PREFIX)
 
+        val cannotInvSeeYourSelf = config.getString("cannotInvSeeYourSelf")!!.replace("%PREFIX%", PREFIX)
+
 
     }
 
-    fun autoSetupOn(player: String) {
+    fun autoUtilsOn(player: String) {
         val config = YamlConfiguration.loadConfiguration(file)
 
         if (!config.contains(player)) { return }
         config.set(player, true)
         config.save(file)
     }
-    fun autoSetupOff(player: String) {
+    fun autoUtilsOff(player: String) {
         val config = YamlConfiguration.loadConfiguration(file)
 
         if (!config.contains(player)) { return }
         config.set(player, false)
         config.save(file)
     }
-    fun getSetupAuto(player: String): Boolean {
+    fun getUtilsAuto(player: String): Boolean {
         val config = YamlConfiguration.loadConfiguration(this.file)
 
         return !(!config.contains(player) || !config.getBoolean(player))

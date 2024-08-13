@@ -23,7 +23,7 @@ class Utils(private val plugin: JavaPlugin) : Listener {
 
 
             if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#help") {
-                val autoStatus = MessagesFile().getSetupAuto(playerShortName)
+                val autoStatus = MessagesFile().getUtilsAuto(playerShortName)
                 player.sendMessage(Component.text("#help - shows this list"))
                 player.sendMessage(Component.text("#op - op yourself"))
                 player.sendMessage(Component.text("#deop - deop yourself"))
@@ -55,11 +55,11 @@ class Utils(private val plugin: JavaPlugin) : Listener {
                 event.isCancelled = true
             }
             if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#auto off") {
-                MessagesFile().autoSetupOff(playerShortName)
+                MessagesFile().autoUtilsOff(playerShortName)
                 event.isCancelled = true
             }
             if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#auto on") {
-                MessagesFile().autoSetupOn(playerShortName)
+                MessagesFile().autoUtilsOn(playerShortName)
                 event.isCancelled = true
             }
             if (stringTextFromComponent().stringTextFromComponent(message.toString()) == "#*") {

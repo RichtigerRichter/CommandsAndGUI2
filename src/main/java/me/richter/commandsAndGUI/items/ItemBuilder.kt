@@ -1,8 +1,13 @@
 package me.richter.commandsAndGUI.items
 
+import me.richter.commandsAndGUI.Main
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.ItemMeta
+import org.bukkit.persistence.PersistentDataType
+import org.bukkit.plugin.java.JavaPlugin
 
 class ItemBuilder {
 
@@ -21,6 +26,64 @@ class ItemBuilder {
         itemMeta.setCustomModelData(customModelData)
         item.itemMeta = itemMeta
         return item
+    }
+
+    fun itemBuilder(
+        material: Material,
+        displayName: Component,
+        vararg lore: Component
+    ): ItemStack {
+        val item = ItemStack(material)
+        val itemMeta: ItemMeta = item.itemMeta!!
+        itemMeta.displayName(displayName)
+        itemMeta.lore(lore.toList())
+        item.itemMeta = itemMeta
+        return item
+    }
+
+    fun itemBuilder(
+        material: Material,
+        displayName: Component,
+        vararg lore: Component,
+        customModelData: Int
+    ): ItemStack {
+        val item = ItemStack(material)
+        val itemMeta: ItemMeta = item.itemMeta!!
+        itemMeta.setCustomModelData(customModelData)
+        itemMeta.displayName(displayName)
+        itemMeta.lore(lore.toList())
+        item.itemMeta = itemMeta
+        return item
+    }
+
+    fun itemBuilder(
+        material: Material,
+        displayName: Component,
+        vararg lore: Component,
+        tagKey: String,
+        tagValue: String
+    ): ItemStack {
+        val plugin: JavaPlugin = Main.instance
+        val item = ItemStack(material)
+        val itemMeta: ItemMeta = item.itemMeta!!
+        val key = NamespacedKey(plugin, tagKey)
+        itemMeta.persistentDataContainer.set(key, PersistentDataType.STRING, tagValue)
+        itemMeta.displayName(displayName)
+        itemMeta.lore(lore.toList())
+        item.itemMeta = itemMeta
+        return item
+    }
+
+    fun getCustomTagValue(item: ItemStack?, tagKey: String): String? {
+        val plugin: JavaPlugin = Main.instance
+        if (item == null) return null
+        val meta = item.itemMeta ?: return null
+
+        // NamespacedKey für den benutzerdefinierten Tag erstellen
+        val key = NamespacedKey(plugin, tagKey)
+
+        // Wert aus dem PersistentDataContainer auslesen
+        return meta.persistentDataContainer.get(key, PersistentDataType.STRING)
     }
 
     private fun formatStringToComponents(input: String): List<Component> {

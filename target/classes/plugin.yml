@@ -32,6 +32,13 @@ commands:
     permission: commandsAndGUI.command.gui
     permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.gui permission)
 
+  invSee:
+    description: opens the Inventory Viewer GUI of CommandAndGUI
+    usage: /<command> [targetPlayer]
+    aliases: [ ]
+    permission: commandsAndGUI.command.invSee
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.invSee permission)
+
   heal:
     description: heal a player
     usage: /<command> [playerName]

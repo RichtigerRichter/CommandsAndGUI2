@@ -6,12 +6,12 @@ import org.bukkit.block.Biome
 
 class Funs {
     fun isEven(number: Int): Boolean {
-        println(number % 2 == 0)
+        //println(number % 2 == 0)
         return number % 2 == 0
     }
 
     fun isOdd(number: Int): Boolean {
-        println(number % 2 != 0)
+        //println(number % 2 != 0)
         return number % 2 != 0
     }
 

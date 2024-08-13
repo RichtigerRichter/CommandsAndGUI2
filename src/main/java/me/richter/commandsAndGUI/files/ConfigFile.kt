@@ -26,6 +26,7 @@ class ConfigFile {
             config.set("FlyModule", true)
             config.set("GodmodeModule", true)
             config.set("GuiModule", true)
+            config.set("InvViewModule", true)
             config.set("WorldManager", true)
             config.set("VanishModule", true)
             config.set("JumpModule", true)
@@ -62,6 +63,7 @@ class ConfigFile {
         val fly = config["FlyModule"] as Boolean
         val godmode = config["GodmodeModule"] as Boolean
         val gui = config["GuiModule"] as Boolean
+        val invView = config["InvViewModule"] as Boolean
         val worldManager = config["WorldManager"] as Boolean
         val jump = config["JumpModule"] as Boolean
         val heal = config["HealModule"] as Boolean

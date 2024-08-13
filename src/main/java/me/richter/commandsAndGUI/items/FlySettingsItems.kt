@@ -12,6 +12,9 @@ class FlySettingsItems {
             100
         )
     }
+
+    val skala0Logo = ItemBuilder().itemBuilder(Material.FEATHER, "0% Fly Speed", "", 100)
+
     fun skala0on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
