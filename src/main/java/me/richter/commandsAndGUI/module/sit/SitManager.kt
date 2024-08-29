@@ -10,6 +10,7 @@ class SitManager {
     fun sit (player: Player) {
         if (Main.sitMap.containsKey(player)) return
         if (!player.isOnGround) return
+        if (player.fallDistance != 0f) return
         val position = player.location.add(0.0, 0.0, 0.0)
         val turtle = position.world.spawnEntity(position, EntityType.TURTLE) as Turtle
         turtle.setAI(false)

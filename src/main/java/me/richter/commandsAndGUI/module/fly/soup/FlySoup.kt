@@ -29,7 +29,7 @@ class FlySoup {
 		itemMeta.displayName(Component.text("§r§f$name"))
 		itemMeta.lore(ItemBuilder().formatStringToComponents(lore))
 		if (addGlint) {
-			itemMeta.addEnchant(Enchantment.DURABILITY, 1, true)
+			itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true)
 			//itemMeta.itemFlags.add(ItemFlag.HIDE_ENCHANTS)
 			itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
 		}
@@ -54,7 +54,7 @@ class FlySoup {
 		itemMeta.displayName(Component.text("§r§f$name"))
 		itemMeta.lore(ItemBuilder().formatStringToComponents(lore))
 		if (addGlint) {
-			itemMeta.addEnchant(Enchantment.DURABILITY, 1, true)
+			itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true)
 			//itemMeta.itemFlags.add(ItemFlag.HIDE_ENCHANTS)
 			itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
 		}

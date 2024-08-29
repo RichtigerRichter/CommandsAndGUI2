@@ -28,7 +28,6 @@ class FlyCommand : CommandExecutor, TabCompleter {
                 sender.sendMessage(Component.text(Message.flyingEnabled))
                 return true
             }
-            return false
         }
 
 
@@ -76,7 +75,6 @@ class FlyCommand : CommandExecutor, TabCompleter {
                         sender.sendMessage(Component.text(Message.getFlySpeedFor(targetFlySpeedArg.toString(), targetPlayerName)))
                         return true
                     }
-                    return false
                 }
 
                 var targetFlySpeedArg = args[2].toDouble()
