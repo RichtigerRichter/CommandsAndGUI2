@@ -1,17 +1,12 @@
 package me.richter.commandsAndGUI.module.invView
 
 import me.richter.commandsAndGUI.Main
-import me.richter.commandsAndGUI.items.GeneralItems
+import me.richter.commandsAndGUI.items.guiItems.GeneralItems
 import org.bukkit.Bukkit
-import org.bukkit.Material
 import org.bukkit.entity.Player
-import org.bukkit.event.inventory.InventoryEvent
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.event.inventory.InventoryType
-import org.bukkit.inventory.Inventory
-import org.bukkit.inventory.ItemStack
 
 class InvSeeClickListener(): Listener {
     @EventHandler

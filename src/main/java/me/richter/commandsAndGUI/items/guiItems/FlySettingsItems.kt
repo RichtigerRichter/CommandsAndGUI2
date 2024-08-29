@@ -1,5 +1,6 @@
-package me.richter.commandsAndGUI.items
+package me.richter.commandsAndGUI.items.guiItems
 
+import me.richter.commandsAndGUI.items.ItemBuilder
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 

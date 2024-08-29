@@ -1,15 +1,11 @@
 package me.richter.commandsAndGUI.module.invView
 
 import me.richter.commandsAndGUI.Main
-import me.richter.commandsAndGUI.items.GeneralItems
-import me.richter.commandsAndGUI.module.guiNew.GUIMiscFuns
+import me.richter.commandsAndGUI.items.guiItems.GeneralItems
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
-import org.bukkit.Material
 import org.bukkit.entity.Player
-import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.Inventory
-import org.bukkit.inventory.ItemStack
 import java.util.UUID
 
 class InvSeeGUI {

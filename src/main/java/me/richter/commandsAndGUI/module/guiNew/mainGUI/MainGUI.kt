@@ -2,8 +2,8 @@ package me.richter.commandsAndGUI.module.guiNew.mainGUI
 
 import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.ConfigFile
-import me.richter.commandsAndGUI.items.GeneralItems
-import me.richter.commandsAndGUI.items.MainItems
+import me.richter.commandsAndGUI.items.guiItems.GeneralItems
+import me.richter.commandsAndGUI.items.guiItems.MainItems
 import me.richter.commandsAndGUI.module.guiNew.GUIMiscFuns
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit

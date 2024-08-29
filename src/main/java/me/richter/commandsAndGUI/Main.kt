@@ -4,9 +4,11 @@ import me.richter.commandsAndGUI.files.Config2File
 import me.richter.commandsAndGUI.files.ConfigFile
 import me.richter.commandsAndGUI.files.Messages2File
 import me.richter.commandsAndGUI.files.MessagesFile
+import me.richter.commandsAndGUI.items.GetItemCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackManager
 import me.richter.commandsAndGUI.module.fly.FlyCommand
+import me.richter.commandsAndGUI.module.fly.soup.SoupEatListener
 import me.richter.commandsAndGUI.module.godmode.GodCommand
 import me.richter.commandsAndGUI.module.guiNew.GUICloseListener
 import me.richter.commandsAndGUI.module.guiNew.GUICommand
@@ -133,6 +135,7 @@ class Main : JavaPlugin() {
         getCommand("sit")!!.setExecutor(SitCommand())
         getCommand("heal")!!.setExecutor(HealCommand(this))
         getCommand("head")!!.setExecutor(HeadCommand())
+        getCommand("getItem")!!.setExecutor(GetItemCommand())
         //getCommand("disguise")!!.setExecutor(DisguiseCommand(this))
 
     }
@@ -149,6 +152,8 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(SitListener(), this)
         server.pluginManager.registerEvents(BreakListener(), this)
         server.pluginManager.registerEvents(InvSeeClickListener(), this)
+        server.pluginManager.registerEvents(SoupEatListener(), this)
+
 
         //server.pluginManager.registerEvents(DisguiseListener(this), this)
 

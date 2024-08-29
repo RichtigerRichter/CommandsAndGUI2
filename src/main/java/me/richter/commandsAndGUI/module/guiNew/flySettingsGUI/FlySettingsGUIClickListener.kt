@@ -1,8 +1,8 @@
 package me.richter.commandsAndGUI.module.guiNew.flySettingsGUI
 
 import me.richter.commandsAndGUI.Main
-import me.richter.commandsAndGUI.items.FlySettingsItems
-import me.richter.commandsAndGUI.items.GeneralItems
+import me.richter.commandsAndGUI.items.guiItems.FlySettingsItems
+import me.richter.commandsAndGUI.items.guiItems.GeneralItems
 import me.richter.commandsAndGUI.module.guiNew.mainGUI.MainGUI
 import org.bukkit.Bukkit
 import org.bukkit.event.EventHandler

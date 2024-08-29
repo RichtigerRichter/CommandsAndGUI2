@@ -12,18 +12,37 @@ import org.bukkit.plugin.java.JavaPlugin
 class ItemBuilder {
 
     fun itemBuilder(
-        itemMaterial: Material,
+        material: Material,
         name: String,
         lore: String,
         customModelData: Int
     ): ItemStack {
-        val item = ItemStack(itemMaterial)
+        val item = ItemStack(material)
         val itemMeta = item.itemMeta
         itemMeta.displayName(Component.text("§r§f$name"))
         if (lore != "") {
             itemMeta.lore(formatStringToComponents(lore))
         }
         itemMeta.setCustomModelData(customModelData)
+        item.itemMeta = itemMeta
+        return item
+    }
+
+
+    fun itemBuilder(
+        material: Material,
+        name: String,
+        lore: String,
+        tagKey: String,
+        tagValue: String
+    ): ItemStack {
+        val plugin: JavaPlugin = Main.instance
+        val item = ItemStack(material)
+        val itemMeta: ItemMeta = item.itemMeta!!
+        val key = NamespacedKey(plugin, tagKey)
+        itemMeta.persistentDataContainer.set(key, PersistentDataType.STRING, tagValue)
+        itemMeta.displayName(Component.text("§r§f$name"))
+        itemMeta.lore(formatStringToComponents(lore))
         item.itemMeta = itemMeta
         return item
     }
@@ -86,12 +105,23 @@ class ItemBuilder {
         return meta.persistentDataContainer.get(key, PersistentDataType.STRING)
     }
 
-    private fun formatStringToComponents(input: String): List<Component> {
+    fun formatStringToComponents(input: String): List<Component> {
         val components = mutableListOf<Component>()
 
         val lines = input.split("\n")
 
         for (line in lines){
+            components.add(Component.text(line))
+        }
+
+        return components
+    }
+
+    private fun formatStringArrayToComponents(input: Array<out String>): List<Component> {
+        val components = mutableListOf<Component>()
+
+
+        for (line in input){
             components.add(Component.text(line))
         }
 

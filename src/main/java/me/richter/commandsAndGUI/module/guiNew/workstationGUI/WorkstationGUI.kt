@@ -2,8 +2,8 @@ package me.richter.commandsAndGUI.module.guiNew.workstationGUI
 
 import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.ConfigFile.IsModuleEnabled
-import me.richter.commandsAndGUI.items.GeneralItems
-import me.richter.commandsAndGUI.items.OpenWorkstationsItems
+import me.richter.commandsAndGUI.items.guiItems.GeneralItems
+import me.richter.commandsAndGUI.items.guiItems.OpenWorkstationsItems
 import me.richter.commandsAndGUI.module.guiNew.GUIMiscFuns
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit

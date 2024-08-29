@@ -1,8 +1,8 @@
 package me.richter.commandsAndGUI.module.guiNew.workstationGUI
 
 import me.richter.commandsAndGUI.Main
-import me.richter.commandsAndGUI.items.GeneralItems
-import me.richter.commandsAndGUI.items.OpenWorkstationsItems
+import me.richter.commandsAndGUI.items.guiItems.GeneralItems
+import me.richter.commandsAndGUI.items.guiItems.OpenWorkstationsItems
 import me.richter.commandsAndGUI.module.guiNew.mainGUI.MainGUI
 import me.richter.commandsAndGUI.module.workstations.OpenWorkFun
 import org.bukkit.Bukkit

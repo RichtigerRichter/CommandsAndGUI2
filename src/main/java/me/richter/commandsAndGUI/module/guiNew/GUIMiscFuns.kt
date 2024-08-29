@@ -1,6 +1,6 @@
 package me.richter.commandsAndGUI.module.guiNew
 
-import me.richter.commandsAndGUI.items.GeneralItems
+import me.richter.commandsAndGUI.items.guiItems.GeneralItems
 import org.bukkit.Material
 import org.bukkit.inventory.Inventory
 

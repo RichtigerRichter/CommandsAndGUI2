@@ -1,4 +1,4 @@
-name: CommandsAndGUI
+name: CommandsAndGUI-1.20.2
 version: '${project.version}'
 main: me.richter.commandsAndGUI.Main
 api-version: '1.13'
@@ -87,6 +87,13 @@ commands:
     aliases: []
     permission: commandsAndGUI.command.worldManager
     permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.worldManager permission)
+
+  getItem:
+    description: get an item from the plugin
+    usage: /<command> [item]
+    aliases: []
+    permission: commandsAndGUI.command.getItem
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.getItem permission)
 
   head:
     description: gives head
