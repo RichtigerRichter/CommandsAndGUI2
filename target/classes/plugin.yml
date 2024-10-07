@@ -1,5 +1,5 @@
-name: CommandsAndGUI-1.20.2
-version: '1.0.1'
+name: CommandsAndGUI
+version: '1.21'
 main: me.richter.commandsAndGUI.Main
 api-version: '1.21'
 
@@ -95,9 +95,23 @@ commands:
     permission: commandsAndGUI.command.getItem
     permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.getItem permission)
 
-  head:
+  getHead:
     description: gives head
     usage: /<command> [a minecraft texture url (textures.minecraft.net/texture/)]
+
+  timer:
+    description: timer
+    usage: /<command> resume, /<command> pause, /<command> set [zeit], /<command> reset
+
+  countdown:
+    description: countdown
+
+  testScoreboard:
+    description: maaaaan ich kann das alles nicht mehr, ich muss noch nen schulprojekt machen :(
+
+  track:
+    description: track a person using a compass
+
 
 
 

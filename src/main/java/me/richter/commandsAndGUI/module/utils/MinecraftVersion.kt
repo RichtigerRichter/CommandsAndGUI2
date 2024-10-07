@@ -4,32 +4,32 @@ import org.bukkit.Bukkit
 
 class MinecraftVersion {
 
-    fun between (minVer: String, maxVer: String): Boolean {
+    fun betweenAndIncluding (minVer: String, maxVer: String): Boolean {
         val server = Bukkit.getServer()
 
-        val minVerNum = minVer.substring(2).toDouble()
-        val maxVerNum = maxVer.substring(2).toDouble()
+        val minVerNum = ("0." + minVer.replace(".", "")).toDouble()
+        val maxVerNum = ("0." + maxVer.replace(".", "")).toDouble()
 
-        val serverVerNum = server.minecraftVersion.substring(2).toDouble()
+        val serverVerNum = ("0." + server.minecraftVersion.replace(".", "")).toDouble()
 
         return minVerNum <= serverVerNum && serverVerNum < maxVerNum
     }
-    fun from(ver: String): Boolean {
+    fun newerAndIncluding(minVer: String): Boolean {
         val server = Bukkit.getServer()
 
-        val minVerNum = ver.substring(2).toDouble()
+        val minVerNum = ("0." + minVer.replace(".", "")).toDouble()
 
-        val serverVerNum = server.minecraftVersion.substring(2).toDouble()
+        val serverVerNum = ("0." + server.minecraftVersion.replace(".", "")).toDouble()
 
         return minVerNum <= serverVerNum
 
     }
-    fun until(ver: String): Boolean {
+    fun olderAndIncluding(maxVer: String): Boolean {
         val server = Bukkit.getServer()
 
-        val maxVerNum = ver.substring(2).toDouble()
+        val maxVerNum = ("0." + maxVer.replace(".", "")).toDouble()
 
-        val serverVerNum = server.minecraftVersion.substring(2).toDouble()
+        val serverVerNum = ("0." + server.minecraftVersion.replace(".", "")).toDouble()
 
         return serverVerNum <= maxVerNum
     }

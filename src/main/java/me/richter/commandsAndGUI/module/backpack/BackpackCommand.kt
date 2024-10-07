@@ -145,7 +145,7 @@ class BackpackCommand: CommandExecutor, TabCompleter {
             }
 
             if (args.size == 2 && args[0] == "create") {
-                completions.add("[name]")
+                completions.add("<name>")
 
 
                 return completions.filter { it.startsWith(args[1], ignoreCase = true) }.toMutableList()

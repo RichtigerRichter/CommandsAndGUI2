@@ -6,7 +6,7 @@
 
     <groupId>me.richter</groupId>
     <artifactId>CommandsAndGUI</artifactId>
-    <version>1.0.1</version>
+    <version>1.21</version>
     <packaging>jar</packaging>
 
     <name>Commands and GUI</name>

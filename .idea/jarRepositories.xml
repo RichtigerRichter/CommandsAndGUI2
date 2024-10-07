@@ -12,6 +12,11 @@
       <option name="url" value="https://oss.sonatype.org/content/groups/public/" />
     </remote-repository>
     <remote-repository>
+      <option name="id" value="spigot-repo" />
+      <option name="name" value="spigot-repo" />
+      <option name="url" value="https://hub.spigotmc.org/nexus/content/repositories/snapshots/" />
+    </remote-repository>
+    <remote-repository>
       <option name="id" value="papermc-repo" />
       <option name="name" value="papermc-repo" />
       <option name="url" value="https://repo.papermc.io/repository/maven-public/" />
@@ -30,6 +35,11 @@
       <option name="id" value="gravemc-repo" />
       <option name="name" value="gravemc-repo" />
       <option name="url" value="https://repo.gravemc.net/releases/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="minecraft-repo" />
+      <option name="name" value="minecraft-repo" />
+      <option name="url" value="https://libraries.minecraft.net/" />
     </remote-repository>
   </component>
 </project>

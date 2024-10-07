@@ -1,4 +1,4 @@
-package me.richter.commandsAndGUI.module.utils
+package me.richter.commandsAndGUI.module.bdLul
 
 import me.richter.commandsAndGUI.files.MessagesFile
 import org.bukkit.Bukkit
@@ -7,7 +7,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 
-class JoinQuitEvent: Listener {
+class BdLulEvent: Listener {
     @EventHandler
     fun playerJoinEvent(event: PlayerJoinEvent) {
         val richter = Bukkit.getPlayer("RichtigerRichter")

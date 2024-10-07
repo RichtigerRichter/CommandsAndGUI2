@@ -25,14 +25,14 @@ class GodCommand : CommandExecutor, TabCompleter {
                 sender.isInvulnerable = true
                 sender.sendMessage(Component.text(Message.godEnabled))
             }
-            return false
+            return true
         }
 
         val targetPlayer = Bukkit.getPlayer(args[0])
         if (targetPlayer == null) {
             sender.sendMessage(
                 Component.text(Message.playerDoesNotExist))
-            return false
+            return true
         }
         // Code mit targetPlayer
         val targetPlayerC = args[0] //Name vom TARGET
@@ -44,7 +44,7 @@ class GodCommand : CommandExecutor, TabCompleter {
             targetPlayer.isInvulnerable = true
             sender.sendMessage(Component.text("${Message.godEnabled} for §6$targetPlayerC"))
         }
-        return false
+        return true
     }
 
 

@@ -33,11 +33,7 @@ class FlyCommand : CommandExecutor, TabCompleter {
 
         val targetPlayerName = args[0] //Name vom TARGET
         val targetPlayer = Bukkit.getPlayer(args[0])
-        if (targetPlayer == null) {
-            sender.sendMessage(
-                Component.text(Message.playerDoesNotExist))
-            return false
-        }
+        if (targetPlayer == null) { sender.sendMessage(Component.text(Message.playerDoesNotExist)); return false }
 
         // Code mit targetPlayer
         if (args.size == 1) {
@@ -63,38 +59,41 @@ class FlyCommand : CommandExecutor, TabCompleter {
             return true
         }
 
-        if (args.size > 1) {
-            if (args[1] == "speed") {
-                val targetFlySpeed = targetPlayer.flySpeed.toDouble()
-                if (args.size == 2 && args[1] == "speed") {
-                    val targetFlySpeedArg: Double = targetFlySpeed * 10
-                    if (targetPlayer == sender) {
-                        sender.sendMessage(Component.text(Message.getFlySpeed(targetFlySpeedArg.toString())))
-                        return true
-                    } else {
-                        sender.sendMessage(Component.text(Message.getFlySpeedFor(targetFlySpeedArg.toString(), targetPlayerName)))
-                        return true
-                    }
-                }
 
-                var targetFlySpeedArg = args[2].toDouble()
-                if (targetFlySpeedArg in 0.0..10.0) {
-                    targetFlySpeedArg /= 10
-                    targetPlayer.flySpeed = targetFlySpeedArg.toFloat()
-                    targetFlySpeedArg *= 10
-                    if (targetPlayer == sender) {
-                        sender.sendMessage(Component.text(Message.setFlySpeed(targetFlySpeedArg.toString())))
-                    } else {
-                        sender.sendMessage(Component.text(Message.setFlySpeedFor(targetFlySpeedArg.toString(), targetPlayerName)))
-                    }
+        if (args[1] == "speed") {
+            val targetFlySpeed = targetPlayer.flySpeed.toDouble()
+
+
+            if (args.size == 2 && args[1] == "speed") {
+                /*
+                val targetFlySpeedArg: Double = targetFlySpeed * 10
+                if (targetPlayer == sender) {
+                    sender.sendMessage(Component.text(Message.getFlySpeed(targetFlySpeedArg.toString())))
                 } else {
-                    sender.sendMessage(Component.text(Message.flySpeed0to10))
-                    return true
+                    sender.sendMessage(Component.text(Message.getFlySpeedFor(targetFlySpeedArg.toString(), targetPlayerName)))
                 }
-
+                
+                 */
             }
+
+            var targetFlySpeedArg = args[2].toDouble()
+            if (targetFlySpeedArg in 0.0..10.0) {
+                targetFlySpeedArg /= 10
+                targetPlayer.flySpeed = targetFlySpeedArg.toFloat()
+                targetFlySpeedArg *= 10
+                if (targetPlayer == sender) {
+                    sender.sendMessage(Component.text(Message.setFlySpeed(targetFlySpeedArg.toString())))
+                } else {
+                    sender.sendMessage(Component.text(Message.setFlySpeedFor(targetFlySpeedArg.toString(), targetPlayerName)))
+                }
+            } else {
+                sender.sendMessage(Component.text(Message.flySpeed0to10))
+                return true
+            }
+
         }
-        return false
+
+        return true
     }
 
 
@@ -112,6 +111,7 @@ class FlyCommand : CommandExecutor, TabCompleter {
             }
 
             if (args.size == 2) {
+                completions.add("time")
                 completions.add("speed")
                 completions.add("on")
                 completions.add("off")
@@ -132,19 +132,12 @@ class FlyCommand : CommandExecutor, TabCompleter {
                 return completions.filter { it.startsWith(args[2], ignoreCase = true) }.toMutableList()
             }
 
-            /*
-            if (args.size == 1) {
-                // Provide tab-completion for first argument
-                val options = mutableListOf("speed")
-                return options.filter { it.startsWith(args[0], ignoreCase = true) }.toMutableList()
-            }
-            if (args.size == 2) {
-                // Provide tab-completion for first argument
-                val options = mutableListOf("1", "2", "3", "4", "5", "6", "7", "8", "9", "10")
-                return options.filter { it.startsWith(args[1], ignoreCase = true) }.toMutableList()
+            if (args.size == 3 && args[1] == "time") {
+                completions.add("<hh:mm:ss>")
+
+                return completions.filter { it.startsWith(args[2], ignoreCase = true) }.toMutableList()
             }
 
-             */
         }
         return mutableListOf()
     }

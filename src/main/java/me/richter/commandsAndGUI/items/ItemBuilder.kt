@@ -93,15 +93,24 @@ class ItemBuilder {
         return item
     }
 
-    fun getCustomTagValue(item: ItemStack?, tagKey: String): String? {
+    fun setCustomTagValue(itemMeta: ItemMeta, tagKey: String, tagValue: String) {
         val plugin: JavaPlugin = Main.instance
-        if (item == null) return null
+        val key = NamespacedKey(plugin, tagKey)
+        itemMeta.persistentDataContainer.set(key, PersistentDataType.STRING, tagValue)
+
+
+        println(itemMeta.persistentDataContainer.keys)
+    }
+
+    fun getCustomTagValue(item: ItemStack, tagKey: String): String? {
+        val plugin: JavaPlugin = Main.instance
         val meta = item.itemMeta ?: return null
 
         // NamespacedKey für den benutzerdefinierten Tag erstellen
         val key = NamespacedKey(plugin, tagKey)
 
         // Wert aus dem PersistentDataContainer auslesen
+        println(meta.persistentDataContainer.get(key, PersistentDataType.STRING))
         return meta.persistentDataContainer.get(key, PersistentDataType.STRING)
     }
 

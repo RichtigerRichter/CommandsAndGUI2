@@ -1,76 +1,45 @@
 package me.richter.commandsAndGUI.module.fly.soup
 
-import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.items.ItemBuilder
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
-import org.bukkit.NamespacedKey
-import org.bukkit.enchantments.Enchantment
-import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.meta.ItemMeta
-import org.bukkit.persistence.PersistentDataType
-import org.bukkit.plugin.java.JavaPlugin
 
 class FlySoup {
 	fun itemBuilder(
 		material: Material,
-		name: String,
-		lore: String,
-		addGlint: Boolean,
-		tagKey: String,
-		tagValue: String
-	): ItemStack {
-		val plugin: JavaPlugin = Main.instance
-		val item = ItemStack(material)
-		val itemMeta: ItemMeta = item.itemMeta!!
-		val key = NamespacedKey(plugin, tagKey)
-		itemMeta.persistentDataContainer.set(key, PersistentDataType.STRING, tagValue)
-		itemMeta.displayName(Component.text("§r§f$name"))
-		itemMeta.lore(ItemBuilder().formatStringToComponents(lore))
-		if (addGlint) {
-			itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true)
-			//itemMeta.itemFlags.add(ItemFlag.HIDE_ENCHANTS)
-			itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
-		}
-		item.itemMeta = itemMeta
-		return item
-	}
-
-	fun itemBuilder(
-		material: Material,
-		name: String,
-		lore: String,
+		name: String?,
+		lore: String?,
+		maxStackSize: Int?,
 		count: Int,
 		addGlint: Boolean,
-		tagKey: String,
-		tagValue: String
+		tagKey: String?,
+		tagValue: String?
 	): ItemStack {
-		val plugin: JavaPlugin = Main.instance
 		val item = ItemStack(material, count)
-		val itemMeta: ItemMeta = item.itemMeta!!
-		val key = NamespacedKey(plugin, tagKey)
-		itemMeta.persistentDataContainer.set(key, PersistentDataType.STRING, tagValue)
-		itemMeta.displayName(Component.text("§r§f$name"))
-		itemMeta.lore(ItemBuilder().formatStringToComponents(lore))
-		if (addGlint) {
-			itemMeta.addEnchant(Enchantment.UNBREAKING, 1, true)
-			//itemMeta.itemFlags.add(ItemFlag.HIDE_ENCHANTS)
-			itemMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS)
-		}
+		val itemMeta: ItemMeta = item.itemMeta
+
+		if (name != null) itemMeta.displayName(Component.text("§r§f$name"))
+		if (lore != null) itemMeta.lore(ItemBuilder().formatStringToComponents(lore))
+		if (maxStackSize != null) itemMeta.setMaxStackSize(maxStackSize)
+		if (addGlint) itemMeta.setEnchantmentGlintOverride(true)
+		if (tagKey != null && tagValue != null)	ItemBuilder().setCustomTagValue(itemMeta, tagKey, tagValue)
+
 		item.itemMeta = itemMeta
 		return item
 	}
 
-	fun flySoupItem(): ItemStack {
-		return itemBuilder(Material.FEATHER, name = "FlySoup", lore = "Eat temporarily to gain the ability to fly \nDuration: ?? min", addGlint =  true , tagKey = "CAG.item", tagValue = "flySoup")
-	}
 	fun flySoupItem(count: Int): ItemStack {
-		return itemBuilder(Material.FEATHER, name = "FlySoup", lore = "Eat temporarily to gain the ability to fly \nDuration: ?? min", count, addGlint =  true , tagKey = "CAG.item", tagValue = "flySoup")
+		return itemBuilder(
+			material =  Material.SUSPICIOUS_STEW,
+			name = "FlySoup",
+			lore = "Eat to temporarily gain the ability to fly \nDuration: ?? min",
+			maxStackSize = 64,
+			count = count,
+			addGlint =  true ,
+			tagKey = "CAG.item",
+			tagValue = "flySoup")
 	}
-	fun flySoup2Item(): ItemStack {
-		return ItemBuilder().itemBuilder(Material.SUSPICIOUS_STEW, name = "FlySoup", lore = "Eat temporarily to gain the ability to fly \nDuration: ?? min", tagKey = "CAG.item", tagValue = "flySoup")
-	}
-
 
 }

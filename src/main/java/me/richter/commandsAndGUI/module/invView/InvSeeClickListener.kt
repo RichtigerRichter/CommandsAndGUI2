@@ -118,19 +118,16 @@ class InvSeeClickListener(): Listener {
 
     @EventHandler
     fun updateTargetInvOnClick(event: InventoryClickEvent) {
-        //if(event.currentItem == null) return
+        // Check if the clicked item or inventory is null
         val player = event.whoClicked as Player
         val inventory = event.clickedInventory ?: return
         val target = Bukkit.getPlayer(InvSeeGUI().getTargetFromInv(inventory) ?: return) ?: return
 
         if (inventory == Main.guiInvSeeMap[target.uniqueId]) {
-            Bukkit.getScheduler().runTaskAsynchronously(Main.instance, Runnable {
-                Bukkit.getScheduler().runTask(Main.instance, Runnable {
-                    InvSeeGUI().updateTargetInv(target, inventory)
-                })
+            // Run the update directly on the main thread
+            Bukkit.getScheduler().runTask(Main.instance, Runnable {
+                InvSeeGUI().updateTargetInv(target, inventory)
             })
         }
-
     }
-
 }

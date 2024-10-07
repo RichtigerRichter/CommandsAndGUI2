@@ -116,12 +116,12 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
 
 
             if (args.size == 2 && args[0] == "createTempDevWorld") {
-                completions.add("[WorldName]")
+                completions.add("<WorldName>")
 
                 return completions.filter { it.startsWith(args[1], ignoreCase = true) }.toMutableList()
             }
             if (args.size == 2 && args[0] == "initialize") {
-                completions.add("[WorldName]")
+                completions.add("<WorldName>")
 
                 return completions.filter { it.startsWith(args[1], ignoreCase = true) }.toMutableList()
             }
@@ -192,7 +192,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
                 return completions.filter { it.startsWith(args[3], ignoreCase = true) }.toMutableList()
             }
             if (args.size == 4 && args[2] == "seed") {
-                completions.add("[seed]")
+                completions.add("<seed>")
 
                 return completions.filter { it.startsWith(args[3], ignoreCase = true) }.toMutableList()
             }
@@ -201,7 +201,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
                 //Todo layer system ausdenken
                 //{"layers": [{"block": "stone", "height": 1}, {"block": "grass_block", "height": 1}], "biome":"plains"}
                 //z.B. => plains 1 stone 5 grass_block
-                completions.add("[biome]")
+                completions.add("<biome>")
                 completions.addAll(Funs().getAllBiomeNames())
                 completions.remove("CUSTOM")
 
@@ -212,7 +212,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
                 //Todo layer system ausdenken
                 //{"layers": [{"block": "stone", "height": 1}, {"block": "grass_block", "height": 1}], "biome":"plains"}
                 //z.B. => plains stone 5 grass_block 7
-                completions.add("[height]")
+                completions.add("<height>")
 
 
                 return completions.filter { it.startsWith(args[args.size - 1], ignoreCase = true) }.toMutableList()
@@ -221,7 +221,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
                 //Todo layer system ausdenken
                 //{"layers": [{"block": "stone", "height": 1}, {"block": "grass_block", "height": 1}], "biome":"plains"}
                 //z.B. => plains stone 5 grass_block 7
-                completions.add("[block]")
+                completions.add("<block>")
                 completions.addAll(Funs().getAllBlockNames())
 
                 return completions.filter { it.startsWith(args[args.size - 1], ignoreCase = true) }.toMutableList()

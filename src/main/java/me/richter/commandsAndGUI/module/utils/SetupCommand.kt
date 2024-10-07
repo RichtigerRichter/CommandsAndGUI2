@@ -43,7 +43,7 @@ class SetupCommand : CommandExecutor {
         val doTraderSpawning = world.getGameRuleValue(GameRule.DO_TRADER_SPAWNING)
         sender.sendMessage(Component.text("$PREFIX DO_TRADER_SPAWNING set to $doTraderSpawning"))
 
-        if (MinecraftVersion().from("1.19.4")){
+        if (MinecraftVersion().newerAndIncluding("1.19.4")){
         world.setGameRule(GameRule.DO_VINES_SPREAD, false)
         val doVinesSpread = world.getGameRuleValue(GameRule.DO_VINES_SPREAD)
         sender.sendMessage(Component.text("$PREFIX DO_VINES_SPREAD set to $doVinesSpread"))
