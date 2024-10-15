@@ -1,22 +1,23 @@
 package me.richter.commandsAndGUI.module.playerTracker
 
 import me.richter.commandsAndGUI.Main
-import org.bukkit.Location
-import org.bukkit.entity.Player
+import me.richter.commandsAndGUI.items.ItemBuilder
 import net.kyori.adventure.bossbar.BossBar
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
+import org.bukkit.Location
+import org.bukkit.Material
 import org.bukkit.World
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Item
+import org.bukkit.entity.Player
+import org.bukkit.inventory.meta.CompassMeta
 import org.bukkit.util.Vector
 import java.util.*
 import kotlin.math.atan2
 
 class TrackManager {
-	//trackingPlayer 1:n Name Location/Entity Bossbar/Compass
-	// /track
-
+	//BOSSBAR HANDLING
 	fun updateBossbarTick() {
 		for (uuid in Main.trackMap.keys) {
 			val player = Bukkit.getPlayer(uuid) ?: continue
@@ -72,7 +73,7 @@ class TrackManager {
 		}
 	}
 
-	fun startTracking(player: Player, targetEntity: Entity, name: String) {
+	fun startTrackingBossbar(player: Player, targetEntity: Entity, name: String) {
 		// Erstelle eine neue Bossbar oder verwende eine vorhandene
 		val bossBar = BossBar.bossBar(
 			Component.text("Tracking ${targetEntity.name}"),
@@ -90,7 +91,7 @@ class TrackManager {
 
 	}
 
-	fun startTracking(player: Player, targetLocation: Location, name: String) {
+	fun startTrackingBossbar(player: Player, targetLocation: Location, name: String) {
 		// Erstelle eine neue Bossbar oder verwende eine vorhandene
 		val bossBar = BossBar.bossBar(
 			Component.text("Tracking ${targetLocation.x} ${targetLocation.y} ${targetLocation.z}"),
@@ -107,6 +108,43 @@ class TrackManager {
 
 	}
 
+	//COMPASS HANDLING
+	fun updateCompassTick() {
+		for (player in Bukkit.getOnlinePlayers()) {
+			for (unsureItem in player.inventory.contents) {
+				val item = unsureItem ?: continue
+				val tag = ItemBuilder().getCustomTagValue(item, "CAG.item.trackingCompass.entity") ?: continue
+				val entityUUID = UUID.fromString(tag)
+				val targetEntity = Bukkit.getEntity(entityUUID) ?: continue
+				val meta = item.itemMeta as CompassMeta
+				meta.lodestone = targetEntity.location
+				item.itemMeta = meta
+			}
+		}
+	}
+
+	fun giveLocationCompass(player: Player, location: Location, name: String) {
+		val compass = ItemBuilder().itemBuilder(Material.COMPASS, "Tracking: $name", "", "CAG.item.trackingCompass.location", name)
+		val meta = compass.itemMeta as CompassMeta
+		meta.isLodestoneTracked = false
+		meta.lodestone = location
+		compass.itemMeta = meta
+		println(compass.toString())
+		player.inventory.addItem(compass)
+	}
+
+	fun giveEntityCompass(player: Player, entity: Entity, name: String) {
+		val compass = ItemBuilder().itemBuilder(Material.COMPASS, "Tracking: $name", "", "CAG.item.trackingCompass.entity", entity.uniqueId.toString())
+		val meta = compass.itemMeta as CompassMeta
+		meta.isLodestoneTracked = false
+		meta.lodestone = entity.location
+		compass.itemMeta = meta
+		println(compass.toString())
+		player.inventory.addItem(compass)
+	}
+
+
+	//ALLGEMEINES HANDLING
 	fun endTracking(player: Player, name: String) {
 		val playerMap = Main.trackMap[player.uniqueId] ?: return
 		val trackerList = playerMap[name] ?: return
@@ -179,161 +217,4 @@ class TrackManager {
 
 		return relativeYaw
 	}
-
-
-
-	/*
-	fun updateBossbarTick() {
-		for (uuid in Main.trackMap.keys) {
-			val player = Bukkit.getPlayer(uuid) ?: return
-			val userMap = Main.trackMap[uuid] ?: return
-
-			for (name in userMap.keys) {
-				val trackerMap = userMap[name] ?: return
-				var location: Location? = null
-				val locationOrPlayer = trackerMap[1]
-				if (locationOrPlayer is Location) {
-					location = locationOrPlayer
-				}
-				if (locationOrPlayer is Player) {
-					if (locationOrPlayer.world == player.world) {
-						location = locationOrPlayer.location
-					}
-				}
-
-				val bossbarOrCompass = trackerMap[0]
-				if (bossbarOrCompass is BossBar) {
-					if (locationOrPlayer is Player) {
-						when (locationOrPlayer.world.environment) {
-							World.Environment.NORMAL -> {
-								bossbarOrCompass.color(BossBar.Color.GREEN)
-							}
-							World.Environment.NETHER -> {
-								bossbarOrCompass.color(BossBar.Color.RED)
-							}
-							World.Environment.THE_END -> {
-								bossbarOrCompass.color(BossBar.Color.PURPLE)
-							}
-							World.Environment.CUSTOM -> {
-								bossbarOrCompass.color(BossBar.Color.BLUE)
-							}
-						}
-						if (locationOrPlayer.world != player.world) {
-							when (locationOrPlayer.world.environment) {
-								World.Environment.NORMAL -> bossbarOrCompass.name(Component.text("Target is in the Overworld"))
-								World.Environment.NETHER -> bossbarOrCompass.name(Component.text("Target is in the Nether"))
-								World.Environment.THE_END -> bossbarOrCompass.name(Component.text("Target is in the End"))
-								World.Environment.CUSTOM -> bossbarOrCompass.name(Component.text("Target is in a custom World"))
-							}
-
-
-							return
-						}
-					}
-					if (locationOrPlayer is Location) {
-						when (locationOrPlayer.world.environment) {
-							World.Environment.NORMAL -> {
-								bossbarOrCompass.color(BossBar.Color.GREEN)
-							}
-							World.Environment.NETHER -> {
-								bossbarOrCompass.color(BossBar.Color.RED)
-							}
-							World.Environment.THE_END -> {
-								bossbarOrCompass.color(BossBar.Color.PURPLE)
-							}
-							World.Environment.CUSTOM -> {
-								bossbarOrCompass.color(BossBar.Color.BLUE)
-							}
-						}
-						if (locationOrPlayer.world != player.world) {
-							when (locationOrPlayer.world.environment) {
-								World.Environment.NORMAL -> bossbarOrCompass.name(Component.text("Target is in the Overworld"))
-								World.Environment.NETHER -> bossbarOrCompass.name(Component.text("Target is in the Nether"))
-								World.Environment.THE_END -> bossbarOrCompass.name(Component.text("Target is in the End"))
-								World.Environment.CUSTOM -> bossbarOrCompass.name(Component.text("Target is in a custom World"))
-							}
-
-
-							return
-						}
-					}
-
-
-
-					if (location == null) return
-					val angle = getRelativeYaw(player, location)
-					val compassString = angleToCompassString(angle, 29)
-					bossbarOrCompass.name(Component.text(compassString))
-					player.showBossBar(bossbarOrCompass)
-				}
-				if (bossbarOrCompass is Item) {
-					return
-				}
-			}
-
-		}
-	}
-
-	 */
-	/*
-	fun updateBarForDimesion(player: Player, locationOrPlayer: Any, bossbarOrCompass: Any) {
-		if (bossbarOrCompass is BossBar) {
-			if (locationOrPlayer is Player) {
-				when (locationOrPlayer.world.environment) {
-					World.Environment.NORMAL -> {
-						bossbarOrCompass.color(BossBar.Color.GREEN)
-					}
-					World.Environment.NETHER -> {
-						bossbarOrCompass.color(BossBar.Color.RED)
-					}
-					World.Environment.THE_END -> {
-						bossbarOrCompass.color(BossBar.Color.PURPLE)
-					}
-					World.Environment.CUSTOM -> {
-						bossbarOrCompass.color(BossBar.Color.BLUE)
-					}
-				}
-				if (locationOrPlayer.world != player.world) {
-					when (locationOrPlayer.world.environment) {
-						World.Environment.NORMAL -> bossbarOrCompass.name(Component.text("Target is in the Overworld"))
-						World.Environment.NETHER -> bossbarOrCompass.name(Component.text("Target is in the Nether"))
-						World.Environment.THE_END -> bossbarOrCompass.name(Component.text("Target is in the End"))
-						World.Environment.CUSTOM -> bossbarOrCompass.name(Component.text("Target is in a custom World"))
-					}
-
-
-					return
-				}
-			}
-			if (locationOrPlayer is Location) {
-				when (locationOrPlayer.world.environment) {
-					World.Environment.NORMAL -> {
-						bossbarOrCompass.color(BossBar.Color.GREEN)
-					}
-					World.Environment.NETHER -> {
-						bossbarOrCompass.color(BossBar.Color.RED)
-					}
-					World.Environment.THE_END -> {
-						bossbarOrCompass.color(BossBar.Color.PURPLE)
-					}
-					World.Environment.CUSTOM -> {
-						bossbarOrCompass.color(BossBar.Color.BLUE)
-					}
-				}
-				if (locationOrPlayer.world != player.world) {
-					when (locationOrPlayer.world.environment) {
-						World.Environment.NORMAL -> bossbarOrCompass.name(Component.text("Target is in the Overworld"))
-						World.Environment.NETHER -> bossbarOrCompass.name(Component.text("Target is in the Nether"))
-						World.Environment.THE_END -> bossbarOrCompass.name(Component.text("Target is in the End"))
-						World.Environment.CUSTOM -> bossbarOrCompass.name(Component.text("Target is in a custom World"))
-					}
-
-
-					return
-				}
-			}
-		}
-	}
-	 */
-
 }

@@ -1,6 +1,11 @@
+#general Massages
 R: true
 B: false
 PREFIX: §8[§aRichtigerStuff§8]§r
+playerDoesNotExist: '%PREFIX% §4player does not exist§r'
+moduleNotEnabled: '%PREFIX% §cThis module is not enabled!§r'
+
+#fly Massages
 flyingDisabled: '%PREFIX% Flying§7 disabled§r'
 flyingEnabled: '%PREFIX% Flying§a enabled§r'
 flyingDisabledFor: '%PREFIX% Flying§7 disabled§r for §6%PLAYER%§r'
@@ -10,20 +15,34 @@ setFlySpeed: '%PREFIX% Set your fly speed to §a%FlySpeed%§r (default is 1)'
 getFlySpeed: '%PREFIX% Your current fly speed is §a%FlySpeed%§r (default is 1)'
 setFlySpeedFor: '%PREFIX% Set fly speed of §6%PLAYER%§r to §a%FlySpeed%§r (default is 1)'
 getFlySpeedFor: '%PREFIX% The current fly speed of §6%PLAYER%§r is §a%FlySpeed%§r (default is 1)'
+flyTimeLeft: '%PREFIX% Fly time left is %TIME%'
+timeNeedsToBeNumber: '%PREFIX% Time needs to be a number'
+flyTimeSet: '%PREFIX% Fly time was set to %TIME%'
+flyTimeAdded: '%PREFIX% Added %TIME%s to fly time. New time (%NEW_TIME%)'
+
+#god Massages
 godDisabled: '%PREFIX% Godmode§7 disabled§r'
 godEnabled: '%PREFIX% Godmode§a enabled§r'
+
+#heal Massages
 youGotHealed: '%PREFIX% You got Healed§r'
+
+#vanish Massages
 vanishDisabled: '%PREFIX% Vanish§7 disabled§r'
 vanishEnabled: '%PREFIX% Vanish§a enabled§r'
-playerDoesNotExist: '%PREFIX% §4player does not exist§r'
+
+#backpack Massages
 backpackAlredyExists: '%PREFIX% A Backpack with this name already Exists§r'
 backpackCreated: '%PREFIX% Backpack Created§r'
 backpackDeleted: '%PREFIX% Backpack Deleted§r'
 backpackDontExists: '%PREFIX% A Backpack with this name does not Exist§r'
 youAreNotAllowedToOpenThisBackpack: '%PREFIX% You are not allowed to open this Backpack§r'
 youAreNotTheOwner: '%PREFIX% You are not the owner of this Backpack§r'
-moduleNotEnabled: '%PREFIX% §cThis module is not enabled!§r'
+
+#worldManager Massages
 initWorldManager: '%PREFIX% Initialized world creation§r'
 cratingWorld: '%PREFIX% Creating world...§r'
 finCratingWorld: '%PREFIX% Finished world creation§r'
+
+#invsee Massages
 cannotInvSeeYourSelf: '%PREFIX% You can not InvSee yourself (mainly because im to lazy to fix some bugs)§r'

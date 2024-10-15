@@ -1,7 +1,8 @@
 package me.richter.commandsAndGUI.module.guiNew.mainGUI
 
 import me.richter.commandsAndGUI.Main
-import me.richter.commandsAndGUI.files.MessagesFile
+import me.richter.commandsAndGUI.files.Messages2File.Message
+import me.richter.commandsAndGUI.files.Messages2File
 import me.richter.commandsAndGUI.items.guiItems.GeneralItems
 import me.richter.commandsAndGUI.items.guiItems.MainItems
 import me.richter.commandsAndGUI.module.backpack.BackpackManager
@@ -40,11 +41,11 @@ class MainGUIClickListener(private val plugin: JavaPlugin): Listener {
                 return }
             MainItems().itemGuiFlightOn() -> {
                 Bukkit.getPlayer(event.whoClicked.uniqueId)!!.allowFlight = false
-                player.sendMessage(Component.text(MessagesFile.Message.flyingDisabled))
+                player.sendMessage(Component.text(Message.flyingDisabled))
                 event.clickedInventory!!.setItem(event.slot, MainItems().itemGuiFlightOff()) }
             MainItems().itemGuiFlightOff() -> {
                 Bukkit.getPlayer(event.whoClicked.uniqueId)!!.allowFlight = true
-                player.sendMessage(Component.text(MessagesFile.Message.flyingEnabled))
+                player.sendMessage(Component.text(Message.flyingEnabled))
                 event.clickedInventory!!.setItem(event.slot, MainItems().itemGuiFlightOn()) }
 
             MainItems().itemGuiGodmodeLogo() -> {
@@ -54,22 +55,22 @@ class MainGUIClickListener(private val plugin: JavaPlugin): Listener {
             }
             MainItems().itemGuiGodmodeOn() -> {
                 player.isInvulnerable = false
-                player.sendMessage(Component.text(MessagesFile.Message.godDisabled))
+                player.sendMessage(Component.text(Message.godDisabled))
                 event.clickedInventory!!.setItem(event.slot, MainItems().itemGuiGodmodeOff()) }
             MainItems().itemGuiGodmodeOff() -> {
                 player.isInvulnerable = true
-                player.sendMessage(Component.text(MessagesFile.Message.godEnabled))
+                player.sendMessage(Component.text(Message.godEnabled))
                 event.clickedInventory!!.setItem(event.slot, MainItems().itemGuiGodmodeOn()) }
 
             MainItems().itemGuiVanishLogo() -> {}
             MainItems().itemGuiVanishOn() -> {
                 VanishManager(plugin).set(player, false)
                 event.clickedInventory!!.setItem(event.slot, MainItems().itemGuiVanishOff())
-                player.sendMessage(Component.text(MessagesFile.Message.vanishDisabled))}
+                player.sendMessage(Component.text(Message.vanishDisabled))}
             MainItems().itemGuiVanishOff() -> {
                 VanishManager(plugin).set(player, true)
                 event.clickedInventory!!.setItem(event.slot, MainItems().itemGuiVanishOn())
-                player.sendMessage(Component.text(MessagesFile.Message.vanishEnabled))}
+                player.sendMessage(Component.text(Message.vanishEnabled))}
 
             GeneralItems().itemGuiClose() -> inventory?.close()
         }

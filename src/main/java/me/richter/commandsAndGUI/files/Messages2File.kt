@@ -1,7 +1,7 @@
 package me.richter.commandsAndGUI.files
 
 import me.richter.commandsAndGUI.Main
-import me.richter.commandsAndGUI.files.MessagesFile.Message
+import me.richter.commandsAndGUI.files.Messages2File.Message
 import org.bukkit.Bukkit
 import org.bukkit.configuration.file.FileConfiguration
 import org.bukkit.configuration.file.YamlConfiguration
@@ -36,7 +36,7 @@ class Messages2File {
 		private val file = File(dir, "messages2.yml")
 		private val config = YamlConfiguration.loadConfiguration(file)
 
-		private val PREFIX: String = config.getString("PREFIX") ?: run {
+		val PREFIX: String = config.getString("PREFIX") ?: run {
 			logMessageNotFound("PREFIX")
 			"§8[§aRichtigerStuff§8]§r"
 		}
@@ -50,7 +50,8 @@ class Messages2File {
 
 		private fun logMessageNotFound(path: String) {
 			// Sendet eine Fehlermeldung an die Konsole
-			Bukkit.getLogger().warning("Message path '$path' not found in messages.yml.")
+			Main().logger.warning("Message path '$path' not found in messages.yml.")
+			//Bukkit.getLogger().warning("Message path '$path' not found in messages.yml.")
 		}
 
 		val flyingDisabled = getMessage("flyingDisabled", "$PREFIX Flying disabled")
@@ -88,6 +89,24 @@ class Messages2File {
 			return getMessage("getFlySpeedFor", "$PREFIX The current fly speed of %PLAYER% is %FlySpeed% (default is 1)")
 				.replace("%FlySpeed%", flySpeed)
 				.replace("%PLAYER%", targetPlayer)
+		}
+
+		fun flyTimeLeft(time: String): String {
+			return getMessage("flyTimeLeft", "$PREFIX Fly time left is %TIME%")
+				.replace("%TIME%", time)
+		}
+
+		val timeNeedsToBeNumber = getMessage("timeNeedsToBeNumber", "$PREFIX Time needs to be a number")
+
+		fun flyTimeSet(time: String): String {
+			return getMessage("flyTimeSet", "$PREFIX Fly time was set to %TIME%")
+				.replace("%TIME%", time)
+		}
+
+		fun flyTimeAdded(time: String, newTime: String): String {
+			return getMessage("flyTimeAdded", "$PREFIX Added %TIME%s to fly time. New time (%NEW_TIME%)")
+				.replace("%TIME%", time)
+				.replace("%NEW_TIME%", newTime)
 		}
 
 		val godDisabled = getMessage("godDisabled", "$PREFIX Godmode disabled")

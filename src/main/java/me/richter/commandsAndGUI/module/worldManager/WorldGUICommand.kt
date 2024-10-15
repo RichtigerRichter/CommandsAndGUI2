@@ -1,6 +1,7 @@
 package me.richter.commandsAndGUI.module.worldManager
 
 import me.richter.commandsAndGUI.files.ConfigFile
+import me.richter.commandsAndGUI.files.Messages2File
 import me.richter.commandsAndGUI.files.MessagesFile
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.TriState
@@ -14,7 +15,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, alias: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.gui) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+        if (!ConfigFile.IsModuleEnabled.gui) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
         if (sender !is Player) return false
         if (args.isEmpty()) return false
         val player = Bukkit.getPlayer(sender.uniqueId)!!
@@ -33,7 +34,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
 
         if (args.size == 2 && args[0] == "initialize") {
            WorldManager(plugin).initWorld(args[1])
-            sender.sendMessage(Component.text(MessagesFile.Message.initWorldManager))
+            sender.sendMessage(Component.text(Messages2File.Message.initWorldManager))
         }
 
         if (args.size == 2 && args[0] == "join") {
@@ -45,9 +46,9 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
         }
 
         if (args.size == 2 && args[0] == "create") {
-            sender.sendMessage(Component.text(MessagesFile.Message.cratingWorld))
+            sender.sendMessage(Component.text(Messages2File.Message.creatingWorld))
             WorldManager(plugin).createWorld(args[1])
-            sender.sendMessage(Component.text(MessagesFile.Message.finCratingWorld))
+            sender.sendMessage(Component.text(Messages2File.Message.finCreatingWorld))
         }
 
 

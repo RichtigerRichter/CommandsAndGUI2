@@ -1,6 +1,7 @@
 package me.richter.commandsAndGUI.module.workstations
 
 import me.richter.commandsAndGUI.files.ConfigFile
+import me.richter.commandsAndGUI.files.Messages2File
 import me.richter.commandsAndGUI.files.MessagesFile
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
@@ -11,74 +12,74 @@ import org.bukkit.entity.Player
 class OpenCommand: CommandExecutor, TabCompleter{
     @Override
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.workstation) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+        if (!ConfigFile.IsModuleEnabled.workstation) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
 
         if (sender !is Player) return false
         if (args.isEmpty()) {return false}
         if (args[0].isEmpty()) {return false}
 
         if (args[0] == "Workbench") {
-            if (!ConfigFile.IsModuleEnabled.workbench) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.workbench) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openWorkbench(sender)
             return true
         }
 
         if (args[0] == "CartographyTable") {
-            if (!ConfigFile.IsModuleEnabled.cartographyTable) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.cartographyTable) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openCartographyTable(sender)
             return true
         }
 
         if (args[0] == "Grindstone") {
-            if (!ConfigFile.IsModuleEnabled.grindstone) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.grindstone) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openGrindstone(sender)
             return true
         }
 
         if (args[0] == "Loom") {
-            if (!ConfigFile.IsModuleEnabled.loom) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.loom) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openLoom(sender)
             return true
         }
 
         if (args[0] == "SmithingTable") {
-            if (!ConfigFile.IsModuleEnabled.smithingTable) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.smithingTable) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openSmithingTable(sender)
             return true
         }
 
         if (args[0] == "Stonecutter") {
-            if (!ConfigFile.IsModuleEnabled.stonecutter) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.stonecutter) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openStonecutter(sender)
             return true
         }
 
         if (args[0] == "Furnace") {
-            if (!ConfigFile.IsModuleEnabled.furnace) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.furnace) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openFurnace(sender)
             return true
         }
 
         if (args[0] == "BlastFurnace") {
-            if (!ConfigFile.IsModuleEnabled.blastFurnace) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.blastFurnace) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openBlastFurnace(sender)
             return true
         }
 
         if (args[0] == "Brewing") {
-            if (!ConfigFile.IsModuleEnabled.brewing) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.brewing) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openBrewing(sender)
             return true
         }
 
         if (args[0] == "Smoker") {
-            if (!ConfigFile.IsModuleEnabled.smoker) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.smoker) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             OpenWorkFun().openSmoker(sender)
             return true
         }
 
         if (args[0] == "Anvil") {
-            if (!ConfigFile.IsModuleEnabled.anvil) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.anvil) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             if (args.size == 1){
                 OpenWorkFun().openAnvil(sender)
                 return true
@@ -90,7 +91,7 @@ class OpenCommand: CommandExecutor, TabCompleter{
         }
 
         if (args[0] == "Enchanting") {
-            if (!ConfigFile.IsModuleEnabled.enchanting) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+            if (!ConfigFile.IsModuleEnabled.enchanting) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
             if (args.size == 1) {
                 OpenWorkFun().openEnchanting(sender)
                 return true
@@ -106,7 +107,7 @@ class OpenCommand: CommandExecutor, TabCompleter{
 
     override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {
         if (command.name.equals("workstation", ignoreCase = true)) {
-            if (!ConfigFile.IsModuleEnabled.workstation) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return mutableListOf() }
+            if (!ConfigFile.IsModuleEnabled.workstation) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return mutableListOf() }
             val completions = mutableListOf<String>()
 
             if (args.size == 1) {

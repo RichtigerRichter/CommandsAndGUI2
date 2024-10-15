@@ -11,6 +11,8 @@ import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
+
+//Todo Disguise funktioniert nicht
 class DisguiseCommand(private  val plugin: JavaPlugin): CommandExecutor {
 	private val provider = DisguiseManager.getProvider()
 

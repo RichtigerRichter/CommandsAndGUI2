@@ -71,7 +71,7 @@ class MessagesFile {
     }
 
 
-    object Message {
+    object Message1 {
         private val dir = File("./plugins/CommandsAndGUI")
         private val file = File(dir, "messages.yml")
         private val config = YamlConfiguration.loadConfiguration(this.file)

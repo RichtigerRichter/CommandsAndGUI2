@@ -4,7 +4,7 @@
 package me.richter.commandsAndGUI.module.vanish
 
 import me.richter.commandsAndGUI.files.ConfigFile
-import me.richter.commandsAndGUI.files.MessagesFile.Message
+import me.richter.commandsAndGUI.files.Messages2File.Message
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.command.Command

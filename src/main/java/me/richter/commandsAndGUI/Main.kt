@@ -19,9 +19,9 @@ import me.richter.commandsAndGUI.module.guiNew.flySettingsGUI.FlySettingsGUIClic
 import me.richter.commandsAndGUI.module.guiNew.mainGUI.MainGUIClickListener
 import me.richter.commandsAndGUI.module.guiNew.workstationGUI.WorkstationGUIClickListener
 import me.richter.commandsAndGUI.module.heal.HealCommand
-import me.richter.commandsAndGUI.module.invView.InvSeeClickListener
-import me.richter.commandsAndGUI.module.invView.InvSeeCommand
-import me.richter.commandsAndGUI.module.invView.InvSeeGUI
+import me.richter.commandsAndGUI.module.invSee.InvSeeClickListener
+import me.richter.commandsAndGUI.module.invSee.InvSeeCommand
+import me.richter.commandsAndGUI.module.invSee.InvSeeGUI
 import me.richter.commandsAndGUI.module.jump.JumpCommand
 import me.richter.commandsAndGUI.module.playerTracker.*
 import me.richter.commandsAndGUI.module.scoreboard.JoinLeaveListener
@@ -40,9 +40,6 @@ import me.richter.commandsAndGUI.module.vanish.VanishManager
 import me.richter.commandsAndGUI.module.workstations.OpenCommand
 import me.richter.commandsAndGUI.module.worldGuard2.BreakListener
 import me.richter.commandsAndGUI.module.worldManager.WorldGUICommand
-import net.kyori.adventure.bossbar.BossBar
-import org.bukkit.Bukkit
-import org.bukkit.Location
 import org.bukkit.WorldCreator
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
@@ -149,6 +146,7 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(InvSeeClickListener(), this)
         server.pluginManager.registerEvents(SoupEatListener(), this)
         server.pluginManager.registerEvents(JoinLeaveListener(), this)
+        server.pluginManager.registerEvents(LodestoneListener(), this)
 
 
 
@@ -157,8 +155,8 @@ class Main : JavaPlugin() {
     private fun runEverySec() {
         taskEverySec = object : BukkitRunnable() {
             override fun run() {
-                FlyManager().countdownTick()
-                
+                FlyManager().flytimeSec()
+
                 Countdown().runningEverySec()
                 Timer().runningEverySec()
 
@@ -172,10 +170,12 @@ class Main : JavaPlugin() {
     private fun runEveryTick() {
         taskEveryTick = object : BukkitRunnable() {
             override fun run() {
-                //TODO noch nicht so geil
+                FlyManager().flytimeTick()
+
                 InvSeeGUI().updateAllInvSeeGUIs()
 
                 TrackManager().updateBossbarTick()
+                TrackManager().updateCompassTick()
 
             }
         }

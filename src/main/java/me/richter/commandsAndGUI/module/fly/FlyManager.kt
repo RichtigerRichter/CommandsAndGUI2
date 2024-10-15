@@ -75,7 +75,7 @@ class FlyManager {
 		return players
 	}
 
-	fun countdownTick() {
+	fun flytimeTick() {
 		val players = getAllFlyPlayersInCountdownConfigAsPlayers()
 
 		for (player in players) {
@@ -87,10 +87,18 @@ class FlyManager {
 				player.allowFlight = false
 				player.isFlying = false
 			}
+		}
+	}
+	fun flytimeSec() {
+		val players = getAllFlyPlayersInCountdownConfigAsPlayers()
+
+		for (player in players) {
+			if (!player.isOnline) return
+			if (player.gameMode == GameMode.CREATIVE || player.gameMode == GameMode.SPECTATOR) return
+
 
 			setTime(player, getTime(player) - 1)
 			removePlayersWithNoTimeFromConfig()
 		}
-
 	}
 }

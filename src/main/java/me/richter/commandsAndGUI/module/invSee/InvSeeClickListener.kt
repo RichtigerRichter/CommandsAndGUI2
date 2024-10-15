@@ -1,4 +1,4 @@
-package me.richter.commandsAndGUI.module.invView
+package me.richter.commandsAndGUI.module.invSee
 
 import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.items.guiItems.GeneralItems

@@ -1,7 +1,7 @@
 package me.richter.commandsAndGUI.module.backpack
 
 import me.richter.commandsAndGUI.Main
-import me.richter.commandsAndGUI.files.MessagesFile
+import me.richter.commandsAndGUI.files.Messages2File
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.configuration.file.YamlConfiguration
@@ -73,7 +73,7 @@ class BackpackManager {
         config.set("allowedPlayers", allowedPlayers)
 
         if (backpackFile.exists()) {
-            owner.sendMessage(Component.text(MessagesFile.Message.backpackAlredyExists))
+            owner.sendMessage(Component.text(Messages2File.Message.backpackAlreadyExists))
         } else {
             // Erstelle ein neues Inventar, wenn es in der Datei nicht gefunden wird
             val inventory = Bukkit.createInventory(null, 54, Component.text(backpackName))
@@ -94,7 +94,7 @@ class BackpackManager {
             } catch (e: IOException) {
                 e.printStackTrace()
             }
-            owner.sendMessage(Component.text(MessagesFile.Message.backpackCreated))
+            owner.sendMessage(Component.text(Messages2File.Message.backpackCreated))
         }
 
 
