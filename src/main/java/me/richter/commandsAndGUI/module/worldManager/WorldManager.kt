@@ -1,14 +1,10 @@
 package me.richter.commandsAndGUI.module.worldManager
 
+import me.richter.commandsAndGUI.Main.Companion.initWorldCreator
 import net.kyori.adventure.util.TriState
-import org.bukkit.Bukkit
-import org.bukkit.GameRule
-import org.bukkit.World
-import org.bukkit.WorldCreator
-import org.bukkit.WorldType
+import org.bukkit.*
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
-import me.richter.commandsAndGUI.Main.Companion.initWorldCreator
 
 class WorldManager(plugin: JavaPlugin) {
 
@@ -82,7 +78,12 @@ class WorldManager(plugin: JavaPlugin) {
         val allGameRules = world.gameRules
         var changedRules = ""
         for (gameRule in allGameRules) {
-            if (world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>) != world.getGameRuleDefault(GameRule.getByName(gameRule) as GameRule<*>)) {
+            if (world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>) != world.getGameRuleDefault(
+                    GameRule.getByName(
+                        gameRule
+                    ) as GameRule<*>
+                )
+            ) {
                 changedRules += "\n§e$gameRule: §2${world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>)}"
             }
         }

@@ -119,7 +119,7 @@ class ItemBuilder {
 
         val lines = input.split("\n")
 
-        for (line in lines){
+        for (line in lines) {
             components.add(Component.text(line))
         }
 
@@ -130,7 +130,7 @@ class ItemBuilder {
         val components = mutableListOf<Component>()
 
 
-        for (line in input){
+        for (line in input) {
             components.add(Component.text(line))
         }
 

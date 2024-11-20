@@ -2,8 +2,7 @@ name: CommandsAndGUI
 version: '${project.version}'
 main: me.richter.commandsAndGUI.Main
 api-version: '1.21'
-
-softdepend: ["PlaceholderAPI"]
+depend: ["PlaceholderAPI"]
 
 commands:
   backpack:

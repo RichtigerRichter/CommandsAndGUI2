@@ -18,32 +18,56 @@ class VanishCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComple
 
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.vanish) { sender.sendMessage(Message.moduleNotEnabled); return true }
+        if (!ConfigFile.IsModuleEnabled.vanish) {
+            sender.sendMessage(Message.moduleNotEnabled); return true
+        }
 
         if (sender !is Player) return true
         VanishManager(plugin).toggle(sender)
 
         if (VanishManager(plugin).isVanished(sender)) {
-            if (args.size > 1) {return false}
-            if (args.isEmpty()) {return false}
-            if (args[0] != "fakeDisconnect") {return true}
+            if (args.size > 1) {
+                return false
+            }
+            if (args.isEmpty()) {
+                return false
+            }
+            if (args[0] != "fakeDisconnect") {
+                return true
+            }
             for (player in Bukkit.getOnlinePlayers()) {
 
                 val language = player.locale().language
                 when (language) {
-                    "en" -> {player.sendMessage(Component.text("§e${sender.name} left the game"))}
-                    "de" -> {player.sendMessage(Component.text("§e${sender.name} hat das Spiel verlassen"))}
+                    "en" -> {
+                        player.sendMessage(Component.text("§e${sender.name} left the game"))
+                    }
+
+                    "de" -> {
+                        player.sendMessage(Component.text("§e${sender.name} hat das Spiel verlassen"))
+                    }
                 }
             }
         } else {
-            if (args.size > 1) {return false}
-            if (args.isEmpty()) {return false}
-            if (args[0] != "fakeDisconnect") {return true}
+            if (args.size > 1) {
+                return false
+            }
+            if (args.isEmpty()) {
+                return false
+            }
+            if (args[0] != "fakeDisconnect") {
+                return true
+            }
             for (player in Bukkit.getOnlinePlayers()) {
                 val language = player.locale().language
                 when (language) {
-                    "en" -> {player.sendMessage(Component.text("§e${sender.name} joined the game"))}
-                    "de" -> {player.sendMessage(Component.text("§e${sender.name} hat das Spiel betreten"))}
+                    "en" -> {
+                        player.sendMessage(Component.text("§e${sender.name} joined the game"))
+                    }
+
+                    "de" -> {
+                        player.sendMessage(Component.text("§e${sender.name} hat das Spiel betreten"))
+                    }
                 }
             }
         }
@@ -53,13 +77,18 @@ class VanishCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComple
         return false
     }
 
-    override fun onTabComplete(sender: CommandSender, command: Command, lable: String, args: Array<out String>
+    override fun onTabComplete(
+        sender: CommandSender, command: Command, lable: String, args: Array<out String>
     ): MutableList<String> {
         if (command.name.equals("vanish", ignoreCase = true)) {
-            if (!ConfigFile.IsModuleEnabled.vanish) { sender.sendMessage(Message.moduleNotEnabled); return mutableListOf() }
+            if (!ConfigFile.IsModuleEnabled.vanish) {
+                sender.sendMessage(Message.moduleNotEnabled); return mutableListOf()
+            }
 
             val completions = mutableListOf<String>()
-            if (args.isEmpty()) {return completions}
+            if (args.isEmpty()) {
+                return completions
+            }
 
             if (args.size == 1) {
                 // Get list of online players

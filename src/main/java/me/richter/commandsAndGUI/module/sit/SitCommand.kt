@@ -8,7 +8,7 @@ import org.bukkit.entity.Player
 
 class SitCommand : CommandExecutor {
     override fun onCommand(sender: CommandSender, command: Command, alias: String, args: Array<out String>?): Boolean {
-        val player:Player = Bukkit.getPlayer(sender.name)!!
+        val player: Player = Bukkit.getPlayer(sender.name)!!
         SitManager().sit(player)
 
         return true

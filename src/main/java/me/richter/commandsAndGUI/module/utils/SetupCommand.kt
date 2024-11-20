@@ -14,9 +14,11 @@ class SetupCommand : CommandExecutor {
 
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, arg: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.setup) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+        if (!ConfigFile.IsModuleEnabled.setup) {
+            sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true
+        }
 
-        if(sender !is Player) return true
+        if (sender !is Player) return true
         val world = sender.world
 
         world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false)
@@ -43,10 +45,10 @@ class SetupCommand : CommandExecutor {
         val doTraderSpawning = world.getGameRuleValue(GameRule.DO_TRADER_SPAWNING)
         sender.sendMessage(Component.text("$PREFIX DO_TRADER_SPAWNING set to $doTraderSpawning"))
 
-        if (MinecraftVersion().newerAndIncluding("1.19.4")){
-        world.setGameRule(GameRule.DO_VINES_SPREAD, false)
-        val doVinesSpread = world.getGameRuleValue(GameRule.DO_VINES_SPREAD)
-        sender.sendMessage(Component.text("$PREFIX DO_VINES_SPREAD set to $doVinesSpread"))
+        if (MinecraftVersion().newerAndIncluding("1.19.4")) {
+            world.setGameRule(GameRule.DO_VINES_SPREAD, false)
+            val doVinesSpread = world.getGameRuleValue(GameRule.DO_VINES_SPREAD)
+            sender.sendMessage(Component.text("$PREFIX DO_VINES_SPREAD set to $doVinesSpread"))
         }
 
         world.setGameRule(GameRule.KEEP_INVENTORY, true)

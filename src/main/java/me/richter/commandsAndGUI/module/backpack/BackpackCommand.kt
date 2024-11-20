@@ -10,11 +10,15 @@ import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
 
-class BackpackCommand: CommandExecutor, TabCompleter {
+class BackpackCommand : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, alias: String, args: Array<out String>): Boolean {
-        if (!IsModuleEnabled.backpack) { sender.sendMessage(Message.moduleNotEnabled); return true }
+        if (!IsModuleEnabled.backpack) {
+            sender.sendMessage(Message.moduleNotEnabled); return true
+        }
 
-        if (sender !is Player) { return false }
+        if (sender !is Player) {
+            return false
+        }
         if (args.size >= 2) {
 
             if (args[0] == "open") {
@@ -69,13 +73,15 @@ class BackpackCommand: CommandExecutor, TabCompleter {
                 var size = 2
                 while (size < maxSize) {
                     val player = Bukkit.getPlayer(args[size]) ?: return true
-                    if (BackpackManager().isAllowedPlayer(args[1], player)) { return true }
+                    if (BackpackManager().isAllowedPlayer(args[1], player)) {
+                        return true
+                    }
 
                     allowedPlayers.add(player)
 
                     size += 1
                 }
-                    BackpackManager().addPlayer(args[1], allowedPlayers)
+                BackpackManager().addPlayer(args[1], allowedPlayers)
                 sender.sendMessage(Component.text("The following players where added to this Backpack:\n$allowedPlayers"))
             }
 
@@ -120,9 +126,16 @@ class BackpackCommand: CommandExecutor, TabCompleter {
         return true
     }
 
-    override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {
+    override fun onTabComplete(
+        sender: CommandSender,
+        command: Command,
+        alias: String,
+        args: Array<out String>
+    ): MutableList<String> {
         if (command.name.equals("backpack", ignoreCase = true)) {
-            if (!IsModuleEnabled.backpack) { sender.sendMessage(Message.moduleNotEnabled); return mutableListOf() }
+            if (!IsModuleEnabled.backpack) {
+                sender.sendMessage(Message.moduleNotEnabled); return mutableListOf()
+            }
 
             val player = Bukkit.getPlayer(sender.name)!!
             val completions = mutableListOf<String>()
@@ -174,7 +187,7 @@ class BackpackCommand: CommandExecutor, TabCompleter {
 
                 //alle player anzeigen
 
-                return completions.filter { it.startsWith(args[args.size-1], ignoreCase = true) }.toMutableList()
+                return completions.filter { it.startsWith(args[args.size - 1], ignoreCase = true) }.toMutableList()
             }
 
             if (args.size == 2 && args[0] == "playerRemove") {
@@ -192,7 +205,7 @@ class BackpackCommand: CommandExecutor, TabCompleter {
 
                 //alle player anzeigen
 
-                return completions.filter { it.startsWith(args[args.size-1], ignoreCase = true) }.toMutableList()
+                return completions.filter { it.startsWith(args[args.size - 1], ignoreCase = true) }.toMutableList()
             }
 
             if (args.size == 2 && args[0] == "playersList") {

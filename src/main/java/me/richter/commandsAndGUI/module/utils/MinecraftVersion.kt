@@ -4,7 +4,7 @@ import org.bukkit.Bukkit
 
 class MinecraftVersion {
 
-    fun betweenAndIncluding (minVer: String, maxVer: String): Boolean {
+    fun betweenAndIncluding(minVer: String, maxVer: String): Boolean {
         val server = Bukkit.getServer()
 
         val minVerNum = ("0." + minVer.replace(".", "")).toDouble()
@@ -14,6 +14,7 @@ class MinecraftVersion {
 
         return minVerNum <= serverVerNum && serverVerNum < maxVerNum
     }
+
     fun newerAndIncluding(minVer: String): Boolean {
         val server = Bukkit.getServer()
 
@@ -24,6 +25,7 @@ class MinecraftVersion {
         return minVerNum <= serverVerNum
 
     }
+
     fun olderAndIncluding(maxVer: String): Boolean {
         val server = Bukkit.getServer()
 

@@ -6,7 +6,7 @@ import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
-import java.util.UUID
+import java.util.*
 
 class InvSeeGUI {
     fun open(player: Player, target: Player) {
@@ -15,7 +15,7 @@ class InvSeeGUI {
         if (Main.guiInvSeeMap.contains(target.uniqueId)) {
             inventory = Main.guiInvSeeMap[target.uniqueId]!!
         } else {
-            inventory = Bukkit.createInventory(player, 6*9, Component.text("${target.name}'s Inventory"))
+            inventory = Bukkit.createInventory(player, 6 * 9, Component.text("${target.name}'s Inventory"))
             Main.guiInvSeeMap[target.uniqueId] = inventory
         }
 
@@ -28,7 +28,7 @@ class InvSeeGUI {
         //hotbar
         for (index in 0..8) {
             val item = target.inventory.getItem(index)
-            inventory.setItem(index+4*9, item)
+            inventory.setItem(index + 4 * 9, item)
         }
 
         //inv
@@ -53,7 +53,7 @@ class InvSeeGUI {
     fun updateTargetInv(target: Player, inventory: Inventory) {
         //hotbar
         for (index in 0..8) {
-            val item = inventory.getItem(index+4*9)
+            val item = inventory.getItem(index + 4 * 9)
             target.inventory.setItem(index, item)
         }
 

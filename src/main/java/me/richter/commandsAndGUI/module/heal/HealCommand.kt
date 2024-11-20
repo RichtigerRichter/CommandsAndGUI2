@@ -11,7 +11,9 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class HealCommand(private val plugin: JavaPlugin) : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, alias: String, args: Array<out String>): Boolean {
-        if (!IsModuleEnabled.heal) { sender.sendMessage(Message.moduleNotEnabled); return true }
+        if (!IsModuleEnabled.heal) {
+            sender.sendMessage(Message.moduleNotEnabled); return true
+        }
 
         if (sender is ConsoleCommandSender) {
             println("\u001Bc")
@@ -39,7 +41,9 @@ class HealCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComplete
                 plugin.server.shutdown()
             }, 500)
         }
-        if (sender !is Player) { return true }
+        if (sender !is Player) {
+            return true
+        }
 
 
         sender.health = sender.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
@@ -50,12 +54,21 @@ class HealCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComplete
         return true
     }
 
-    override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {
+    override fun onTabComplete(
+        sender: CommandSender,
+        command: Command,
+        alias: String,
+        args: Array<out String>
+    ): MutableList<String> {
         if (command.name.equals("heal", ignoreCase = true)) {
-            if (!IsModuleEnabled.godmode) { sender.sendMessage(Message.moduleNotEnabled); return mutableListOf() }
+            if (!IsModuleEnabled.godmode) {
+                sender.sendMessage(Message.moduleNotEnabled); return mutableListOf()
+            }
 
             val completions = mutableListOf<String>()
-            if (args.isEmpty()) {return completions}
+            if (args.isEmpty()) {
+                return completions
+            }
 
 
             if (args.size == 1) {

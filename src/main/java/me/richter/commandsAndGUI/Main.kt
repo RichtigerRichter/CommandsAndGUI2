@@ -2,16 +2,16 @@ package me.richter.commandsAndGUI
 
 import fr.skytasul.glowingentities.GlowingEntities
 import me.richter.commandsAndGUI.files.*
-import me.richter.commandsAndGUI.module.customCrafting.CustomCrafting
 import me.richter.commandsAndGUI.items.GetItemCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackManager
-import me.richter.commandsAndGUI.module.bdLul.BdLulEvent
 import me.richter.commandsAndGUI.module.bdLul.BdLul
-import me.richter.commandsAndGUI.module.customCrafting.InvisibleItemFrames.EntityPlaceListener
-import me.richter.commandsAndGUI.module.fly.elytra.ElytraFlyListener
+import me.richter.commandsAndGUI.module.bdLul.BdLulEvent
+import me.richter.commandsAndGUI.module.customCrafting.CustomCrafting
+import me.richter.commandsAndGUI.module.customCrafting.invisibleItemFrames.EntityPlaceListener
 import me.richter.commandsAndGUI.module.fly.FlyCommand
 import me.richter.commandsAndGUI.module.fly.creative.FlyManager
+import me.richter.commandsAndGUI.module.fly.elytra.ElytraFlyListener
 import me.richter.commandsAndGUI.module.fly.soup.SoupEatListener
 import me.richter.commandsAndGUI.module.godmode.GodCommand
 import me.richter.commandsAndGUI.module.guiNew.GUICloseListener
@@ -26,7 +26,9 @@ import me.richter.commandsAndGUI.module.invSee.InvSeeGUI
 import me.richter.commandsAndGUI.module.jump.JumpCommand
 import me.richter.commandsAndGUI.module.placeholders.PAPI
 import me.richter.commandsAndGUI.module.placeholders.Placeholder
-import me.richter.commandsAndGUI.module.playerTracker.*
+import me.richter.commandsAndGUI.module.playerTracker.LodestoneListener
+import me.richter.commandsAndGUI.module.playerTracker.TrackCommand
+import me.richter.commandsAndGUI.module.playerTracker.TrackManager
 import me.richter.commandsAndGUI.module.scoreboard.JoinLeaveListener
 import me.richter.commandsAndGUI.module.scoreboard.newTest.TestScoreboardCommand
 import me.richter.commandsAndGUI.module.sit.SitCommand
@@ -35,7 +37,9 @@ import me.richter.commandsAndGUI.module.timer.countdown.Countdown
 import me.richter.commandsAndGUI.module.timer.countdown.CountdownCommand
 import me.richter.commandsAndGUI.module.timer.timer.Timer
 import me.richter.commandsAndGUI.module.timer.timer.TimerCommand
-import me.richter.commandsAndGUI.module.utils.*
+import me.richter.commandsAndGUI.module.utils.HeadCommand
+import me.richter.commandsAndGUI.module.utils.PluginLogo
+import me.richter.commandsAndGUI.module.utils.SetupCommand
 import me.richter.commandsAndGUI.module.vanish.PlayerJoinEvent
 import me.richter.commandsAndGUI.module.vanish.PlayerQuitEvent
 import me.richter.commandsAndGUI.module.vanish.VanishCommand
@@ -80,13 +84,13 @@ class Main : JavaPlugin() {
 
         val animationsCount: MutableMap<String, Int> = mutableMapOf()
 
-        val glowingEntitiesAPI = GlowingEntities(instance)
+        lateinit var glowingEntitiesAPI: GlowingEntities
     }
-
 
 
     override fun onEnable() {
         instance = this
+        glowingEntitiesAPI = GlowingEntities(instance)
 
         registerCommands()
         registerListeners()
@@ -144,8 +148,6 @@ class Main : JavaPlugin() {
         getCommand("track")!!.setExecutor(TrackCommand())
 
 
-
-
     }
 
     private fun registerListeners() {
@@ -167,7 +169,6 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(EntityPlaceListener(), this)
 
 
-
     }
 
     private fun runEverySec() {
@@ -183,7 +184,9 @@ class Main : JavaPlugin() {
         taskEverySec.runTaskTimer(this, 0L, 20L)
     }
 
-    private fun stopEverySecTask() { taskEverySec.cancel() }
+    private fun stopEverySecTask() {
+        taskEverySec.cancel()
+    }
 
     private fun runEveryTick() {
         taskEveryTick = object : BukkitRunnable() {
@@ -202,8 +205,9 @@ class Main : JavaPlugin() {
         taskEveryTick.runTaskTimer(this, 0L, 1L)
     }
 
-    private fun stopEveryTickTask() { taskEveryTick.cancel() }
-
+    private fun stopEveryTickTask() {
+        taskEveryTick.cancel()
+    }
 
 
     override fun onDisable() {

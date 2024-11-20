@@ -13,6 +13,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiOpenWorkstation(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.CRAFTING_TABLE,
@@ -21,6 +22,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiFlightLogo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.ELYTRA,
@@ -29,6 +31,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiFlightOn(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -37,6 +40,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiFlightOff(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -45,6 +49,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiGodmodeLogo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.ENCHANTED_GOLDEN_APPLE,
@@ -53,6 +58,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiGodmodeOn(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -61,6 +67,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiGodmodeOff(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -69,6 +76,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiVanishLogo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GLASS,
@@ -77,6 +85,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiVanishOn(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -85,6 +94,7 @@ class MainItems {
             100
         )
     }
+
     fun itemGuiVanishOff(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,

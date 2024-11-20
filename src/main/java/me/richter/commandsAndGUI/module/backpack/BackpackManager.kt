@@ -14,11 +14,10 @@ class BackpackManager {
 
     fun openGUI(player: Player): Boolean {
         val backpackName = "${player.name}'s Backpack"
-        if (!Main.BackpackMap.containsKey(backpackName)){
+        if (!Main.BackpackMap.containsKey(backpackName)) {
             val pluginFolder = File("./plugins/CommandsAndGUI/Backpacks")
             val backpackFile = File(pluginFolder, "$backpackName.yml")
             val config = YamlConfiguration.loadConfiguration(backpackFile)
-
 
 
             val allowedPlayers = mutableListOf<Player>()
@@ -54,14 +53,14 @@ class BackpackManager {
     }
 
     fun open(backpackName: String, player: Player): Boolean {
-        if (!Main.BackpackMap.containsKey(backpackName)){
+        if (!Main.BackpackMap.containsKey(backpackName)) {
             return false
         }
         player.openInventory(Main.BackpackMap[backpackName]!!)
         return true
     }
 
-    fun create(backpackName: String, owner:Player) {
+    fun create(backpackName: String, owner: Player) {
         val pluginFolder = File("./plugins/CommandsAndGUI/Backpacks")
         val backpackFile = File(pluginFolder, "$backpackName.yml")
         val config = YamlConfiguration.loadConfiguration(backpackFile)
@@ -130,7 +129,7 @@ class BackpackManager {
 
         @Suppress("UNCHECKED_CAST")
         val allowedPlayers = config.getList("allowedPlayers") as MutableList<Player>
-        allowedPlayers.removeAll(removedPlayers)
+        allowedPlayers.removeAll(removedPlayers.toSet())
 
         config.save(backpackFile)
     }
@@ -220,7 +219,7 @@ class BackpackManager {
 
         @Suppress("UNCHECKED_CAST")
         val allowedPlayers = config.getList("allowedPlayers") as List<Player>
-        for (player in allowedPlayers){
+        for (player in allowedPlayers) {
             allPlayersAllowedToOpenBackpack.add(player.name)
         }
 
@@ -234,9 +233,10 @@ class BackpackManager {
             val inventory = backpackMap.value
 
 
-
             val backpackFile = File(pluginFolder, "$backpackName.yml")
-            if (!backpackFile.exists()) {return}
+            if (!backpackFile.exists()) {
+                return
+            }
             val config = YamlConfiguration.loadConfiguration(backpackFile)
             val itemsWithPositions = mutableListOf<Map<String, Any?>>()
 
@@ -244,8 +244,8 @@ class BackpackManager {
             for (slot in 0 until inventory.size) {
                 val item = inventory.getItem(slot)
 
-                    val itemData = mapOf("position" to slot, "item" to item)
-                    itemsWithPositions.add(itemData)
+                val itemData = mapOf("position" to slot, "item" to item)
+                itemsWithPositions.add(itemData)
 
             }
 

@@ -14,7 +14,9 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, alias: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.gui) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
+        if (!ConfigFile.IsModuleEnabled.gui) {
+            sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true
+        }
         if (sender !is Player) return false
         if (args.isEmpty()) return false
         val player = Bukkit.getPlayer(sender.uniqueId)!!
@@ -32,12 +34,12 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
         }
 
         if (args.size == 2 && args[0] == "initialize") {
-           WorldManager(plugin).initWorld(args[1])
+            WorldManager(plugin).initWorld(args[1])
             sender.sendMessage(Component.text(MessagesFile.Message.initWorldManager))
         }
 
         if (args.size == 2 && args[0] == "join") {
-            WorldManager(plugin).joinWorld(player ,args[1])
+            WorldManager(plugin).joinWorld(player, args[1])
         }
 
         if (args.size == 2 && args[0] == "saveAsPreset") {
@@ -93,7 +95,12 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
         return true
     }
 
-    override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {
+    override fun onTabComplete(
+        sender: CommandSender,
+        command: Command,
+        alias: String,
+        args: Array<out String>
+    ): MutableList<String> {
         if (command.name.equals("worldmanager", ignoreCase = true)) {
             //if (!IsModuleEnabled.template) { sender.sendMessage(Message.moduleNotEnabled); return mutableListOf() }
 

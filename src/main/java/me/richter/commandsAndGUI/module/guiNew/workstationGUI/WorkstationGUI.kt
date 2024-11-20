@@ -10,8 +10,8 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
 class WorkstationGUI {
-    fun open (player: Player) {
-        val inventory = Bukkit.createInventory(player, 6*9, Component.text("Workstation GUI"))
+    fun open(player: Player) {
+        val inventory = Bukkit.createInventory(player, 6 * 9, Component.text("Workstation GUI"))
         Main.guiWorkstationMap[player.uniqueId] = inventory
 
         inventory.setItem(19, OpenWorkstationsItems().itemGuiOpenWorkbench())

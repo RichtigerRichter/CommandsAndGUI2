@@ -1,0 +1,4 @@
+#Example Player
+ExamplePlayer:
+  fly:
+    allow-elytraless-elytra-flight: true

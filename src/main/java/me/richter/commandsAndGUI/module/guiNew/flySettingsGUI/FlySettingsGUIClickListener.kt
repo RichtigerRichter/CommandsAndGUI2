@@ -9,13 +9,15 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 
-class FlySettingsGUIClickListener: Listener {
+class FlySettingsGUIClickListener : Listener {
     @EventHandler
     fun inventoryClickEvent(event: InventoryClickEvent) {
-        if(event.currentItem == null) return
+        if (event.currentItem == null) return
         val player = Bukkit.getPlayer(event.whoClicked.uniqueId) ?: return
         val inventory = Main.guiFlySettingsMap[player.uniqueId]
-        if(event.clickedInventory != inventory) { return }
+        if (event.clickedInventory != inventory) {
+            return
+        }
 
         when (event.currentItem) {
             FlySettingsItems().skala0off() -> {
@@ -24,6 +26,7 @@ class FlySettingsGUIClickListener: Listener {
                 player.flySpeed = 0.000f
                 event.isCancelled = true
             }
+
             FlySettingsItems().skala0on() -> {}
 
             FlySettingsItems().skala25off() -> {
@@ -32,6 +35,7 @@ class FlySettingsGUIClickListener: Listener {
                 player.flySpeed = 0.025f
                 event.isCancelled = true
             }
+
             FlySettingsItems().skala25on() -> {}
 
             FlySettingsItems().skala50off() -> {
@@ -40,6 +44,7 @@ class FlySettingsGUIClickListener: Listener {
                 player.flySpeed = 0.050F
                 event.isCancelled = true
             }
+
             FlySettingsItems().skala50on() -> {}
 
             FlySettingsItems().skala75off() -> {
@@ -48,6 +53,7 @@ class FlySettingsGUIClickListener: Listener {
                 player.flySpeed = 0.075F
                 event.isCancelled = true
             }
+
             FlySettingsItems().skala75on() -> {}
 
             FlySettingsItems().skala100off() -> {
@@ -56,6 +62,7 @@ class FlySettingsGUIClickListener: Listener {
                 player.flySpeed = 0.100F
                 event.isCancelled = true
             }
+
             FlySettingsItems().skala100on() -> {}
 
             FlySettingsItems().skala250off() -> {
@@ -64,6 +71,7 @@ class FlySettingsGUIClickListener: Listener {
                 player.flySpeed = 0.250F
                 event.isCancelled = true
             }
+
             FlySettingsItems().skala250on() -> {}
 
             FlySettingsItems().skala500off() -> {
@@ -72,6 +80,7 @@ class FlySettingsGUIClickListener: Listener {
                 player.flySpeed = 0.500F
                 event.isCancelled = true
             }
+
             FlySettingsItems().skala500on() -> {}
 
             FlySettingsItems().skala750off() -> {
@@ -80,6 +89,7 @@ class FlySettingsGUIClickListener: Listener {
                 player.flySpeed = 0.750F
                 event.isCancelled = true
             }
+
             FlySettingsItems().skala750on() -> {}
 
             FlySettingsItems().skala1000off() -> {
@@ -88,12 +98,14 @@ class FlySettingsGUIClickListener: Listener {
                 player.flySpeed = 1.000F
                 event.isCancelled = true
             }
+
             FlySettingsItems().skala1000on() -> {}
 
             GeneralItems().itemGuiBack() -> {
                 MainGUI().open(player)
                 event.isCancelled = true
             }
+
             GeneralItems().itemGuiClose() -> {
                 player.closeInventory()
                 event.isCancelled = true

@@ -43,8 +43,7 @@ class VanishManager(private val plugin: JavaPlugin) {
         if (!config.contains(player.name) || !config.getBoolean(player.name)) {
             save(player, true)
             player.sendMessage(Component.text(MessagesFile.Message.vanishEnabled))
-        }
-        else {
+        } else {
             save(player, false)
             player.sendMessage(Component.text(MessagesFile.Message.vanishDisabled))
         }
@@ -64,8 +63,7 @@ class VanishManager(private val plugin: JavaPlugin) {
             for (onlinePlayer in Bukkit.getOnlinePlayers()) {
                 onlinePlayer.hidePlayer(plugin, player)
             }
-        }
-        else {
+        } else {
             for (onlinePlayer in Bukkit.getOnlinePlayers()) {
 
                 onlinePlayer.showPlayer(plugin, player)

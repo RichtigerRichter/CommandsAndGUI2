@@ -13,7 +13,9 @@ import org.bukkit.entity.Player
 
 class GodCommand : CommandExecutor, TabCompleter {
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.godmode) { sender.sendMessage(Message.moduleNotEnabled); return true }
+        if (!ConfigFile.IsModuleEnabled.godmode) {
+            sender.sendMessage(Message.moduleNotEnabled); return true
+        }
 
         if (args.isEmpty()) {
             if (sender !is Player) return true
@@ -31,7 +33,8 @@ class GodCommand : CommandExecutor, TabCompleter {
         val targetPlayer = Bukkit.getPlayer(args[0])
         if (targetPlayer == null) {
             sender.sendMessage(
-                Component.text(Message.playerDoesNotExist))
+                Component.text(Message.playerDoesNotExist)
+            )
             return true
         }
         // Code mit targetPlayer
@@ -48,12 +51,21 @@ class GodCommand : CommandExecutor, TabCompleter {
     }
 
 
-    override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {
+    override fun onTabComplete(
+        sender: CommandSender,
+        command: Command,
+        alias: String,
+        args: Array<out String>
+    ): MutableList<String> {
         if (command.name.equals("god", ignoreCase = true)) {
-            if (!ConfigFile.IsModuleEnabled.godmode) { sender.sendMessage(Message.moduleNotEnabled); return mutableListOf() }
+            if (!ConfigFile.IsModuleEnabled.godmode) {
+                sender.sendMessage(Message.moduleNotEnabled); return mutableListOf()
+            }
 
             val completions = mutableListOf<String>()
-            if (args.isEmpty()) {return completions}
+            if (args.isEmpty()) {
+                return completions
+            }
 
 
             if (args.size == 1) {

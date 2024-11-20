@@ -96,7 +96,17 @@ class FlyCommand : CommandExecutor, TabCompleter {
         }
 
         if (args[1] == "time" && args.size == 2) {
-            sender.sendMessage(Component.text(Message.flyTimeLeft(TimeFormat().timeToString(FlyManager().getTime(targetPlayer)))))
+            sender.sendMessage(
+                Component.text(
+                    Message.flyTimeLeft(
+                        TimeFormat().timeToString(
+                            FlyManager().getTime(
+                                targetPlayer
+                            )
+                        )
+                    )
+                )
+            )
             return true
         }
 
@@ -118,6 +128,7 @@ class FlyCommand : CommandExecutor, TabCompleter {
                 sender.sendMessage(Component.text(Message.flyTimeSet(TimeFormat().timeToString(time))))
                 return true
             }
+
             "add" -> {
                 if (args.size != 4) return false
                 val time = args[3].toIntOrNull()
@@ -127,8 +138,15 @@ class FlyCommand : CommandExecutor, TabCompleter {
                 }
 
                 FlyManager().addTime(targetPlayer, time)
-                sender.sendMessage(Component.text(Message.flyTimeAdded(time.toString(), TimeFormat().timeToString(
-					FlyManager().getTime(targetPlayer) + time))))
+                sender.sendMessage(
+                    Component.text(
+                        Message.flyTimeAdded(
+                            time.toString(), TimeFormat().timeToString(
+                                FlyManager().getTime(targetPlayer) + time
+                            )
+                        )
+                    )
+                )
                 return true
             }
         }
@@ -138,9 +156,16 @@ class FlyCommand : CommandExecutor, TabCompleter {
     }
 
 
-    override fun onTabComplete(sender: CommandSender, command: Command, alias: String, args: Array<out String>): MutableList<String> {
+    override fun onTabComplete(
+        sender: CommandSender,
+        command: Command,
+        alias: String,
+        args: Array<out String>
+    ): MutableList<String> {
         if (command.name.equals("fly", ignoreCase = true)) {
-            if (!ConfigFile.IsModuleEnabled.fly) { sender.sendMessage(Message.moduleNotEnabled); return mutableListOf() }
+            if (!ConfigFile.IsModuleEnabled.fly) {
+                sender.sendMessage(Message.moduleNotEnabled); return mutableListOf()
+            }
 
             val completions = mutableListOf<String>()
 

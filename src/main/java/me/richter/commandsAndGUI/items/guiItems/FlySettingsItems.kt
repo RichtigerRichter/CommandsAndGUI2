@@ -24,6 +24,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala0off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -32,6 +33,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala25Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
@@ -40,6 +42,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala25on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -48,6 +51,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala25off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -56,6 +60,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala50Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
@@ -64,6 +69,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala50on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -72,6 +78,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala50off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -80,6 +87,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala75Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
@@ -88,6 +96,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala75on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -96,6 +105,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala75off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -104,6 +114,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala100Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.ELYTRA,
@@ -112,6 +123,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala100on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -120,6 +132,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala100off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -128,6 +141,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala250Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
@@ -136,6 +150,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala250on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -144,6 +159,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala250off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -152,6 +168,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala500Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
@@ -160,6 +177,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala500on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -168,6 +186,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala500off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -176,6 +195,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala750Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
@@ -184,6 +204,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala750on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -192,6 +213,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala750off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,
@@ -200,6 +222,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala1000Logo(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.FEATHER,
@@ -208,6 +231,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala1000on(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LIME_DYE,
@@ -216,6 +240,7 @@ class FlySettingsItems {
             100
         )
     }
+
     fun skala1000off(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_DYE,

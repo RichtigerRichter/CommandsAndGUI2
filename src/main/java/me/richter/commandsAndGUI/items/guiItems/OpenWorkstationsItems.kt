@@ -13,6 +13,7 @@ class OpenWorkstationsItems {
             100
         )
     }
+
     fun itemGuiOpenCartographyTable(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.CARTOGRAPHY_TABLE,
@@ -21,6 +22,7 @@ class OpenWorkstationsItems {
             100
         )
     }
+
     fun itemGuiOpenGrindstone(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRINDSTONE,
@@ -29,6 +31,7 @@ class OpenWorkstationsItems {
             100
         )
     }
+
     fun itemGuiOpenLoom(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.LOOM,
@@ -37,6 +40,7 @@ class OpenWorkstationsItems {
             100
         )
     }
+
     fun itemGuiOpenSmithingTable(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.SMITHING_TABLE,
@@ -45,6 +49,7 @@ class OpenWorkstationsItems {
             100
         )
     }
+
     fun itemGuiOpenStonecutter(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.STONECUTTER,
@@ -53,6 +58,7 @@ class OpenWorkstationsItems {
             100
         )
     }
+
     fun itemGuiOpenAnvil(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.ANVIL,
@@ -61,6 +67,7 @@ class OpenWorkstationsItems {
             100
         )
     }
+
     fun itemGuiOpenEnchanting(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.ENCHANTING_TABLE,

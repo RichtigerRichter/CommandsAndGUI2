@@ -1,0 +1,22 @@
+#Scoreboard
+#max 15 lines
+#minimassage supported (https://docs.advntr.dev/minimessage/format.html)
+#PlaceholderAPI supported (https://wiki.placeholderapi.com/)
+#Custom PAPI Placeholders:
+# %cag_fly_time% -> displays time a player has left to fly
+# %cag_animation:test% -> displays time a player has left to fly
+
+
+commandsAndGUI:
+ name: "§5§l  CommandsAndGUI"
+ lines:
+  - "%cag_animation:test%"
+  - "test"
+  - ""
+  - "Rank:"
+  - "%luckperms_prefix%"
+  - ""
+  - "<white>Fly Time: <green>%cag_fly_time%"
+  - ""
+  - "Saturation:"
+  - "%player_saturation%"

@@ -7,7 +7,7 @@ import org.bukkit.entity.Player
 import org.bukkit.entity.Turtle
 
 class SitManager {
-    fun sit (player: Player) {
+    fun sit(player: Player) {
         if (Main.sitMap.containsKey(player)) return
         if (!player.isOnGround) return
         if (player.fallDistance != 0f) return

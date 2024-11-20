@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
 
 class MainGUI {
     fun open(player: Player) {
-        val inventory = Bukkit.createInventory(player, 6*9, Component.text("Main GUI"))
+        val inventory = Bukkit.createInventory(player, 6 * 9, Component.text("Main GUI"))
         Main.guiMainMap[player.uniqueId] = inventory
 
         inventory.setItem(19, MainItems().itemGuiBackpackLogo())
@@ -22,7 +22,7 @@ class MainGUI {
 
 
         inventory.setItem(21, MainItems().itemGuiFlightLogo())
-        if(player.allowFlight) {
+        if (player.allowFlight) {
             inventory.setItem(30, MainItems().itemGuiFlightOn())
         } else {
             inventory.setItem(30, MainItems().itemGuiFlightOff())
@@ -32,7 +32,7 @@ class MainGUI {
 
 
         inventory.setItem(23, MainItems().itemGuiGodmodeLogo())
-        if (player.isInvulnerable){
+        if (player.isInvulnerable) {
             inventory.setItem(32, MainItems().itemGuiGodmodeOn())
         } else {
             inventory.setItem(32, MainItems().itemGuiGodmodeOff())

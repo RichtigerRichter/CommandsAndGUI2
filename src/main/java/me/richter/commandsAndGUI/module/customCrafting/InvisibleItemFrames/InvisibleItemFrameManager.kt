@@ -1,13 +1,19 @@
-package me.richter.commandsAndGUI.module.customCrafting.InvisibleItemFrames
+package me.richter.commandsAndGUI.module.customCrafting.invisibleItemFrames
 
 import me.richter.commandsAndGUI.items.ItemBuilder
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
 class InvisibleItemFrameManager {
-	fun invisibleItemFrameItem(): ItemStack {
-		return ItemBuilder().itemBuilder(Material.ITEM_FRAME, "Invisible ItemFrame", "", "cag.item", "invisibleItemFrame")
-	}
+    fun invisibleItemFrameItem(): ItemStack {
+        return ItemBuilder().itemBuilder(
+            Material.ITEM_FRAME,
+            "Invisible ItemFrame",
+            "",
+            "cag.item",
+            "invisibleItemFrame"
+        )
+    }
 
 
 }

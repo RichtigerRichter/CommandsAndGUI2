@@ -13,6 +13,7 @@ class GeneralItems {
             100
         )
     }
+
     fun itemGuiClose(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.BARRIER,
@@ -21,6 +22,7 @@ class GeneralItems {
             100
         )
     }
+
     fun itemGuiBack(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.ARROW,
@@ -38,6 +40,7 @@ class GeneralItems {
             100
         )
     }
+
     fun itemGUIFillerGray(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.GRAY_STAINED_GLASS_PANE,
@@ -46,6 +49,7 @@ class GeneralItems {
             100
         )
     }
+
     fun itemGUIFillerBlack(): ItemStack {
         return ItemBuilder().itemBuilder(
             Material.BLACK_STAINED_GLASS_PANE,

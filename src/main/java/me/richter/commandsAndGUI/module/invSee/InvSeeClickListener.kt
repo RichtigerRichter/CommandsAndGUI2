@@ -8,20 +8,30 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 
-class InvSeeClickListener(): Listener {
+class InvSeeClickListener : Listener {
     @EventHandler
     fun invSeeGUIClickListener(event: InventoryClickEvent) {
-        if(event.currentItem == null) return
+        if (event.currentItem == null) return
         val player = event.whoClicked
         val inventory = Main.guiInvSeeMap[player.uniqueId]
         //if(event.clickedInventory != inventory) { return }
 
         when (event.currentItem) {
-            GeneralItems().itemGUIFillerGray() -> { event.isCancelled = true }
-            GeneralItems().itemGUIFillerBlack() -> { event.isCancelled = true }
-            GeneralItems().itemGUIFillerLightGray() -> { event.isCancelled = true }
+            GeneralItems().itemGUIFillerGray() -> {
+                event.isCancelled = true
+            }
 
-            GeneralItems().itemGuiClose() -> { event.inventory.close(); event.isCancelled = true }
+            GeneralItems().itemGUIFillerBlack() -> {
+                event.isCancelled = true
+            }
+
+            GeneralItems().itemGUIFillerLightGray() -> {
+                event.isCancelled = true
+            }
+
+            GeneralItems().itemGuiClose() -> {
+                event.inventory.close(); event.isCancelled = true
+            }
         }
 
     }
