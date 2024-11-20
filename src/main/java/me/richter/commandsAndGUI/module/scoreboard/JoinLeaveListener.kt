@@ -11,26 +11,12 @@ import java.util.UUID
 import java.util.concurrent.ConcurrentHashMap
 
 class JoinLeaveListener : Listener {
-
 	// Map zum Speichern der TestScoreboard-Instanzen für jeden Spieler
 	private val playerScoreboards = ConcurrentHashMap<UUID, TestScoreboard>()
 
 	@EventHandler
 	fun onJoin(event: PlayerJoinEvent) {
-		//todo debug
-		return
 		val player = event.player
-
-		// Setze die Join-Nachricht mit Adventure-API
-		event.joinMessage(Component.text("${player.name} hat den Server betreten.", NamedTextColor.GREEN))
-
-		// Sende eine Willkommensnachricht
-		player.sendMessage(
-			"""
-            ${ChatColor.GOLD}Willkommen auf dem Server! 
-            Viel Spaß und viel Vergnügen (^:
-            """.trimIndent()
-		)
 
 		// Scoreboard erstellen und initialisieren
 		val scoreboard = TestScoreboard(player).also {
@@ -51,8 +37,5 @@ class JoinLeaveListener : Listener {
 			stopRunEverySec()
 			stopRunEveryTick()
 		}
-
-		// Setze die Quit-Nachricht
-		event.quitMessage(Component.text("${player.name} hat den Server verlassen.", NamedTextColor.RED))
 	}
 }

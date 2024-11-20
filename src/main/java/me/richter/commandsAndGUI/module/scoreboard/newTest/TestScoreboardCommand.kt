@@ -1,4 +1,4 @@
-package me.richter.commandsAndGUI.module.scoreboard
+package me.richter.commandsAndGUI.module.scoreboard.newTest
 
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
@@ -37,9 +37,21 @@ class TestScoreboardCommand : CommandExecutor {
         objective.displaySlot = DisplaySlot.SIDEBAR
 
         // Set a score on the scoreboard
-        objective.getScore("siis").score = 1
+        objective.getScore("siis1").score = 1
         objective.getScore("siis2").score = 2
-
+        objective.getScore("siis3").score = 3
+        objective.getScore("siis4").score = 4
+        objective.getScore("siis5").score = 5
+        objective.getScore("siis6").score = 6
+        objective.getScore("siis7").score = 7
+        objective.getScore("siis8").score = 8
+        objective.getScore("siis9").score = 9
+        objective.getScore("siis10").score = 10
+        objective.getScore("siis11").score = 11
+        objective.getScore("siis12").score = 12
+        objective.getScore("siis13").score = 13
+        objective.getScore("siis14").score = 14
+        objective.getScore("siis15").score = 15
 
         // Assign the scoreboard to the player
         player.scoreboard = scoreboard

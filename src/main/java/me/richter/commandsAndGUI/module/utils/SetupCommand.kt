@@ -1,8 +1,8 @@
 package me.richter.commandsAndGUI.module.utils
 
 import me.richter.commandsAndGUI.files.ConfigFile
-import me.richter.commandsAndGUI.files.Messages2File
-import me.richter.commandsAndGUI.files.Messages2File.Message.PREFIX
+import me.richter.commandsAndGUI.files.MessagesFile
+import me.richter.commandsAndGUI.files.MessagesFile.Message.PREFIX
 import net.kyori.adventure.text.Component
 import org.bukkit.GameRule
 import org.bukkit.command.Command
@@ -14,7 +14,7 @@ class SetupCommand : CommandExecutor {
 
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, arg: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.setup) { sender.sendMessage(Messages2File.Message.moduleNotEnabled); return true }
+        if (!ConfigFile.IsModuleEnabled.setup) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true }
 
         if(sender !is Player) return true
         val world = sender.world

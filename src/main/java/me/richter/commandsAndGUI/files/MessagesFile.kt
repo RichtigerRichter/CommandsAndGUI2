@@ -1,141 +1,152 @@
 package me.richter.commandsAndGUI.files
 
+import me.richter.commandsAndGUI.Main
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 class MessagesFile {
-    private val file: File
-    private var config: YamlConfiguration
+	private val configFile: File = File(Main.instance.dataFolder, "messages.yml")
+	private val messages2: YamlConfiguration
 
-    init {
-        val dir = File("./plugins/CommandsAndGUI")
-        if (!dir.exists()) {
-            dir.mkdirs()
-        }
+	init {
+		if (!configFile.exists()) {
+			configFile.parentFile.mkdirs()
+			Main.instance.saveResource("messages.yml", false)
+		}
+		messages2 = YamlConfiguration.loadConfiguration(configFile)
+	}
 
-        file = File(dir, "messages.yml")
-        if (!file.exists()) {
-            file.createNewFile()
+	fun loadConfig() {
+		val configFile = File(Main.instance.dataFolder, "messages.yml")
+		if (!configFile.exists()) {
+			configFile.parentFile.mkdirs()
+			Main.instance.saveResource("messages.yml", false)
+		}
+	}
 
-            config = YamlConfiguration.loadConfiguration(this.file)
+	fun saveConfig() {
+		messages2.save(configFile)
+	}
 
-            config.addDefault("test", true)
+	object Message {
+		private val dir = File("./plugins/CommandsAndGUI")
+		private val file = File(dir, "messages.yml")
+		private val config = YamlConfiguration.loadConfiguration(file)
 
-            config.set("R", true)
-            config.set("B", false)
+		val PREFIX: String = config.getString("PREFIX") ?: run {
+			logMessageNotFound("PREFIX")
+			"§8[§aRichtigerStuff§8]§r"
+		}
 
-            config.set("PREFIX", "§8[§aRichtigerStuff§8]§r")
+		private fun getMessage(path: String, default: String): String {
+			return config.getString(path)?.replace("%PREFIX%", PREFIX) ?: run {
+				logMessageNotFound(path)
+				default
+			}
+		}
 
-            config.set("flyingDisabled", "%PREFIX% Flying§7 disabled§r")
-            config.set("flyingEnabled", "%PREFIX% Flying§a enabled§r")
-            config.set("flyingDisabledFor", "%PREFIX% Flying§7 disabled§r for §6%PLAYER%§r")
-            config.set("flyingEnabledFor", "%PREFIX% Flying§a enabled§r for §6%PLAYER%§r")
-            config.set("flySpeed0to10", "%PREFIX% §4Fly speed has to be a number from §r0 §4to §r10§r")
-            config.set("setFlySpeed", "%PREFIX% Set your fly speed to §a%FlySpeed%§r (default is 1)")
-            config.set("getFlySpeed", "%PREFIX% Your current fly speed is §a%FlySpeed%§r (default is 1)")
-            config.set("setFlySpeedFor", "%PREFIX% Set fly speed of §6%PLAYER%§r to §a%FlySpeed%§r (default is 1)")
-            config.set("getFlySpeedFor", "%PREFIX% The current fly speed of §6%PLAYER%§r is §a%FlySpeed%§r (default is 1)")
+		private fun logMessageNotFound(path: String) {
+			// Sendet eine Fehlermeldung an die Konsole
+			Main.instance.logger.warning("Message path '$path' not found in messages.yml.")
+			//Bukkit.getLogger().warning("Message path '$path' not found in messages.yml.")
+		}
 
-            config.set("godDisabled", "%PREFIX% Godmode§7 disabled§r")
-            config.set("godEnabled", "%PREFIX% Godmode§a enabled§r")
+		val flyingDisabled = getMessage("flyingDisabled", "$PREFIX Flying disabled")
+		val flyingEnabled = getMessage("flyingEnabled", "$PREFIX Flying enabled")
 
-            config.set("youGotHealed", "%PREFIX% You got Healed§r")
+		fun flyingDisabledFor(targetPlayer: String): String {
+			return getMessage("flyingDisabledFor", "$PREFIX Flying disabled for %PLAYER%")
+				.replace("%PLAYER%", targetPlayer)
+		}
 
-            config.set("vanishDisabled", "%PREFIX% Vanish§7 disabled§r")
-            config.set("vanishEnabled", "%PREFIX% Vanish§a enabled§r")
+		fun flyingEnabledFor(targetPlayer: String): String {
+			return getMessage("flyingEnabledFor", "$PREFIX Flying enabled for %PLAYER%")
+				.replace("%PLAYER%", targetPlayer)
+		}
 
-            config.set("playerDoesNotExist", "%PREFIX% §4player does not exist§r")
+		val flySpeed0to10 = getMessage("flySpeed0to10", "$PREFIX Fly speed has to be a number from 0 to 10")
 
-            config.set("backpackAlredyExists", "%PREFIX% A Backpack with this name already Exists§r")
-            config.set("backpackCreated", "%PREFIX% Backpack Created§r")
-            config.set("backpackDeleted", "%PREFIX% Backpack Deleted§r")
-            config.set("backpackDontExists", "%PREFIX% A Backpack with this name does not Exist§r")
-            config.set("youAreNotAllowedToOpenThisBackpack", "%PREFIX% You are not allowed to open this Backpack§r")
-            config.set("youAreNotTheOwner", "%PREFIX% You are not the owner of this Backpack§r")
+		fun setFlySpeed(flySpeed: String): String {
+			return getMessage("setFlySpeed", "$PREFIX Set your fly speed to %FlySpeed% (default is 1)")
+				.replace("%FlySpeed%", flySpeed)
+		}
 
-            config.set("moduleNotEnabled", "%PREFIX% §cThis module is not enabled!§r")
+		fun getFlySpeed(flySpeed: String): String {
+			return getMessage("getFlySpeed", "$PREFIX Your current fly speed is %FlySpeed% (default is 1)")
+				.replace("%FlySpeed%", flySpeed)
+		}
 
-            config.set("initWorldManager", "%PREFIX% Initialized world creation§r")
-            config.set("cratingWorld", "%PREFIX% Creating world...§r")
-            config.set("finCratingWorld", "%PREFIX% Finished world creation§r")
+		fun setFlySpeedFor(flySpeed: String, targetPlayer: String): String {
+			return getMessage("setFlySpeedFor", "$PREFIX Set fly speed of %PLAYER% to %FlySpeed% (default is 1)")
+				.replace("%FlySpeed%", flySpeed)
+				.replace("%PLAYER%", targetPlayer)
+		}
 
-            config.set("cannotInvSeeYourSelf", "%PREFIX% You can not InvSee yourself (mainly because im to lazy to fix some bugs)§r")
+		fun getFlySpeedFor(flySpeed: String, targetPlayer: String): String {
+			return getMessage("getFlySpeedFor", "$PREFIX The current fly speed of %PLAYER% is %FlySpeed% (default is 1)")
+				.replace("%FlySpeed%", flySpeed)
+				.replace("%PLAYER%", targetPlayer)
+		}
 
+		fun flyTimeLeft(time: String): String {
+			return getMessage("flyTimeLeft", "$PREFIX Fly time left is %TIME%")
+				.replace("%TIME%", time)
+		}
 
-            config.save(this.file)
-        }
+		val timeNeedsToBeNumber = getMessage("timeNeedsToBeNumber", "$PREFIX Time needs to be a number")
 
+		fun flyTimeSet(time: String): String {
+			return getMessage("flyTimeSet", "$PREFIX Fly time was set to %TIME%")
+				.replace("%TIME%", time)
+		}
 
+		fun flyTimeAdded(time: String, newTime: String): String {
+			return getMessage("flyTimeAdded", "$PREFIX Added %TIME%s to fly time. New time (%NEW_TIME%)")
+				.replace("%TIME%", time)
+				.replace("%NEW_TIME%", newTime)
+		}
 
-        config = YamlConfiguration.loadConfiguration(this.file)
-    }
+		val godDisabled = getMessage("godDisabled", "$PREFIX Godmode disabled")
+		val godEnabled = getMessage("godEnabled", "$PREFIX Godmode enabled")
 
+		val youGotHealed = getMessage("youGotHealed", "$PREFIX You've been healed")
 
-    object Message1 {
-        private val dir = File("./plugins/CommandsAndGUI")
-        private val file = File(dir, "messages.yml")
-        private val config = YamlConfiguration.loadConfiguration(this.file)
+		val vanishDisabled = getMessage("vanishDisabled", "$PREFIX Vanish disabled")
+		val vanishEnabled = getMessage("vanishEnabled", "$PREFIX Vanish enabled")
 
-        val PREFIX: String = config.getString("PREFIX") as String
+		val playerDoesNotExist = getMessage("playerDoesNotExist", "$PREFIX Player does not exist")
 
-        val flyingDisabled = config.getString("flyingDisabled")!!.replace("%PREFIX%", PREFIX)
-        val flyingEnabled = config.getString("flyingEnabled")!!.replace("%PREFIX%", PREFIX)
-        fun flyingDisabledFor(targetPlayer: String):String { return config.getString("flyingDisabledFor")!!.replace("%PREFIX%", PREFIX).replace("%PLAYER%", targetPlayer) }
-        fun flyingEnabledFor(targetPlayer: String):String { return config.getString("flyingEnabledFor")!!.replace("%PREFIX%", PREFIX).replace("%PLAYER%", targetPlayer) }
-        val flySpeed0to10 = config.getString("flySpeed0to10")!!.replace("%PREFIX%", PREFIX)
-        fun setFlySpeed(flySpeed: String):String { return config.getString("setFlySpeed")!!.replace("%PREFIX%", PREFIX).replace("%FlySpeed%", flySpeed) }
-        fun getFlySpeed(flySpeed: String):String { return config.getString("getFlySpeed")!!.replace("%PREFIX%", PREFIX).replace("%FlySpeed%", flySpeed) }
-        fun setFlySpeedFor(flySpeed: String, targetPlayer: String):String { return config.getString("setFlySpeedFor")!!.replace("%PREFIX%", PREFIX).replace("%FlySpeed%", flySpeed).replace("%PLAYER%", targetPlayer) }
-        fun getFlySpeedFor(flySpeed: String, targetPlayer: String):String { return config.getString("getFlySpeedFor")!!.replace("%PREFIX%", PREFIX).replace("%FlySpeed%", flySpeed).replace("%PLAYER%", targetPlayer) }
+		val backpackAlreadyExists = getMessage("backpackAlredyExists", "$PREFIX A Backpack with this name already Exists")
+		val backpackCreated = getMessage("backpackCreated", "$PREFIX Backpack Created")
+		val backpackDeleted = getMessage("backpackDeleted", "$PREFIX Backpack Deleted")
+		val backpackDoesntExists = getMessage("backpackDontExists", "$PREFIX A Backpack with this name does not Exist")
+		val youAreNotAllowedToOpenThisBackpack = getMessage("youAreNotAllowedToOpenThisBackpack", "$PREFIX You are not allowed to open this Backpack")
+		val youAreNotTheOwner = getMessage("youAreNotTheOwner", "$PREFIX You are not the owner of this Backpack")
+		val moduleNotEnabled = getMessage("moduleNotEnabled", "$PREFIX This module is not enabled!")
 
-        val godDisabled = config.getString("godDisabled")!!.replace("%PREFIX%", PREFIX)
-        val godEnabled = config.getString("godEnabled")!!.replace("%PREFIX%", PREFIX)
+		val initWorldManager = getMessage("initWorldManager", "$PREFIX Initialized world creation")
+		val creatingWorld = getMessage("cratingWorld", "$PREFIX Creating world...")
+		val finCreatingWorld = getMessage("finCratingWorld", "$PREFIX Finished world creation")
 
-        val youGotHealed = config.getString("youGotHealed")!!.replace("%PREFIX%", PREFIX)
+		val cannotInvSeeYourSelf = getMessage("cannotInvSeeYourSelf", "$PREFIX You can not InvSee yourself (mainly because im to lazy to fix some bugs)§r")
 
-        val vanishDisabled = config.getString("vanishDisabled")!!.replace("%PREFIX%", PREFIX)
-        val vanishEnabled = config.getString("vanishEnabled")!!.replace("%PREFIX%", PREFIX)
+	}
 
-        val playerDoesNotExist = config.getString("playerDoesNotExist")!!.replace("%PREFIX%", PREFIX)
+	fun autoUtilsOn(player: String) {
+		messages2.set(player, true)
+		saveConfig()
+	}
 
-        val backpackAlredyExists = config.getString("backpackAlredyExists")!!.replace("%PREFIX%", PREFIX)
-        val backpackCreated = config.getString("backpackCreated")!!.replace("%PREFIX%", PREFIX)
-        val backpackDeleted = config.getString("backpackDeleted")!!.replace("%PREFIX%", PREFIX)
-        val backpackDoesntExists = config.getString("backpackDontExists")!!.replace("%PREFIX%", PREFIX)
-        val youAreNotAllowedToOpenThisBackpack = config.getString("youAreNotAllowedToOpenThisBackpack")!!.replace("%PREFIX%", PREFIX)
-        val youAreNotTheOwner = config.getString("youAreNotTheOwner")!!.replace("%PREFIX%", PREFIX)
-        val moduleNotEnabled = config.getString("moduleNotEnabled")!!.replace("%PREFIX%", PREFIX)
+	fun autoUtilsOff(player: String) {
+		messages2.set(player, false)
+		saveConfig()
+	}
 
-        val initWorldManager = config.getString("initWorldManager")!!.replace("%PREFIX%", PREFIX)
-        val cratingWorld = config.getString("cratingWorld")!!.replace("%PREFIX%", PREFIX)
-        val finCratingWorld = config.getString("finCratingWorld")!!.replace("%PREFIX%", PREFIX)
+	fun getUtilsAuto(player: String): Boolean {
+		return messages2.getBoolean(player, false)
+	}
 
-        val cannotInvSeeYourSelf = config.getString("cannotInvSeeYourSelf")!!.replace("%PREFIX%", PREFIX)
-
-
-    }
-
-    fun autoUtilsOn(player: String) {
-        val config = YamlConfiguration.loadConfiguration(file)
-
-        if (!config.contains(player)) { return }
-        config.set(player, true)
-        config.save(file)
-    }
-    fun autoUtilsOff(player: String) {
-        val config = YamlConfiguration.loadConfiguration(file)
-
-        if (!config.contains(player)) { return }
-        config.set(player, false)
-        config.save(file)
-    }
-    fun getUtilsAuto(player: String): Boolean {
-        val config = YamlConfiguration.loadConfiguration(this.file)
-
-        return !(!config.contains(player) || !config.getBoolean(player))
-    }
-
-    fun save() {
-        config.save(this.file)
-    }
+	fun save() {
+		messages2.save(configFile)
+	}
 }

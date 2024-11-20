@@ -129,7 +129,6 @@ class TrackManager {
 		meta.isLodestoneTracked = false
 		meta.lodestone = location
 		compass.itemMeta = meta
-		println(compass.toString())
 		player.inventory.addItem(compass)
 	}
 
@@ -139,7 +138,6 @@ class TrackManager {
 		meta.isLodestoneTracked = false
 		meta.lodestone = entity.location
 		compass.itemMeta = meta
-		println(compass.toString())
 		player.inventory.addItem(compass)
 	}
 

@@ -18,7 +18,7 @@ class MainGUI {
         if (!ConfigFile.IsModuleEnabled.backpack) inventory.setItem(19, GeneralItems().itemGuiUnavailable())
 
         inventory.setItem(28, MainItems().itemGuiOpenWorkstation())
-        if (!ConfigFile.IsModuleEnabled.workstation) inventory.setItem(19, GeneralItems().itemGuiUnavailable())
+        if (!ConfigFile.IsModuleEnabled.all) inventory.setItem(19, GeneralItems().itemGuiUnavailable())
 
 
         inventory.setItem(21, MainItems().itemGuiFlightLogo())

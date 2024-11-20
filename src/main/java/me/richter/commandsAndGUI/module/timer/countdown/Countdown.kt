@@ -1,6 +1,5 @@
 package me.richter.commandsAndGUI.module.timer.countdown
 
-import me.richter.commandsAndGUI.module.fly.FlyManager
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player

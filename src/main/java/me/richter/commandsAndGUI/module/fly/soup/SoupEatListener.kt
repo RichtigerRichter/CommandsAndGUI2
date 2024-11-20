@@ -1,8 +1,7 @@
 package me.richter.commandsAndGUI.module.fly.soup
 
 import me.richter.commandsAndGUI.items.ItemBuilder
-import me.richter.commandsAndGUI.module.fly.FlyManager
-import me.richter.commandsAndGUI.module.timer.countdown.Countdown
+import me.richter.commandsAndGUI.module.fly.creative.FlyManager
 import org.bukkit.GameMode
 import org.bukkit.Sound
 import org.bukkit.SoundCategory

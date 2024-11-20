@@ -25,7 +25,7 @@ godDisabled: '%PREFIX% Godmode§7 disabled§r'
 godEnabled: '%PREFIX% Godmode§a enabled§r'
 
 #heal Massages
-youGotHealed: '%PREFIX% You got Healed§r'
+youGotHealed: "%PREFIX% You've been healed§r"
 
 #vanish Massages
 vanishDisabled: '%PREFIX% Vanish§7 disabled§r'

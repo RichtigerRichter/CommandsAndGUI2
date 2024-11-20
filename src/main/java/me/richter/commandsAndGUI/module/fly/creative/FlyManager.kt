@@ -1,4 +1,4 @@
-package me.richter.commandsAndGUI.module.fly
+package me.richter.commandsAndGUI.module.fly.creative
 
 import me.richter.commandsAndGUI.module.timer.countdown.CountdownFile
 import me.richter.commandsAndGUI.module.utils.RegexStrings
@@ -89,6 +89,7 @@ class FlyManager {
 			}
 		}
 	}
+
 	fun flytimeSec() {
 		val players = getAllFlyPlayersInCountdownConfigAsPlayers()
 

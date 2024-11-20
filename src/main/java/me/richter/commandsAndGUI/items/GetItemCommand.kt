@@ -1,6 +1,9 @@
 package me.richter.commandsAndGUI.items
 
+import me.richter.commandsAndGUI.module.customCrafting.CustomCrafting
+import me.richter.commandsAndGUI.module.customCrafting.InvisibleItemFrames.InvisibleItemFrameManager
 import me.richter.commandsAndGUI.module.fly.soup.FlySoup
+import org.bukkit.Material
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -14,6 +17,8 @@ class GetItemCommand: CommandExecutor, TabCompleter {
 		val count = if (args.size == 2) args[1].toInt() else 1
 
 		if (args[0] == "FlySoup") sender.inventory.addItem(FlySoup().flySoupItem(count))
+		if (args[0] == "InvisItemFrame") sender.inventory.addItem(InvisibleItemFrameManager().invisibleItemFrameItem())
+
 
 		return true
 	}
@@ -26,6 +31,8 @@ class GetItemCommand: CommandExecutor, TabCompleter {
 	): MutableList<String> {
 		val completions: MutableList<String> = mutableListOf()
 		completions.addLast("FlySoup")
+		completions.addLast("InvisItemFrame")
+
 		return completions
 	}
 }

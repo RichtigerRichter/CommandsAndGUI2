@@ -1,94 +1,88 @@
-//Todo [todo] mehr konfigurierbares machen
 package me.richter.commandsAndGUI.files
 
+import me.richter.commandsAndGUI.Main
+import org.bukkit.Bukkit
 import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 class ConfigFile {
-    private val file: File
-    private var config: YamlConfiguration
+	private val configFile: File = File(Main.instance.dataFolder, "config.yml")
+	private val config2: YamlConfiguration
 
-    init {
-        val dir = File("./plugins/CommandsAndGUI")
-        if (!dir.exists()) {
-            dir.mkdirs()
-        }
+	init {
+		if (!configFile.exists()) {
+			configFile.parentFile.mkdirs()
+			Main.instance.saveResource("config.yml", false)
+		}
+		config2 = YamlConfiguration.loadConfiguration(configFile)
+	}
 
-        file = File(dir, "config.yml")
-        if (!file.exists()) {
-            file.createNewFile()
+	fun loadConfig() {
+		val configFile = File(Main.instance.dataFolder, "config.yml")
+		if (!configFile.exists()) {
+			configFile.parentFile.mkdirs()
+			Main.instance.saveResource("config.yml", false)
+		}
+	}
 
-            config = YamlConfiguration.loadConfiguration(this.file)
+	fun getConfig(): YamlConfiguration {
+		val configFile = File(Main.instance.dataFolder, "config.yml")
+		return YamlConfiguration.loadConfiguration(configFile)
+	}
 
-            //enabling or disabling modules
-            config.set("------Modules------", "------Modules------")
-            config.set("BackpackModule", true)
-            config.set("FlyModule", true)
-            config.set("GodmodeModule", true)
-            config.set("GuiModule", true)
-            config.set("InvViewModule", true)
-            config.set("WorldManager", true)
-            config.set("VanishModule", true)
-            config.set("JumpModule", true)
-            config.set("HealModule", true)
-            config.set("SetupCommand", true)
-            config.set("---------Workstations---------", true)
-            config.set("Workbench", true)
-            config.set("Enchanting", true)
-            config.set("Stonecutter", true)
-            config.set("CartographyTable", true)
-            config.set("Anvil", true)
-            config.set("SmithingTable", true)
-            config.set("Grindstone", true)
-            config.set("Loom", true)
-            config.set("Furnace", true)
-            config.set("BlastFurnace", true)
-            config.set("Brewing", true)
-            config.set("Smoker", true)
+	fun saveConfig() {
+		val configFile = File(Main.instance.dataFolder, "config.yml")
+		config2.save(configFile)
+	}
 
+	fun getValue(path: String): Any? {
+		return config2.get(path)
+	}
 
-            config.save(file)
-        }
+	object IsModuleEnabled {
+		private val dir = File("./plugins/CommandsAndGUI")
+		private val file = File(dir, "config.yml")
+		private val config = YamlConfiguration.loadConfiguration(file)
 
+		private fun getBoolean(path: String, default: Boolean = false): Boolean {
+			return config.getBoolean(path, default).also {
+				if (!config.contains(path)) {
+					logValueNotFound(path, default)
+				}
+			}
+		}
 
-        config = YamlConfiguration.loadConfiguration(this.file)
-    }
+		private fun logValueNotFound(path: String, default: Boolean) {
+			// Logs a warning to the console if the configuration path is not found
+			Bukkit.getLogger().warning("Configuration value '$path' not found in config.yml. Using default: $default")
+		}
 
-    object IsModuleEnabled {
-        private val dir = File("./plugins/CommandsAndGUI")
-        private val file = File(dir, "config.yml")
-        private val config = YamlConfiguration.loadConfiguration(this.file)
+		val backpack: Boolean = getBoolean("Modules.BackpackModule", true)
+		val fly: Boolean = getBoolean("Modules.FlyModule", true)
+		val godmode: Boolean = getBoolean("Modules.GodmodeModule", true)
+		val gui: Boolean = getBoolean("Modules.GuiModule", true)
+		val invView: Boolean = getBoolean("Modules.InvViewModule", true)
+		val worldManager: Boolean = getBoolean("Modules.WorldManager", true)
+		val vanish: Boolean = getBoolean("Modules.VanishModule", true)
+		val jump: Boolean = getBoolean("Modules.JumpModule", true)
+		val heal: Boolean = getBoolean("Modules.HealModule", true)
+		val setup: Boolean = getBoolean("Modules.SetupCommand", true)
 
-        val backpack = config["BackpackModule"] as Boolean
-        val fly = config["FlyModule"] as Boolean
-        val godmode = config["GodmodeModule"] as Boolean
-        val gui = config["GuiModule"] as Boolean
-        val invView = config["InvViewModule"] as Boolean
-        val worldManager = config["WorldManager"] as Boolean
-        val jump = config["JumpModule"] as Boolean
-        val heal = config["HealModule"] as Boolean
-        val vanish = config["VanishModule"] as Boolean
-        val workstation = config["---------Workstations---------"] as Boolean
-        val setup = config["SetupCommand"] as Boolean
-        val workbench = config["Workbench"] as Boolean
-        val enchanting = config["Enchanting"] as Boolean
-        val stonecutter = config["Stonecutter"] as Boolean
-        val cartographyTable = config["CartographyTable"] as Boolean
-        val anvil = config["Anvil"] as Boolean
-        val smithingTable = config["SmithingTable"] as Boolean
-        val grindstone = config["Grindstone"] as Boolean
-        val loom = config["Loom"] as Boolean
-        val furnace = config["Furnace"] as Boolean
-        val blastFurnace = config["BlastFurnace"] as Boolean
-        val brewing = config["Brewing"] as Boolean
-        val smoker = config["Smoker"] as Boolean
-
-
-
-
-    }
-
-    fun save() {
-        config.save(file)
-    }
+		// Workstations
+		val all: Boolean = getBoolean("Workstations.All", true)
+		val workbench: Boolean = getBoolean("Workstations.Workbench", true)
+		val enchanting: Boolean = getBoolean("Workstations.Enchanting", true)
+		val stonecutter: Boolean = getBoolean("Workstations.Stonecutter", true)
+		val cartographyTable: Boolean = getBoolean("Workstations.CartographyTable", true)
+		val anvil: Boolean = getBoolean("Workstations.Anvil", true)
+		val smithingTable: Boolean = getBoolean("Workstations.SmithingTable", true)
+		val grindstone: Boolean = getBoolean("Workstations.Grindstone", true)
+		val loom: Boolean = getBoolean("Workstations.Loom", true)
+		val furnace: Boolean = getBoolean("Workstations.Furnace", true)
+		val blastFurnace: Boolean = getBoolean("Workstations.BlastFurnace", true)
+		val creative: Boolean = getBoolean("Workstations.Creative", true)
+		val brewing: Boolean = getBoolean("Workstations.Brewing", true)
+		val crafting: Boolean = getBoolean("Workstations.Crafting", true)
+		val smoker: Boolean = getBoolean("Workstations.Smoker", true)
+	}
 }

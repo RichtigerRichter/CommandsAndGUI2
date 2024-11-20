@@ -1,13 +1,20 @@
 package me.richter.commandsAndGUI.module.scoreboard
 
+import me.clip.placeholderapi.PlaceholderAPI
 import me.richter.commandsAndGUI.Main
+import me.richter.commandsAndGUI.files.AnimationsFile
+import me.richter.commandsAndGUI.files.ScoreboardFile
+import me.richter.commandsAndGUI.module.placeholders.Placeholder
 import me.richter.commandsAndGUI.module.timer.countdown.Countdown
+import me.richter.commandsAndGUI.module.utils.LegacyColorCodesToMiniMassageTags
+import me.richter.commandsAndGUI.module.utils.Text
+import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
 import org.bukkit.scheduler.BukkitRunnable
 
-class TestScoreboard(player: Player?) : ScoreboardBuilder(player!!, "${ChatColor.DARK_PURPLE}${ChatColor.BOLD}  CommandsAndGUI  ") {
+class TestScoreboard(player: Player) : ScoreboardBuilder(player, ScoreboardFile().scoreboardDisplayNameMap["commandsAndGUI"]) {
 	private var taskEveryTick: BukkitRunnable? = null
 	private var taskEverySec: BukkitRunnable? = null
 
@@ -19,11 +26,13 @@ class TestScoreboard(player: Player?) : ScoreboardBuilder(player!!, "${ChatColor
 	)
 
 	fun init() {
-		runEverySec()
-		runEveryTick()
+		runEverySecTask()
+		runEveryTickTask()
 	}
 
+
 	override fun createScoreboard() {
+		/*
 		val nachricht = MiniMessage.miniMessage().deserialize("<rainbow>Hello world, isn't <underlined>MiniMessage</underlined> fun?</rainbow>")
 		setScore(nachricht, 9)
 
@@ -38,20 +47,59 @@ class TestScoreboard(player: Player?) : ScoreboardBuilder(player!!, "${ChatColor
 		setScore("", 2)
 		setScore(MiniMessage.miniMessage().deserialize("<red>${player.address?.hostName ?: "Unbekannt"}"), 1)
 		setScore("", 0)
+
+		 */
+
+
+		val scoreList = ScoreboardFile().scoreboardListMap["commandsAndGUI"] ?: return
+		println(scoreList)
+
+		for (score in 0..14) {
+
+			if (score > scoreList.size-1) return
+			setScore(scoreList[score], score)
+		}
 	}
+
+	fun runEverySec() {
+		//setScore(socialLinks[socialId], 3)
+		//socialId = (socialId + 1) % socialLinks.size
+	}
+
+	private var animation = 0
+	private var aniFrame = 0
+
+	val animationList = AnimationsFile().getAnimationList("test")
+
+
+
+	fun runEveryTick() {
+		updatePlaceholders()
+
+	}
+
+
+	fun updatePlaceholders() {
+		val scoreList = ScoreboardFile().scoreboardListMap["commandsAndGUI"] ?: return
+
+		for (score in 0..14) {
+			if (score > scoreList.size-1) return
+			val line = Placeholder().replacePlaceholders(scoreList[score], player)
+
+			setScore(line, score)
+		}
+	}
+
 
 	override fun update() {
 		// Dynamische Scoreboard Updates
 	}
 
-	// Optimierte runEverySec-Methode
-	private fun runEverySec() {
+	private fun runEverySecTask() {
 		stopRunEverySec() // Sicherstellen, dass der vorherige Task gestoppt wird
 		taskEverySec = object : BukkitRunnable() {
 			override fun run() {
-				setScore(socialLinks[socialId], 3)
-				socialId = (socialId + 1) % socialLinks.size
-				println("Scoreboard runEverySec() is running")
+				runEverySec()
 			}
 		}.also {
 			it.runTaskTimer(Main.instance, 20, 20)
@@ -62,13 +110,11 @@ class TestScoreboard(player: Player?) : ScoreboardBuilder(player!!, "${ChatColor
 		taskEverySec?.cancel()
 	}
 
-	// Optimierte runEveryTick-Methode
-	private fun runEveryTick() {
+	private fun runEveryTickTask() {
 		stopRunEveryTick() // Sicherstellen, dass der vorherige Task gestoppt wird
 		taskEveryTick = object : BukkitRunnable() {
 			override fun run() {
-				val flyTime = Countdown().formatTime("flySoup.${player.uniqueId}")
-				setScore(MiniMessage.miniMessage().deserialize("<white>Fly Time: <green>$flyTime"), 3)
+				runEveryTick()
 			}
 		}.also {
 			it.runTaskTimer(Main.instance, 1, 1)

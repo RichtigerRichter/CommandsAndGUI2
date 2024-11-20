@@ -1,10 +1,9 @@
 package me.richter.commandsAndGUI.module.fly
 
 import me.richter.commandsAndGUI.files.ConfigFile
-import me.richter.commandsAndGUI.files.Messages2File.Message
-import me.richter.commandsAndGUI.module.timer.countdown.Countdown
-import me.richter.commandsAndGUI.module.timer.countdown.CountdownFile
-import me.richter.commandsAndGUI.module.utils.RegexStrings
+import me.richter.commandsAndGUI.files.MessagesFile.Message
+import me.richter.commandsAndGUI.module.fly.creative.FlyManager
+import me.richter.commandsAndGUI.module.fly.elytra.ElytraFlyManager
 import me.richter.commandsAndGUI.module.utils.TimeFormat
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
@@ -13,7 +12,6 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
-import kotlin.jvm.internal.Intrinsics.Kotlin
 
 
 class FlyCommand : CommandExecutor, TabCompleter {
@@ -102,6 +100,11 @@ class FlyCommand : CommandExecutor, TabCompleter {
             return true
         }
 
+        if (args[1] == "elytra" && args.size == 2) {
+            ElytraFlyManager().startElytraFly(targetPlayer)
+            return true
+        }
+
         when (args[2].lowercase()) {
             "set" -> {
                 if (args.size != 4) return false
@@ -124,7 +127,8 @@ class FlyCommand : CommandExecutor, TabCompleter {
                 }
 
                 FlyManager().addTime(targetPlayer, time)
-                sender.sendMessage(Component.text(Message.flyTimeAdded(time.toString(), TimeFormat().timeToString(FlyManager().getTime(targetPlayer) + time))))
+                sender.sendMessage(Component.text(Message.flyTimeAdded(time.toString(), TimeFormat().timeToString(
+					FlyManager().getTime(targetPlayer) + time))))
                 return true
             }
         }
@@ -152,6 +156,7 @@ class FlyCommand : CommandExecutor, TabCompleter {
                 completions.add("speed")
                 completions.add("on")
                 completions.add("off")
+                completions.add("elytra")
                 return completions.filter { it.startsWith(args[1], ignoreCase = true) }.toMutableList()
             }
 

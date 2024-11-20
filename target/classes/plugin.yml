@@ -3,6 +3,8 @@ version: '1.21'
 main: me.richter.commandsAndGUI.Main
 api-version: '1.21'
 
+softdepend: ["PlaceholderAPI"]
+
 commands:
   backpack:
     description: create, share, and use double chest sized backpacks

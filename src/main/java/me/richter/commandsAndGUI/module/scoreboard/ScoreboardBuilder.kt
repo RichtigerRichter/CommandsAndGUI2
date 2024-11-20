@@ -1,5 +1,6 @@
 package me.richter.commandsAndGUI.module.scoreboard
 
+import io.papermc.paper.scoreboard.numbers.NumberFormat
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
@@ -90,6 +91,7 @@ abstract class ScoreboardBuilder(protected val player: Player, displayName: Stri
 		}
 
 		objective.getScore(name.entryName).score = score
+		objective.getScore(name.entryName).numberFormat(NumberFormat.blank())
 	}
 
 	private fun hideScore(score: Int) {

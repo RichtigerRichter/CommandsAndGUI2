@@ -1,16 +1,17 @@
 package me.richter.commandsAndGUI
 
-import me.richter.commandsAndGUI.files.Config2File
-import me.richter.commandsAndGUI.files.ConfigFile
-import me.richter.commandsAndGUI.files.Messages2File
-import me.richter.commandsAndGUI.files.MessagesFile
+import fr.skytasul.glowingentities.GlowingEntities
+import me.richter.commandsAndGUI.files.*
+import me.richter.commandsAndGUI.module.customCrafting.CustomCrafting
 import me.richter.commandsAndGUI.items.GetItemCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackManager
 import me.richter.commandsAndGUI.module.bdLul.BdLulEvent
 import me.richter.commandsAndGUI.module.bdLul.BdLul
+import me.richter.commandsAndGUI.module.customCrafting.InvisibleItemFrames.EntityPlaceListener
+import me.richter.commandsAndGUI.module.fly.elytra.ElytraFlyListener
 import me.richter.commandsAndGUI.module.fly.FlyCommand
-import me.richter.commandsAndGUI.module.fly.FlyManager
+import me.richter.commandsAndGUI.module.fly.creative.FlyManager
 import me.richter.commandsAndGUI.module.fly.soup.SoupEatListener
 import me.richter.commandsAndGUI.module.godmode.GodCommand
 import me.richter.commandsAndGUI.module.guiNew.GUICloseListener
@@ -23,9 +24,11 @@ import me.richter.commandsAndGUI.module.invSee.InvSeeClickListener
 import me.richter.commandsAndGUI.module.invSee.InvSeeCommand
 import me.richter.commandsAndGUI.module.invSee.InvSeeGUI
 import me.richter.commandsAndGUI.module.jump.JumpCommand
+import me.richter.commandsAndGUI.module.placeholders.PAPI
+import me.richter.commandsAndGUI.module.placeholders.Placeholder
 import me.richter.commandsAndGUI.module.playerTracker.*
 import me.richter.commandsAndGUI.module.scoreboard.JoinLeaveListener
-import me.richter.commandsAndGUI.module.scoreboard.TestScoreboardCommand
+import me.richter.commandsAndGUI.module.scoreboard.newTest.TestScoreboardCommand
 import me.richter.commandsAndGUI.module.sit.SitCommand
 import me.richter.commandsAndGUI.module.sit.SitListener
 import me.richter.commandsAndGUI.module.timer.countdown.Countdown
@@ -40,6 +43,7 @@ import me.richter.commandsAndGUI.module.vanish.VanishManager
 import me.richter.commandsAndGUI.module.workstations.OpenCommand
 import me.richter.commandsAndGUI.module.worldGuard2.BreakListener
 import me.richter.commandsAndGUI.module.worldManager.WorldGUICommand
+import org.bukkit.Bukkit
 import org.bukkit.WorldCreator
 import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
@@ -73,6 +77,10 @@ class Main : JavaPlugin() {
         val BackpackMap: MutableMap<String, Inventory> = mutableMapOf()
 
         val vanishedPlayersMap: MutableMap<UUID, Boolean> = mutableMapOf()
+
+        val animationsCount: MutableMap<String, Int> = mutableMapOf()
+
+        val glowingEntitiesAPI = GlowingEntities(instance)
     }
 
 
@@ -83,13 +91,16 @@ class Main : JavaPlugin() {
         registerCommands()
         registerListeners()
 
+        CustomCrafting().registerCustomRecipes()
+
         //config stuff
         saveDefaultConfig()
-        Config2File().loadConfig()
-        Messages2File().loadConfig()
+        ConfigFile().loadConfig()
+        MessagesFile().loadConfig()
+        ScoreboardFile().loadConfig()
+        AnimationsFile().loadConfig()
+        PlayerDataFile().loadConfig()
 
-        ConfigFile().save()
-        MessagesFile().save()
         VanishManager(this).create()
         BackpackManager().load()
 
@@ -102,6 +113,11 @@ class Main : JavaPlugin() {
 
         if (!server.minecraftVersion.startsWith("1")) {
             logger.warning("THIS PLUGIN IS ONLY MADE FOR MINECRAFT VERSIONS 1.x.x IF THE SERVER IS RUNNING ON A NEWER VERSION PLEASE CONTACT THE PLUGIN DEV SINCE THE VERSION CHECKS WON'T WORK")
+        }
+
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) { //
+
+            PAPI().register() //
         }
 
     }
@@ -147,6 +163,8 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(SoupEatListener(), this)
         server.pluginManager.registerEvents(JoinLeaveListener(), this)
         server.pluginManager.registerEvents(LodestoneListener(), this)
+        server.pluginManager.registerEvents(ElytraFlyListener(), this)
+        server.pluginManager.registerEvents(EntityPlaceListener(), this)
 
 
 
@@ -177,6 +195,8 @@ class Main : JavaPlugin() {
                 TrackManager().updateBossbarTick()
                 TrackManager().updateCompassTick()
 
+                Placeholder().animationUpdateTick()
+
             }
         }
         taskEveryTick.runTaskTimer(this, 0L, 1L)
@@ -188,8 +208,7 @@ class Main : JavaPlugin() {
 
     override fun onDisable() {
         // Plugin shutdown logic
-        ConfigFile().save()
-        MessagesFile().save()
+
         VanishManager(this).create()
         BackpackManager().save()
 

@@ -99,7 +99,7 @@ class ItemBuilder {
         itemMeta.persistentDataContainer.set(key, PersistentDataType.STRING, tagValue)
 
 
-        println(itemMeta.persistentDataContainer.keys)
+        //println(itemMeta.persistentDataContainer.keys)
     }
 
     fun getCustomTagValue(item: ItemStack, tagKey: String): String? {
@@ -110,7 +110,7 @@ class ItemBuilder {
         val key = NamespacedKey(plugin, tagKey)
 
         // Wert aus dem PersistentDataContainer auslesen
-        println(meta.persistentDataContainer.get(key, PersistentDataType.STRING))
+        //println(meta.persistentDataContainer.get(key, PersistentDataType.STRING))
         return meta.persistentDataContainer.get(key, PersistentDataType.STRING)
     }
 
