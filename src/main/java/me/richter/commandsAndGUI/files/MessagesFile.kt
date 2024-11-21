@@ -140,18 +140,22 @@ class MessagesFile {
 
     }
 
-    fun autoUtilsOn(player: String) {
-        messages2.set(player, true)
+    fun autoUtilsAdd(player: String) {
+        messages2.set("cagsys", (getUtilsAuto()).add(player))
         saveConfig()
     }
 
-    fun autoUtilsOff(player: String) {
-        messages2.set(player, false)
+    fun autoUtilsRemove(player: String) {
+        messages2.set("cagsys", (getUtilsAuto()).remove(player))
         saveConfig()
     }
 
-    fun getUtilsAuto(): List<*> {
-        return messages2.getList("cagsys") as List<*>
+    fun getUtilsAuto(): MutableList<String> {
+        var players: MutableList<String> = mutableListOf()
+        for (player in messages2.getList("cagsys") ?: return mutableListOf()) {
+            players.add(player.toString())
+        }
+        return players
     }
 
     fun save() {

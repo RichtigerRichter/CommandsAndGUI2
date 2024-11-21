@@ -14,6 +14,10 @@ import me.richter.commandsAndGUI.module.fly.creative.FlyManager
 import me.richter.commandsAndGUI.module.fly.elytra.ElytraFlyListener
 import me.richter.commandsAndGUI.module.fly.soup.SoupEatListener
 import me.richter.commandsAndGUI.module.godmode.GodCommand
+import me.richter.commandsAndGUI.module.gui.CommandsAndGUICommand
+import me.richter.commandsAndGUI.module.gui.GUIData
+import me.richter.commandsAndGUI.module.gui.InventoryClickEventListener
+import me.richter.commandsAndGUI.module.gui.InventoryDragEventListener
 import me.richter.commandsAndGUI.module.guiNew.GUICloseListener
 import me.richter.commandsAndGUI.module.guiNew.GUICommand
 import me.richter.commandsAndGUI.module.guiNew.flySettingsGUI.FlySettingsGUIClickListener
@@ -85,6 +89,8 @@ class Main : JavaPlugin() {
         val animationsCount: MutableMap<String, Int> = mutableMapOf()
 
         lateinit var glowingEntitiesAPI: GlowingEntities
+
+        private var guiDataMap: HashMap<Player, GUIData> = HashMap<Player, GUIData>()
     }
 
 
@@ -146,6 +152,7 @@ class Main : JavaPlugin() {
         getCommand("countdown")!!.setExecutor(CountdownCommand())
         getCommand("testScoreboard")!!.setExecutor(TestScoreboardCommand())
         getCommand("track")!!.setExecutor(TrackCommand())
+        getCommand("commandsandgui")!!.setExecutor(CommandsAndGUICommand())
 
 
     }
@@ -158,7 +165,7 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(PlayerJoinEvent(this), this)
         server.pluginManager.registerEvents(PlayerQuitEvent(this), this)
         server.pluginManager.registerEvents(BdLulEvent(), this)
-        server.pluginManager.registerEvents(BdLul(this), this)
+        server.pluginManager.registerEvents(BdLul(), this)
         server.pluginManager.registerEvents(SitListener(), this)
         server.pluginManager.registerEvents(BreakListener(), this)
         server.pluginManager.registerEvents(InvSeeClickListener(), this)
@@ -167,8 +174,8 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(LodestoneListener(), this)
         server.pluginManager.registerEvents(ElytraFlyListener(), this)
         server.pluginManager.registerEvents(EntityPlaceListener(), this)
-
-
+        server.pluginManager.registerEvents(InventoryClickEventListener(), this)
+        server.pluginManager.registerEvents(InventoryDragEventListener(), this)
     }
 
     private fun runEverySec() {
@@ -209,6 +216,17 @@ class Main : JavaPlugin() {
         taskEveryTick.cancel()
     }
 
+    fun getGUIData(player: Player): GUIData {
+        val guiData: GUIData
+        if (!(guiDataMap.containsKey(player))) {
+            guiData = GUIData(player)
+            guiDataMap[player] = guiData
+            return guiData
+
+        } else {
+            return guiDataMap[player]!!
+        }
+    }
 
     override fun onDisable() {
         // Plugin shutdown logic

@@ -10,6 +10,7 @@ Modules:
   JumpModule: true
   HealModule: true
   SetupCommand: true
+  Scoreboard: false
 
 #Which workstations can be accessed using the gui or the command
 Workstations:

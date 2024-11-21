@@ -1,5 +1,6 @@
 package me.richter.commandsAndGUI.module.scoreboard
 
+import me.richter.commandsAndGUI.files.ConfigFile
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
@@ -13,6 +14,7 @@ class JoinLeaveListener : Listener {
 
     @EventHandler
     fun onJoin(event: PlayerJoinEvent) {
+        if (!ConfigFile.IsModuleEnabled.scoreboard) return
         val player = event.player
 
         // Scoreboard erstellen und initialisieren

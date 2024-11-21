@@ -67,6 +67,7 @@ class ConfigFile {
         val jump: Boolean = getBoolean("Modules.JumpModule", true)
         val heal: Boolean = getBoolean("Modules.HealModule", true)
         val setup: Boolean = getBoolean("Modules.SetupCommand", true)
+        val scoreboard: Boolean = getBoolean("Modules.Scoreboard", false)
 
         // Workstations
         val all: Boolean = getBoolean("Workstations.All", true)

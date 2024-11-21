@@ -2,7 +2,7 @@ name: CommandsAndGUI
 version: '${project.version}'
 main: me.richter.commandsAndGUI.Main
 api-version: '1.21'
-depend: ["PlaceholderAPI"]
+softdepend: ["PlaceholderAPI"]
 
 commands:
   backpack:
@@ -25,6 +25,13 @@ commands:
     aliases: []
     permission: commandsAndGUI.command.god
     permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.god permission)
+
+  commandsandgui:
+    description: opens the GUI of CommandAndGUI
+    usage: /<command>
+    aliases: ["cag"]
+    permission: commandsAndGUI.command.gui
+    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.gui permission)
 
   gui:
     description: opens the GUI of CommandAndGUI
