@@ -6,7 +6,6 @@ import me.richter.commandsAndGUI.items.guiItems.OpenWorkstationsItems
 import me.richter.commandsAndGUI.modules.gui.GUI
 import me.richter.commandsAndGUI.modules.gui.GUIData
 import me.richter.commandsAndGUI.modules.workstations.OpenWorkFun
-import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 
 class WorkstationsGUI(guiData: GUIData) : GUI(guiData) {
@@ -16,32 +15,32 @@ class WorkstationsGUI(guiData: GUIData) : GUI(guiData) {
     }
 
     override fun getSlots(): Int {
-        return 6*9
+        return 6 * 9
     }
 
     override fun setGUIItems() {
-        inventory.setItem(19, OpenWorkstationsItems().itemGuiOpenWorkbench())
+        inventory.setItem(9 * 1 + 1, OpenWorkstationsItems().itemGuiOpenWorkbench())
         if (!IsModuleEnabled.workbench) inventory.setItem(19, GeneralItems().itemGuiUnavailable())
 
-        inventory.setItem(21, OpenWorkstationsItems().itemGuiOpenEnchanting())
+        inventory.setItem(9 * 1 + 3, OpenWorkstationsItems().itemGuiOpenEnchanting())
         if (!IsModuleEnabled.enchanting) inventory.setItem(21, GeneralItems().itemGuiUnavailable())
 
-        inventory.setItem(23, OpenWorkstationsItems().itemGuiOpenStonecutter())
+        inventory.setItem(9 * 1 + 5, OpenWorkstationsItems().itemGuiOpenStonecutter())
         if (!IsModuleEnabled.stonecutter) inventory.setItem(23, GeneralItems().itemGuiUnavailable())
 
-        inventory.setItem(25, OpenWorkstationsItems().itemGuiOpenCartographyTable())
+        inventory.setItem(9 * 1 + 7 , OpenWorkstationsItems().itemGuiOpenCartographyTable())
         if (!IsModuleEnabled.cartographyTable) inventory.setItem(25, GeneralItems().itemGuiUnavailable())
 
-        inventory.setItem(28, OpenWorkstationsItems().itemGuiOpenAnvil())
+        inventory.setItem(9 * 3 + 1, OpenWorkstationsItems().itemGuiOpenAnvil())
         if (!IsModuleEnabled.anvil) inventory.setItem(28, GeneralItems().itemGuiUnavailable())
 
-        inventory.setItem(30, OpenWorkstationsItems().itemGuiOpenSmithingTable())
+        inventory.setItem(9 * 3 + 3, OpenWorkstationsItems().itemGuiOpenSmithingTable())
         if (!IsModuleEnabled.smithingTable) inventory.setItem(30, GeneralItems().itemGuiUnavailable())
 
-        inventory.setItem(32, OpenWorkstationsItems().itemGuiOpenGrindstone())
+        inventory.setItem(9 * 3 + 5, OpenWorkstationsItems().itemGuiOpenGrindstone())
         if (!IsModuleEnabled.grindstone) inventory.setItem(32, GeneralItems().itemGuiUnavailable())
 
-        inventory.setItem(34, OpenWorkstationsItems().itemGuiOpenLoom())
+        inventory.setItem(9 * 3 + 7, OpenWorkstationsItems().itemGuiOpenLoom())
         if (!IsModuleEnabled.loom) inventory.setItem(34, GeneralItems().itemGuiUnavailable())
 
 

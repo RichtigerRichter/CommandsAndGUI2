@@ -27,7 +27,7 @@ class PlayerSelectGUI(guiData: GUIData) : GUI(guiData) {
     }
 
     override fun getSlots(): Int {
-        return 6*9
+        return 9 * 6
     }
 
     override fun setGUIItems() {
@@ -166,6 +166,19 @@ class PlayerSelectGUI(guiData: GUIData) : GUI(guiData) {
         selfItem.setItemMeta(selfMeta)
         inventory.setItem(getSlots() - 4, selfItem)
 
+        val refreshItem = ItemStack(Material.PAPER, 1)
+        val refreshMeta = refreshItem.itemMeta
+        refreshMeta.displayName(Text.miniMessage("<italic:false><white>Refresh Interval"))
+        val refreshLore: MutableList<Component> = mutableListOf()
+        if (guiData.getPlayerSelectShowSelfFirst()) {
+            refreshLore.add(Text.miniMessage("<italic:false><gray>Refreshing every 1 Tick"))
+        } else {
+            refreshLore.add(Text.miniMessage("<italic:false><gray>Not refreshing"))
+        }
+        refreshMeta.lore(refreshLore)
+        refreshItem.setItemMeta(refreshMeta)
+        inventory.setItem(getSlots() - 3, refreshItem)
+
         if (page < pageMax) {
             val nextPageItem = ItemStack(Material.ARROW, 1)
             val nextPageMeta = nextPageItem.itemMeta
@@ -221,22 +234,27 @@ class PlayerSelectGUI(guiData: GUIData) : GUI(guiData) {
         if (event.slot == getSlots() - 9 && page > 0) {
             page -= 1
             super.open()
+            //TODO right click to go to first page
         }
 
         if (event.slot == getSlots() - 8) {
             MainGUI(guiData).open()
+            //TODO remember last gui + the page the gui was on (if paginated gui)
         }
 
         if (event.slot == getSlots() - 7) {
             event.whoClicked.sendMessage("me.richter.commandsAndGUI.modules.gui.guis.PlayerSelectGUI:231")
+            //TODO add filter
         }
 
         if (event.slot == getSlots() - 6) {
             event.whoClicked.sendMessage("me.richter.commandsAndGUI.modules.gui.guis.PlayerSelectGUI:235")
+            //TODO add information selector
         }
 
         if (event.slot == getSlots() - 5) {
             event.whoClicked.sendMessage("me.richter.commandsAndGUI.modules.gui.guis.PlayerSelectGUI:239")
+            //TODO add sorting gui - priority based
         }
 
         if (event.slot == getSlots() - 4) {
@@ -247,6 +265,7 @@ class PlayerSelectGUI(guiData: GUIData) : GUI(guiData) {
         if (event.slot == getSlots() - 1 && pageMax > page) {
             page += 1
             super.open()
+            //TODO right click to go to last page
         }
     }
 }

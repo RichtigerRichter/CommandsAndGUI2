@@ -75,7 +75,7 @@ class PlayerGUI(guiData: GUIData) : GUI(guiData) {
     override fun handleGUI(event: InventoryClickEvent) {
         when (event.currentItem) {
             MainItems().itemGuiBackpackLogo() -> {
-                BackpackManager().openGUI(guiData.getSelectedPlayer())
+                BackpackManager().openGUI(guiData.getOwner())
                 return
             }
 
@@ -137,8 +137,6 @@ class PlayerGUI(guiData: GUIData) : GUI(guiData) {
                 event.clickedInventory!!.setItem(event.slot, MainItems().itemGuiVanishOn())
                 guiData.getOwner().sendMessage(Component.text(Message.vanishEnabled))
             }
-
-            GeneralItems().itemGuiClose() -> inventory.close()
         }
 
         if (event.slot == getSlots() - 8) {

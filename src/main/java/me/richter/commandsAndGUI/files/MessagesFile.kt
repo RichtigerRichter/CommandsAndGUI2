@@ -64,20 +64,20 @@ class MessagesFile {
                 .replace("%PLAYER%", targetPlayer)
         }
 
-        val flySpeed0to10 = getMessage("flySpeed0to10", "$PREFIX Fly speed has to be a number from 0 to 10")
+        val flySpeed0to1000 = getMessage("flySpeed0to1000", "$PREFIX Fly speed has to be a number from 0% to 1000%")
 
         fun setFlySpeed(flySpeed: String): String {
-            return getMessage("setFlySpeed", "$PREFIX Set your fly speed to %FlySpeed% (default is 1)")
+            return getMessage("setFlySpeed", "$PREFIX Set your fly speed to %FlySpeed%%")
                 .replace("%FlySpeed%", flySpeed)
         }
 
         fun getFlySpeed(flySpeed: String): String {
-            return getMessage("getFlySpeed", "$PREFIX Your current fly speed is %FlySpeed% (default is 1)")
+            return getMessage("getFlySpeed", "$PREFIX Your current fly speed is %FlySpeed%%")
                 .replace("%FlySpeed%", flySpeed)
         }
 
         fun setFlySpeedFor(flySpeed: String, targetPlayer: String): String {
-            return getMessage("setFlySpeedFor", "$PREFIX Set fly speed of %PLAYER% to %FlySpeed% (default is 1)")
+            return getMessage("setFlySpeedFor", "$PREFIX Set fly speed of %PLAYER% to %FlySpeed%%")
                 .replace("%FlySpeed%", flySpeed)
                 .replace("%PLAYER%", targetPlayer)
         }
@@ -85,7 +85,7 @@ class MessagesFile {
         fun getFlySpeedFor(flySpeed: String, targetPlayer: String): String {
             return getMessage(
                 "getFlySpeedFor",
-                "$PREFIX The current fly speed of %PLAYER% is %FlySpeed% (default is 1)"
+                "$PREFIX The current fly speed of %PLAYER% is %FlySpeed%%"
             )
                 .replace("%FlySpeed%", flySpeed)
                 .replace("%PLAYER%", targetPlayer)

@@ -67,29 +67,28 @@ class FlyCommand : CommandExecutor, TabCompleter {
 
         if (args[1] == "speed") {
             if (args.size == 2) {
-                val targetFlySpeedArg: Double = targetPlayer.flySpeed * 10.0
                 sender.sendMessage(
                     if (targetPlayer == sender) {
-                        Component.text(Message.getFlySpeed(targetFlySpeedArg.toString()))
+                        Component.text(Message.getFlySpeed((targetPlayer.flySpeed * 1000).toInt().toString()))
                     } else {
-                        Component.text(Message.getFlySpeedFor(targetFlySpeedArg.toString(), targetPlayerName))
+                        Component.text(Message.getFlySpeedFor((targetPlayer.flySpeed * 1000).toInt().toString(), targetPlayerName))
                     }
                 )
                 return true
             }
 
-            val targetFlySpeedArg = args[2].toDoubleOrNull()
-            if (targetFlySpeedArg == null || targetFlySpeedArg !in 0.0..10.0) {
-                sender.sendMessage(Component.text(Message.flySpeed0to10))
+            val flySpeed = args[2].replace("%","").toIntOrNull()
+            if (flySpeed !in 0..1000) {
+                sender.sendMessage(Component.text(Message.flySpeed0to1000))
                 return true
             }
 
-            targetPlayer.flySpeed = (targetFlySpeedArg / 10).toFloat()
+            targetPlayer.flySpeed = flySpeed!!.toFloat() / 1000
             sender.sendMessage(
                 if (targetPlayer == sender) {
-                    Component.text(Message.setFlySpeed(targetFlySpeedArg.toString()))
+                    Component.text(Message.setFlySpeed(flySpeed.toString()))
                 } else {
-                    Component.text(Message.setFlySpeedFor(targetFlySpeedArg.toString(), targetPlayerName))
+                    Component.text(Message.setFlySpeedFor(flySpeed.toString(), targetPlayerName))
                 }
             )
             return true
@@ -186,16 +185,7 @@ class FlyCommand : CommandExecutor, TabCompleter {
             }
 
             if (args.size == 3 && args[1] == "speed") {
-                completions.add("01")
-                completions.add("02")
-                completions.add("03")
-                completions.add("04")
-                completions.add("05")
-                completions.add("06")
-                completions.add("07")
-                completions.add("08")
-                completions.add("09")
-                completions.add("10")
+                completions.add("[0..1000%]")
                 return completions.filter { it.startsWith(args[2], ignoreCase = true) }.toMutableList()
             }
 

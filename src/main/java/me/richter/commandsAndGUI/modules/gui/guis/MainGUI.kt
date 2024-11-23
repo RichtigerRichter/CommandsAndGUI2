@@ -8,6 +8,7 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.SkullMeta
 
 class MainGUI(guiData: GUIData) : GUI(guiData) {
 
@@ -16,20 +17,23 @@ class MainGUI(guiData: GUIData) : GUI(guiData) {
     }
 
     override fun getSlots(): Int {
-        return 3*9
+        return 9 * 3
     }
 
     override fun setGUIItems() {
+        guiData.setSelectedPlayer(guiData.getOwner())
+
         val playerItem = ItemStack(Material.PLAYER_HEAD, 1)
-        val playerMeta = playerItem.itemMeta
+        val playerMeta = playerItem.itemMeta as SkullMeta
         playerMeta.displayName(Text.miniMessage("<italic:false><red>Players"))
+        playerMeta.setOwningPlayer(guiData.getOwner())
         val playerLore: MutableList<Component> = mutableListOf()
         playerLore.add(Text.miniMessage("<italic:false><gray>Select a player to change their properties"))
         playerMeta.lore(playerLore)
         playerItem.setItemMeta(playerMeta)
         inventory.setItem(10, playerItem)
 
-        val worldItem = ItemStack(Material.MAP, 1)
+        val worldItem = ItemStack(Material.CRAFTING_TABLE, 1)
         val worldMeta = worldItem.itemMeta
         worldMeta.displayName(Text.miniMessage("<italic:false><green>Workstations"))
         val worldLore: MutableList<Component> = mutableListOf()
@@ -38,7 +42,7 @@ class MainGUI(guiData: GUIData) : GUI(guiData) {
         worldItem.setItemMeta(worldMeta)
         inventory.setItem(12, worldItem)
 
-        val serverItem = ItemStack(Material.COMMAND_BLOCK, 1)
+        val serverItem = ItemStack(Material.ELYTRA, 1)
         val serverMeta = serverItem.itemMeta
         serverMeta.displayName(Text.miniMessage("<italic:false><blue>Fly"))
         val serverLore: MutableList<Component> = mutableListOf()
@@ -76,6 +80,7 @@ class MainGUI(guiData: GUIData) : GUI(guiData) {
 
         if (event.slot == 16) {
             guiOwner.sendMessage("me.richter.commandsAndGUI.module.gui.guis.MainGUI:78")
+            //TODO editor for config files
         }
 
     }
