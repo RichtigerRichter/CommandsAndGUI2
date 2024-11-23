@@ -1,15 +1,15 @@
 package me.richter.commandsAndGUI.module.vanish
 
+import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.MessagesFile
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 import java.io.IOException
 
-class VanishManager(private val plugin: JavaPlugin) {
+class VanishManager {
     private val pluginFolder = File("./plugins/CommandsAndGUI")
     private val vanishedFile = File(pluginFolder, "vanishedPlayers.yml")
 
@@ -61,12 +61,12 @@ class VanishManager(private val plugin: JavaPlugin) {
         val config = YamlConfiguration.loadConfiguration(vanishedFile)
         if (enabled) {
             for (onlinePlayer in Bukkit.getOnlinePlayers()) {
-                onlinePlayer.hidePlayer(plugin, player)
+                onlinePlayer.hidePlayer(Main.instance, player)
             }
         } else {
             for (onlinePlayer in Bukkit.getOnlinePlayers()) {
 
-                onlinePlayer.showPlayer(plugin, player)
+                onlinePlayer.showPlayer(Main.instance, player)
 
             }
         }
@@ -85,7 +85,7 @@ class VanishManager(private val plugin: JavaPlugin) {
             pluginFolder.mkdirs()
         }
 
-        // Ensure the backpack file exists
+        // Ensure the vanished file exists
         if (!vanishedFile.exists()) {
             try {
                 vanishedFile.createNewFile()

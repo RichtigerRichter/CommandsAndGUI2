@@ -15,12 +15,7 @@ class MainItems {
     }
 
     fun itemGuiOpenWorkstation(): ItemStack {
-        return ItemBuilder().itemBuilder(
-            Material.CRAFTING_TABLE,
-            "Open Workstation Menu",
-            "Click to open the Workstation selection Menu",
-            100
-        )
+        return ItemBuilder().itemBuilder(Material.CRAFTING_TABLE,"Open Workstation Menu","Click to open the Workstation selection Menu",100)
     }
 
     fun itemGuiFlightLogo(): ItemStack {

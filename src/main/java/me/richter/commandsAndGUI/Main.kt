@@ -111,7 +111,7 @@ class Main : JavaPlugin() {
         AnimationsFile().loadConfig()
         PlayerDataFile().loadConfig()
 
-        VanishManager(this).create()
+        VanishManager().create()
         BackpackManager().load()
 
         //start loops
@@ -125,11 +125,9 @@ class Main : JavaPlugin() {
             logger.warning("THIS PLUGIN IS ONLY MADE FOR MINECRAFT VERSIONS 1.x.x IF THE SERVER IS RUNNING ON A NEWER VERSION PLEASE CONTACT THE PLUGIN DEV SINCE THE VERSION CHECKS WON'T WORK")
         }
 
-        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) { //
-
-            PAPI().register() //
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) {
+            PAPI().register()
         }
-
     }
 
 
@@ -141,7 +139,7 @@ class Main : JavaPlugin() {
         getCommand("worldManager")!!.setExecutor(WorldGUICommand(this))
         getCommand("setup")!!.setExecutor(SetupCommand())
         getCommand("god")!!.setExecutor(GodCommand())
-        getCommand("vanish")!!.setExecutor(VanishCommand(this))
+        getCommand("vanish")!!.setExecutor(VanishCommand())
         getCommand("workstation")!!.setExecutor(OpenCommand())
         getCommand("backpack")!!.setExecutor(BackpackCommand())
         getCommand("sit")!!.setExecutor(SitCommand())
@@ -153,8 +151,6 @@ class Main : JavaPlugin() {
         getCommand("testScoreboard")!!.setExecutor(TestScoreboardCommand())
         getCommand("track")!!.setExecutor(TrackCommand())
         getCommand("commandsandgui")!!.setExecutor(CommandsAndGUICommand())
-
-
     }
 
     private fun registerListeners() {
@@ -163,7 +159,7 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(WorkstationGUIClickListener(), this)
         server.pluginManager.registerEvents(FlySettingsGUIClickListener(), this)
         server.pluginManager.registerEvents(PlayerJoinEvent(this), this)
-        server.pluginManager.registerEvents(PlayerQuitEvent(this), this)
+        server.pluginManager.registerEvents(PlayerQuitEvent(), this)
         server.pluginManager.registerEvents(BdLulEvent(), this)
         server.pluginManager.registerEvents(BdLul(), this)
         server.pluginManager.registerEvents(SitListener(), this)
@@ -231,7 +227,7 @@ class Main : JavaPlugin() {
     override fun onDisable() {
         // Plugin shutdown logic
 
-        VanishManager(this).create()
+        VanishManager().create()
         BackpackManager().save()
 
         stopEveryTickTask()

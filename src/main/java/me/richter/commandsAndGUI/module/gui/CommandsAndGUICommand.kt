@@ -4,7 +4,6 @@ import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.ConfigFile.IsModuleEnabled
 import me.richter.commandsAndGUI.files.MessagesFile
 import me.richter.commandsAndGUI.module.gui.guis.MainGUI
-import org.bukkit.Bukkit
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -19,7 +18,7 @@ class CommandsAndGUICommand : CommandExecutor, TabCompleter {
             return true
         }
 
-        MainGUI(Main.instance.getGUIData(sender as Player)).open()
+        MainGUI(Main.instance.getGUIData(sender)).open()
 
         /*
         if (args.size >= 2) {
@@ -50,10 +49,10 @@ class CommandsAndGUICommand : CommandExecutor, TabCompleter {
         if (command.name.equals("commandsandgui", ignoreCase = true)) {
             if (!IsModuleEnabled.gui) { sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return mutableListOf() }
 
+            /*
             val player = Bukkit.getPlayer(sender.name)!!
             val completions = mutableListOf<String>()
 
-            /*
             if (args.size == 1) {
                 completions.add("template")
                 completions.add("1")

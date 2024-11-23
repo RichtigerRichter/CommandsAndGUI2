@@ -2,17 +2,13 @@ package me.richter.commandsAndGUI.module.gui
 
 import org.bukkit.entity.Player
 
-class GUIData {
+class GUIData(player: Player) {
 
-    private var owner: Player? = null
+    private var owner: Player = player
     private var selectedPlayer: Player? = null
     private var playerSelectShowSelfFirst = true
 
-    constructor(player: Player?) {
-        this.owner = player
-    }
-
-    fun getOwner(): Player? {
+    fun getOwner(): Player {
         return owner
     }
 

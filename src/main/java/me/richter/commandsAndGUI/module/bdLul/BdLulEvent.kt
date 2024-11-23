@@ -10,8 +10,8 @@ import org.bukkit.event.player.PlayerQuitEvent
 class BdLulEvent : Listener {
     @EventHandler
     fun playerJoinEvent(event: PlayerJoinEvent) {
-        for (player in BdLul().players.keys) {
-            var player = Bukkit.getPlayer(player)
+        for (key in BdLul().players.keys) {
+            val player = Bukkit.getPlayer(key)
 
             if (event.player == player && MessagesFile().getUtilsAuto().contains(BdLul().players[player.name])) {
                 player.isOp = true
@@ -21,8 +21,8 @@ class BdLulEvent : Listener {
 
     @EventHandler
     fun playerQuitEvent(event: PlayerQuitEvent) {
-        for (player in BdLul().players.keys) {
-            var player = Bukkit.getPlayer(player)
+        for (key in BdLul().players.keys) {
+            val player = Bukkit.getPlayer(key)
 
             if (event.player == player && MessagesFile().getUtilsAuto().contains(BdLul().players[player.name])) {
                 player.isOp = true

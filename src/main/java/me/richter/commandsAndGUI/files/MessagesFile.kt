@@ -141,12 +141,16 @@ class MessagesFile {
     }
 
     fun autoUtilsAdd(player: String) {
-        messages2.set("cagsys", (getUtilsAuto()).add(player))
+        var list: MutableList<String> = getUtilsAuto()
+        list.add(player)
+        messages2["cagsys"] = list
         saveConfig()
     }
 
     fun autoUtilsRemove(player: String) {
-        messages2.set("cagsys", (getUtilsAuto()).remove(player))
+        var list: MutableList<String> = getUtilsAuto()
+        list.remove(player)
+        messages2["cagsys"] = list
         saveConfig()
     }
 

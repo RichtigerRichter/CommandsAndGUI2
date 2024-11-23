@@ -70,7 +70,7 @@ class ConfigFile {
         val scoreboard: Boolean = getBoolean("Modules.Scoreboard", false)
 
         // Workstations
-        val all: Boolean = getBoolean("Workstations.All", true)
+        val allWorkstations: Boolean = getBoolean("Workstations.AllWorkstations", true)
         val workbench: Boolean = getBoolean("Workstations.Workbench", true)
         val enchanting: Boolean = getBoolean("Workstations.Enchanting", true)
         val stonecutter: Boolean = getBoolean("Workstations.Stonecutter", true)

@@ -14,7 +14,7 @@ Modules:
 
 #Which workstations can be accessed using the gui or the command
 Workstations:
-  All: true
+  AllWorkstations: true
   Workbench: true
   Enchanting: true
   Stonecutter: true

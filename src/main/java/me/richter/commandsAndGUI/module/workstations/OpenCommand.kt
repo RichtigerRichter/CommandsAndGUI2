@@ -11,7 +11,7 @@ import org.bukkit.entity.Player
 class OpenCommand : CommandExecutor, TabCompleter {
     @Override
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
-        if (!ConfigFile.IsModuleEnabled.all) {
+        if (!ConfigFile.IsModuleEnabled.allWorkstations) {
             sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return true
         }
 
@@ -142,7 +142,7 @@ class OpenCommand : CommandExecutor, TabCompleter {
         args: Array<out String>
     ): MutableList<String> {
         if (command.name.equals("workstation", ignoreCase = true)) {
-            if (!ConfigFile.IsModuleEnabled.all) {
+            if (!ConfigFile.IsModuleEnabled.allWorkstations) {
                 sender.sendMessage(MessagesFile.Message.moduleNotEnabled); return mutableListOf()
             }
             val completions = mutableListOf<String>()

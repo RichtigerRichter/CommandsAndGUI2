@@ -12,9 +12,8 @@ import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
 import org.bukkit.command.TabCompleter
 import org.bukkit.entity.Player
-import org.bukkit.plugin.java.JavaPlugin
 
-class VanishCommand(private val plugin: JavaPlugin) : CommandExecutor, TabCompleter {
+class VanishCommand : CommandExecutor, TabCompleter {
 
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
@@ -23,9 +22,9 @@ class VanishCommand(private val plugin: JavaPlugin) : CommandExecutor, TabComple
         }
 
         if (sender !is Player) return true
-        VanishManager(plugin).toggle(sender)
+        VanishManager().toggle(sender)
 
-        if (VanishManager(plugin).isVanished(sender)) {
+        if (VanishManager().isVanished(sender)) {
             if (args.size > 1) {
                 return false
             }

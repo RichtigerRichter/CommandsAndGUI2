@@ -11,7 +11,7 @@ class InventoryDragEventListener : Listener {
         val holder = event.inventory.holder
 
         if (holder is GUI) {
-            val menu: GUI = holder as GUI
+            val menu: GUI = holder
             for (slot in 0 until menu.getSlots()) {
                 if (event.rawSlots.contains(slot)) {
                     event.isCancelled = true

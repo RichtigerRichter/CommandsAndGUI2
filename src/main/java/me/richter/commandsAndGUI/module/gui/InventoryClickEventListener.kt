@@ -11,7 +11,7 @@ class InventoryClickEventListener : Listener {
         val holder = event.inventory.holder
 
         if (holder is GUI) {
-            val gui: GUI = holder as GUI
+            val gui: GUI = holder
 
             if (event.currentItem != null) {
                 if (event.isShiftClick) {
@@ -24,6 +24,7 @@ class InventoryClickEventListener : Listener {
                 }
             }
         }
+
     }
 
 }
