@@ -1,7 +1,7 @@
 package me.richter.commandsAndGUI.items
 
-import me.richter.commandsAndGUI.module.customCrafting.invisibleItemFrames.InvisibleItemFrameManager
-import me.richter.commandsAndGUI.module.fly.soup.FlySoup
+import me.richter.commandsAndGUI.modules.customCrafting.invisibleItemFrames.InvisibleItemFrameManager
+import me.richter.commandsAndGUI.modules.fly.soup.FlySoup
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender

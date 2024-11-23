@@ -112,7 +112,12 @@ class MessagesFile {
         val godDisabled = getMessage("godDisabled", "$PREFIX Godmode disabled")
         val godEnabled = getMessage("godEnabled", "$PREFIX Godmode enabled")
 
-        val youGotHealed = getMessage("youGotHealed", "$PREFIX You've been healed")
+        val healed = getMessage("healed", "$PREFIX You have been healed")
+
+        fun healedFor(targetPlayer: String): String {
+            return getMessage("healedFor", "$PREFIX %PLAYER% has been healed")
+                .replace("%PLAYER%", targetPlayer)
+        }
 
         val vanishDisabled = getMessage("vanishDisabled", "$PREFIX Vanish disabled")
         val vanishEnabled = getMessage("vanishEnabled", "$PREFIX Vanish enabled")
