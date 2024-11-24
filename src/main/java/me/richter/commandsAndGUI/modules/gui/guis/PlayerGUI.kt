@@ -24,7 +24,7 @@ class PlayerGUI(guiData: GUIData) : GUI(guiData) {
     }
 
     override fun getSlots(): Int {
-        return 6*9
+        return 9 * 6
     }
 
     override fun setGUIItems() {

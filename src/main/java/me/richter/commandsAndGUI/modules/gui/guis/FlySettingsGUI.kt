@@ -1,7 +1,6 @@
 package me.richter.commandsAndGUI.modules.gui.guis
 
 import me.richter.commandsAndGUI.files.MessagesFile.Message
-import me.richter.commandsAndGUI.items.guiItems.FlySettingsItems
 import me.richter.commandsAndGUI.modules.gui.GUI
 import me.richter.commandsAndGUI.modules.gui.GUIData
 import me.richter.commandsAndGUI.modules.utils.Text
