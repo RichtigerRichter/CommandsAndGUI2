@@ -24,12 +24,15 @@ class PAPI: PlaceholderExpansion() {
 	}
 
 	override fun onRequest(player: OfflinePlayer?, params: String): String? {
+		//https://wiki.placeholderapi.com/developers/creating-a-placeholderexpansion/#making-an-internal-expansion
+		//animation placeholder %animation:name%
 		val animationPlaceholder = Regex("(animation:[^%]+)").find(params)?.value
 		val animationName = Regex("animation:([^%]+)").find(params)?.groupValues?.get(1)
 		if (animationPlaceholder != null) {
 			return Placeholder().getCurrentAnimation(animationName)
 		}
 
+		//fly time placeholder %fly_time%
 		if (params == "fly_time") {
 			if (player != null) {
 				return Countdown().formatTime("flySoup.${player.uniqueId}")

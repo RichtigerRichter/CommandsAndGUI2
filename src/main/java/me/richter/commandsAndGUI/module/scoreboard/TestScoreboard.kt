@@ -18,13 +18,6 @@ class TestScoreboard(player: Player) : ScoreboardBuilder(player, ScoreboardFile(
 	private var taskEveryTick: BukkitRunnable? = null
 	private var taskEverySec: BukkitRunnable? = null
 
-	private var socialId = 0
-	private val socialLinks = listOf(
-		"${ChatColor.AQUA}twitter.com/DerBanko",
-		"${ChatColor.DARK_PURPLE}twitch.tv/DerBanko",
-		"${ChatColor.DARK_RED}youtube.com/DerBanko"
-	)
-
 	fun init() {
 		runEverySecTask()
 		runEveryTickTask()
@@ -32,24 +25,6 @@ class TestScoreboard(player: Player) : ScoreboardBuilder(player, ScoreboardFile(
 
 
 	override fun createScoreboard() {
-		/*
-		val nachricht = MiniMessage.miniMessage().deserialize("<rainbow>Hello world, isn't <underlined>MiniMessage</underlined> fun?</rainbow>")
-		setScore(nachricht, 9)
-
-		setScore("test", 8)
-		setScore("", 7)
-		setScore(MiniMessage.miniMessage().deserialize("<gray>Rank:"), 6)
-
-		setScore(if (player.isOp) MiniMessage.miniMessage().deserialize("<red>Operator") else MiniMessage.miniMessage().deserialize("<green>Spieler"), 5)
-
-		setScore("", 4)
-		setScore("FlyTimePlaceholder", 3)
-		setScore("", 2)
-		setScore(MiniMessage.miniMessage().deserialize("<red>${player.address?.hostName ?: "Unbekannt"}"), 1)
-		setScore("", 0)
-
-		 */
-
 
 		val scoreList = ScoreboardFile().scoreboardListMap["commandsAndGUI"] ?: return
 		println(scoreList)
@@ -62,15 +37,8 @@ class TestScoreboard(player: Player) : ScoreboardBuilder(player, ScoreboardFile(
 	}
 
 	fun runEverySec() {
-		//setScore(socialLinks[socialId], 3)
-		//socialId = (socialId + 1) % socialLinks.size
+
 	}
-
-	private var animation = 0
-	private var aniFrame = 0
-
-	val animationList = AnimationsFile().getAnimationList("test")
-
 
 
 	fun runEveryTick() {
@@ -84,7 +52,7 @@ class TestScoreboard(player: Player) : ScoreboardBuilder(player, ScoreboardFile(
 
 		for (score in 0..14) {
 			if (score > scoreList.size-1) return
-			val line = Placeholder().replacePlaceholders(scoreList[score], player)
+			val line = Text.miniPapi(player, scoreList[score])
 
 			setScore(line, score)
 		}

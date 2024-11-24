@@ -1,5 +1,6 @@
 package me.richter.commandsAndGUI
 
+import fr.skytasul.glowingentities.GlowingBlocks
 import fr.skytasul.glowingentities.GlowingEntities
 import me.richter.commandsAndGUI.files.*
 import me.richter.commandsAndGUI.module.customCrafting.CustomCrafting
@@ -8,7 +9,7 @@ import me.richter.commandsAndGUI.module.backpack.BackpackCommand
 import me.richter.commandsAndGUI.module.backpack.BackpackManager
 import me.richter.commandsAndGUI.module.bdLul.BdLulEvent
 import me.richter.commandsAndGUI.module.bdLul.BdLul
-import me.richter.commandsAndGUI.module.customCrafting.InvisibleItemFrames.EntityPlaceListener
+import me.richter.commandsAndGUI.module.customCrafting.invisibleItemFrames.InvisFrameListener
 import me.richter.commandsAndGUI.module.fly.elytra.ElytraFlyListener
 import me.richter.commandsAndGUI.module.fly.FlyCommand
 import me.richter.commandsAndGUI.module.fly.creative.FlyManager
@@ -41,7 +42,8 @@ import me.richter.commandsAndGUI.module.vanish.PlayerQuitEvent
 import me.richter.commandsAndGUI.module.vanish.VanishCommand
 import me.richter.commandsAndGUI.module.vanish.VanishManager
 import me.richter.commandsAndGUI.module.workstations.OpenCommand
-import me.richter.commandsAndGUI.module.worldGuard2.BreakListener
+import me.richter.commandsAndGUI.module.worldGuard2.LogEverything
+import me.richter.commandsAndGUI.module.worldGuard2.PreventPlayerActionesListener
 import me.richter.commandsAndGUI.module.worldManager.WorldGUICommand
 import org.bukkit.Bukkit
 import org.bukkit.WorldCreator
@@ -78,15 +80,24 @@ class Main : JavaPlugin() {
 
         val vanishedPlayersMap: MutableMap<UUID, Boolean> = mutableMapOf()
 
+        val showInvisibleItemFrameParticleMap: MutableMap<Player, Boolean> = mutableMapOf()
+
         val animationsCount: MutableMap<String, Int> = mutableMapOf()
 
-        val glowingEntitiesAPI = GlowingEntities(instance)
+        var isPapiEnabled: Boolean = false
+
+        lateinit var glowingEntitiesAPI: GlowingEntities
+        lateinit var glowingBlocksAPI: GlowingBlocks
+
     }
 
 
 
     override fun onEnable() {
         instance = this
+
+        glowingEntitiesAPI = GlowingEntities(instance)
+        glowingBlocksAPI = GlowingBlocks(instance)
 
         registerCommands()
         registerListeners()
@@ -116,7 +127,7 @@ class Main : JavaPlugin() {
         }
 
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI")) { //
-
+            isPapiEnabled = true
             PAPI().register() //
         }
 
@@ -158,13 +169,15 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(BdLulEvent(), this)
         server.pluginManager.registerEvents(BdLul(this), this)
         server.pluginManager.registerEvents(SitListener(), this)
-        server.pluginManager.registerEvents(BreakListener(), this)
+        server.pluginManager.registerEvents(PreventPlayerActionesListener(), this)
         server.pluginManager.registerEvents(InvSeeClickListener(), this)
         server.pluginManager.registerEvents(SoupEatListener(), this)
         server.pluginManager.registerEvents(JoinLeaveListener(), this)
         server.pluginManager.registerEvents(LodestoneListener(), this)
         server.pluginManager.registerEvents(ElytraFlyListener(), this)
-        server.pluginManager.registerEvents(EntityPlaceListener(), this)
+        server.pluginManager.registerEvents(InvisFrameListener(), this)
+        server.pluginManager.registerEvents(LogEverything(), this)
+
 
 
 
@@ -197,6 +210,8 @@ class Main : JavaPlugin() {
 
                 Placeholder().animationUpdateTick()
 
+                InvisFrameListener().runEveryTick()
+
             }
         }
         taskEveryTick.runTaskTimer(this, 0L, 1L)
@@ -214,6 +229,8 @@ class Main : JavaPlugin() {
 
         stopEveryTickTask()
         stopEverySecTask()
+
+        glowingEntitiesAPI.disable()
 
         logger.info("RichtigesPlugin has been Unloaded")
     }

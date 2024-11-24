@@ -47,16 +47,4 @@ class Placeholder {
 	}
 
 
-
-	fun replacePlaceholders(line: String, player: Player) : Component {
-
-		val animationPlaceholder = Regex("(%Animation:[^%]+%)").find(line)?.value ?: "TestScoreboard.kt:91 null"
-		val animationName = Regex("%Animation:([^%]+)%").find(line)?.groupValues?.get(1) ?: "TestScoreboard.kt:92 null"
-		var text = line
-
-		val papiString = PlaceholderAPI.setPlaceholders(player, text)
-
-
-		return Text.miniMessage(papiString)
-	}
 }

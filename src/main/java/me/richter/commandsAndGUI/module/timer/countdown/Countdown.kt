@@ -5,7 +5,7 @@ import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
 
-class Countdown() {
+class Countdown {
 
 	fun sendActionBar(name: String) {
 		for (player: Player in Bukkit.getOnlinePlayers()) {
@@ -17,8 +17,15 @@ class Countdown() {
 
 			player.sendActionBar(Component.text("§l§g"+formatTime(name)))
 
-
 		}
+	}
+
+	private fun timeList(name: String): Map<String, Int> {
+		val time = CountdownFile().getTime(name)
+		val h = time / 3600
+		val m = (time % 3600) / 60
+		val s = time % 60
+		return mapOf(Pair("h", h), Pair("m", m), Pair("s", s))
 	}
 
 	fun formatTime(name: String): String {
@@ -33,16 +40,6 @@ class Countdown() {
 		return  "$h:$min:$sec"
 	}
 
-
-	fun timeList(name: String): Map<String, Int> {
-		val time = CountdownFile().getTime(name)
-		val h = time / 3600
-		val m = (time % 3600) / 60
-		val s = time % 60
-		return mapOf(Pair("h", h), Pair("m", m), Pair("s", s))
-	}
-
-
 	fun runningEverySec() {
 
 		for (name in CountdownFile().getAllTopGroupsExceptFlySoup()) {
@@ -53,6 +50,5 @@ class Countdown() {
 			//sendActionBar(name)
 		}
 	}
-
 
 }

@@ -50,16 +50,8 @@ class CountdownCommand: CommandExecutor, TabCompleter {
 
 				CountdownFile().setTime(name, s + 60*m + 60*60*h)
 
-				val seconds = Countdown().timeList(name)["s"] ?: return false
-				val minutes = Countdown().timeList(name)["m"] ?: return false
-				val hours = Countdown().timeList(name)["h"] ?: return false
-
-				val formatedSec = if (seconds < 10) "0$seconds" else "$seconds"
-				val formatedMin = if (minutes < 10) "0$minutes" else "$minutes"
-				val formatedHor = if (hours < 10) "0$hours" else "$hours"
-
 				//Countdown().sendActionBar(name)
-				sender.sendMessage(Component.text("§7countdown was set to $formatedHor:$formatedMin:$formatedSec"))
+				sender.sendMessage(Component.text("§7countdown was set to ${Countdown().formatTime(name)}"))
 				return true
 			}
 			"reset" -> {

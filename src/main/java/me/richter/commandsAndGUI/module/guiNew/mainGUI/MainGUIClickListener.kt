@@ -28,7 +28,7 @@ class MainGUIClickListener(private val plugin: JavaPlugin): Listener {
             MainItems().itemGuiBackpackLogo() -> {
                 BackpackManager().openGUI(player)
                 event.isCancelled = true
-                return}
+                return }
             MainItems().itemGuiOpenWorkstation() -> {
                 WorkstationGUI().open(player)
                 event.isCancelled = true

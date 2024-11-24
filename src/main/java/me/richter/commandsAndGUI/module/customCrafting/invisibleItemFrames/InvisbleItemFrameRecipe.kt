@@ -1,4 +1,4 @@
-package me.richter.commandsAndGUI.module.customCrafting.InvisibleItemFrames
+package me.richter.commandsAndGUI.module.customCrafting.invisibleItemFrames
 
 import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.items.ItemBuilder
@@ -9,9 +9,7 @@ import org.bukkit.inventory.ShapedRecipe
 
 class InvisbleItemFrameRecipe {
 	fun invisibleItemframeRecipe() {
-		//TODO fixen das invis geht
-		//TODO und das wenn man invis itemfram in der hand hat die anderen gowing bekommen
-		//TODO und beschriftung in die lore
+		//TODO beschriftung in die lore
 
 		// Create the resulting item (e.g., a diamond sword)
 		val invisibleItemFrame = InvisibleItemFrameManager().invisibleItemFrameItem()
@@ -39,13 +37,10 @@ class InvisbleItemFrameRecipe {
 	}
 
 	fun invisibleGlowItemframeRecipe() {
-		//TODO fixen das invis geht
-		//TODO und das wenn man invis itemfram in der hand hat die anderen gowing bekommen
-		//TODO und beschriftung in die lore
+		//TODO beschriftung in die lore
 
 		// Create the resulting item (e.g., a diamond sword)
-		val invisibleGlowItemFrame = ItemBuilder().itemBuilder(Material.ITEM_FRAME, "Invisible GlowItemFrame", "", "cag.item", "invisibleItemFrame")
-
+		val invisibleGlowItemFrame = InvisibleItemFrameManager().invisibleGlowItemFrameItem()
 
 
 		// Define a NamespacedKey for the recipe (used to uniquely identify it)
