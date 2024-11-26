@@ -33,23 +33,23 @@ class MainGUI(guiData: GUIData) : GUI(guiData) {
         playerItem.setItemMeta(playerMeta)
         inventory.setItem(10, playerItem)
 
+        val serverItem = ItemStack(Material.GRASS_BLOCK, 1)
+        val serverMeta = serverItem.itemMeta
+        serverMeta.displayName(Text.miniMessage("<italic:false><green>World Manager"))
+        val serverLore: MutableList<Component> = mutableListOf()
+        serverLore.add(Text.miniMessage("<italic:false><gray>World Manager"))
+        serverMeta.lore(serverLore)
+        serverItem.setItemMeta(serverMeta)
+        inventory.setItem(12, serverItem)
+
         val worldItem = ItemStack(Material.CRAFTING_TABLE, 1)
         val worldMeta = worldItem.itemMeta
-        worldMeta.displayName(Text.miniMessage("<italic:false><green>Workstations"))
+        worldMeta.displayName(Text.miniMessage("<italic:false><blue>Workstations"))
         val worldLore: MutableList<Component> = mutableListOf()
         worldLore.add(Text.miniMessage("<italic:false><gray>Select a workstation to use it"))
         worldMeta.lore(worldLore)
         worldItem.setItemMeta(worldMeta)
-        inventory.setItem(12, worldItem)
-
-        val serverItem = ItemStack(Material.ELYTRA, 1)
-        val serverMeta = serverItem.itemMeta
-        serverMeta.displayName(Text.miniMessage("<italic:false><blue>Fly"))
-        val serverLore: MutableList<Component> = mutableListOf()
-        serverLore.add(Text.miniMessage("<italic:false><gray>Change properties of this fly"))
-        serverMeta.lore(serverLore)
-        serverItem.setItemMeta(serverMeta)
-        inventory.setItem(14, serverItem)
+        inventory.setItem(14, worldItem)
 
         val pluginItem = ItemStack(Material.COMPARATOR, 1)
         val pluginMeta = pluginItem.itemMeta
@@ -71,11 +71,11 @@ class MainGUI(guiData: GUIData) : GUI(guiData) {
         }
 
         if (event.slot == 12) {
-            WorkstationsGUI(guiData).open()
+            WorldManagerGUI(guiData).open()
         }
 
         if (event.slot == 14) {
-            FlySettingsGUI(guiData).open()
+            WorkstationsGUI(guiData).open()
         }
 
         if (event.slot == 16) {

@@ -1,7 +1,9 @@
 package me.richter.commandsAndGUI.modules.worldManager
 
+import me.richter.commandsAndGUI.Main
 import me.richter.commandsAndGUI.files.ConfigFile
 import me.richter.commandsAndGUI.files.MessagesFile
+import me.richter.commandsAndGUI.modules.gui.guis.WorldManagerGUI
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.TriState
 import org.bukkit.Bukkit
@@ -22,11 +24,11 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
         val player = Bukkit.getPlayer(sender.uniqueId)!!
 
         if (args[0] == "gui") {
-            WorldGUI().open(sender, plugin)
+            WorldManagerGUI(Main.instance.getGUIData(sender)).open()
         }
 
         if (args.size == 2 && args[0] == "createTempDevWorld") {
-
+            //TODO createTempDevWorld
         }
 
         if (args[0] == "list") {
@@ -43,7 +45,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
         }
 
         if (args.size == 2 && args[0] == "saveAsPreset") {
-            //Todo saveAsPreset
+            //TODO saveAsPreset
         }
 
         if (args.size == 2 && args[0] == "create") {

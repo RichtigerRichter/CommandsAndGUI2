@@ -5,8 +5,11 @@ import me.richter.commandsAndGUI.items.guiItems.GeneralItems
 import me.richter.commandsAndGUI.items.guiItems.OpenWorkstationsItems
 import me.richter.commandsAndGUI.modules.gui.GUI
 import me.richter.commandsAndGUI.modules.gui.GUIData
+import me.richter.commandsAndGUI.modules.utils.Text
 import me.richter.commandsAndGUI.modules.workstations.OpenWorkFun
+import org.bukkit.Material
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.inventory.ItemStack
 
 class WorkstationsGUI(guiData: GUIData) : GUI(guiData) {
 
@@ -44,8 +47,11 @@ class WorkstationsGUI(guiData: GUIData) : GUI(guiData) {
         if (!IsModuleEnabled.loom) inventory.setItem(34, GeneralItems().itemGuiUnavailable())
 
 
-        inventory.setItem(48, GeneralItems().itemGuiBack())
-        inventory.setItem(49, GeneralItems().itemGuiClose())
+        val goBackItem = ItemStack(Material.SPECTRAL_ARROW, 1)
+        val goBackMeta = goBackItem.itemMeta
+        goBackMeta.displayName(Text.miniMessage("<italic:false><white>Go Back"))
+        goBackItem.setItemMeta(goBackMeta)
+        inventory.setItem(getSlots() - 8, goBackItem)
 
         setFillerGlass()
     }
@@ -91,14 +97,11 @@ class WorkstationsGUI(guiData: GUIData) : GUI(guiData) {
                 OpenWorkFun().openWorkbench(guiData.getOwner())
                 return
             }
+        }
 
-            GeneralItems().itemGuiBack() -> {
-                MainGUI(guiData).open()
-            }
-
-            GeneralItems().itemGuiClose() -> {
-                guiData.getOwner().closeInventory()
-            }
+        if (event.slot == getSlots() - 8) {
+            MainGUI(guiData).open()
+            //TODO remember last gui + the page the gui was on (if paginated gui)
         }
     }
 }

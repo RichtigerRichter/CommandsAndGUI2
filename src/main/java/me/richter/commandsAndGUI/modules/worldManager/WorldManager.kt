@@ -1,6 +1,8 @@
 package me.richter.commandsAndGUI.modules.worldManager
 
 import me.richter.commandsAndGUI.Main.Companion.initWorldCreator
+import me.richter.commandsAndGUI.modules.utils.Text
+import net.kyori.adventure.text.Component
 import net.kyori.adventure.util.TriState
 import org.bukkit.*
 import org.bukkit.entity.Player
@@ -73,18 +75,13 @@ class WorldManager(plugin: JavaPlugin) {
         return worldGenerator.type().toString() == "FLAT"
     }
 
-    fun getChangedGameRules(worldName: String): String {
-        val world: World = Bukkit.getWorld(worldName) ?: return "there is no world with that name"
+    fun getChangedGameRules(worldName: String): MutableList<Component> {
+        val world: World = Bukkit.getWorld(worldName) ?: return mutableListOf(Text.miniMessage("there is no world with that name"))
         val allGameRules = world.gameRules
-        var changedRules = ""
+        var changedRules: MutableList<Component> = mutableListOf()
         for (gameRule in allGameRules) {
-            if (world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>) != world.getGameRuleDefault(
-                    GameRule.getByName(
-                        gameRule
-                    ) as GameRule<*>
-                )
-            ) {
-                changedRules += "\n§e$gameRule: §2${world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>)}"
+            if (world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>) != world.getGameRuleDefault(GameRule.getByName(gameRule) as GameRule<*>)) {
+                changedRules.add(Text.miniMessage("<italic:false><yellow>$gameRule: <dark_green>${world.getGameRuleValue(GameRule.getByName(gameRule) as GameRule<*>)}"))
             }
         }
         return changedRules

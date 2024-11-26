@@ -18,11 +18,6 @@ import me.richter.commandsAndGUI.modules.gui.CommandsAndGUICommand
 import me.richter.commandsAndGUI.modules.gui.GUIData
 import me.richter.commandsAndGUI.modules.gui.InventoryClickEventListener
 import me.richter.commandsAndGUI.modules.gui.InventoryDragEventListener
-import me.richter.commandsAndGUI.modules.guiNew.GUICloseListener
-import me.richter.commandsAndGUI.modules.guiNew.GUICommand
-import me.richter.commandsAndGUI.modules.guiNew.flySettingsGUI.FlySettingsGUIClickListener
-import me.richter.commandsAndGUI.modules.guiNew.mainGUI.MainGUIClickListener
-import me.richter.commandsAndGUI.modules.guiNew.workstationGUI.WorkstationGUIClickListener
 import me.richter.commandsAndGUI.modules.heal.HealCommand
 import me.richter.commandsAndGUI.modules.invSee.InvSeeClickListener
 import me.richter.commandsAndGUI.modules.invSee.InvSeeCommand
@@ -134,7 +129,6 @@ class Main : JavaPlugin() {
     private fun registerCommands() {
         getCommand("fly")!!.setExecutor(FlyCommand())
         getCommand("jump")!!.setExecutor(JumpCommand())
-        getCommand("GUI")!!.setExecutor(GUICommand())
         getCommand("invSee")!!.setExecutor(InvSeeCommand())
         getCommand("worldManager")!!.setExecutor(WorldGUICommand(this))
         getCommand("setup")!!.setExecutor(SetupCommand())
@@ -154,10 +148,6 @@ class Main : JavaPlugin() {
     }
 
     private fun registerListeners() {
-        server.pluginManager.registerEvents(GUICloseListener(), this)
-        server.pluginManager.registerEvents(MainGUIClickListener(this), this)
-        server.pluginManager.registerEvents(WorkstationGUIClickListener(), this)
-        server.pluginManager.registerEvents(FlySettingsGUIClickListener(), this)
         server.pluginManager.registerEvents(PlayerJoinEvent(this), this)
         server.pluginManager.registerEvents(PlayerQuitEvent(), this)
         server.pluginManager.registerEvents(BdLulEvent(), this)

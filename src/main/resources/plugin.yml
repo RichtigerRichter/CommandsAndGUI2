@@ -29,14 +29,7 @@ commands:
   commandsandgui:
     description: opens the GUI of CommandAndGUI
     usage: /<command>
-    aliases: ["cag"]
-    permission: commandsAndGUI.command.gui
-    permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.gui permission)
-
-  gui:
-    description: opens the GUI of CommandAndGUI
-    usage: /<command>
-    aliases: []
+    aliases: ["cag","gui"]
     permission: commandsAndGUI.command.gui
     permission-message: You do not have permission to use this command (you need the commandsAndGUI.command.gui permission)
 
