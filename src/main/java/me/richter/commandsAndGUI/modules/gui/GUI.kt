@@ -17,9 +17,25 @@ abstract class GUI(protected var guiData: GUIData) : InventoryHolder {
     abstract fun setGUIItems()
     abstract fun handleGUI(event: InventoryClickEvent)
 
+    // to use when going "forwards" to the next gui
+    fun open(lastGUI: GUI) {
+        inventory = Bukkit.createInventory(this, getSlots(), Text.miniMessage(getGUIName()))
+        this.setGUIItems()
+        guiData.lastGUIListAdd(lastGUI)
+        guiData.getOwner().openInventory(inventory as Inventory)
+    }
+
+    fun update() {
+        inventory = Bukkit.createInventory(this, getSlots(), Text.miniMessage(getGUIName()))
+        this.setGUIItems()
+        guiData.getOwner().openInventory(inventory as Inventory)
+    }
+
+    // to use when going "backwards" to the last gui
     fun open() {
         inventory = Bukkit.createInventory(this, getSlots(), Text.miniMessage(getGUIName()))
         this.setGUIItems()
+        guiData.lastGUIListRemoveLast()
         guiData.getOwner().openInventory(inventory as Inventory)
     }
 

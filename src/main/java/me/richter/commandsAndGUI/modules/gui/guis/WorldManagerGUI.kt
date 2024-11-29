@@ -51,9 +51,10 @@ class WorldManagerGUI(guiData : GUIData) : GUI(guiData) {
     }
 
     override fun handleGUI(event: InventoryClickEvent) {
-        if (event.slot == getSlots() - 8) {
-            MainGUI(guiData).open()
-            //TODO remember last gui + the page the gui was on (if paginated gui)
+
+        when (event.slot) {
+            getSlots() - 8 -> { guiData.lastGUIListGetLast().open() }
         }
+
     }
 }

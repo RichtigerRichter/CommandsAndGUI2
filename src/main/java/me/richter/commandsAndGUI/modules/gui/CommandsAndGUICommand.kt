@@ -18,7 +18,9 @@ class CommandsAndGUICommand : CommandExecutor, TabCompleter {
             return true
         }
 
-        MainGUI(Main.instance.getGUIData(sender)).open()
+        val guiData: GUIData = Main.instance.getGUIData(sender)
+        guiData.lastGUIListAdd(MainGUI(guiData))
+        guiData.lastGUIListGetLast().update()
 
         /*
         if (args.size >= 2) {

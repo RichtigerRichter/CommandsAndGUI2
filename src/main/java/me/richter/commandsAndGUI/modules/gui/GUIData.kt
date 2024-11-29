@@ -6,7 +6,8 @@ class GUIData(player: Player) {
 
     private var owner: Player = player
     private var selectedPlayer: Player = player
-    private var playerSelectShowSelfFirst = true
+    private var playerSelectShowSelfFirst: Boolean = true
+    private var lastGUIList: MutableList<GUI> = mutableListOf()
 
     fun getOwner(): Player {
         return owner
@@ -26,6 +27,18 @@ class GUIData(player: Player) {
 
     fun setPlayerSelectShowSelfFirst(playerSelectShowSelfFirst: Boolean) {
         this.playerSelectShowSelfFirst = playerSelectShowSelfFirst
+    }
+
+    fun lastGUIListGetLast(): GUI {
+        return lastGUIList.last()
+    }
+
+    fun lastGUIListAdd(gui: GUI) {
+        this.lastGUIList.add(gui)
+    }
+
+    fun lastGUIListRemoveLast() {
+        this.lastGUIList.removeLast()
     }
 
 }

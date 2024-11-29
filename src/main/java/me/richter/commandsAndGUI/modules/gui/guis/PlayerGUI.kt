@@ -80,12 +80,12 @@ class PlayerGUI(guiData: GUIData) : GUI(guiData) {
             }
 
             MainItems().itemGuiOpenWorkstation() -> {
-                WorkstationsGUI(guiData).open()
+                WorkstationsGUI(guiData).open(this)
                 return
             }
 
             MainItems().itemGuiFlightLogo() -> {
-                FlySettingsGUI(guiData).open()
+                FlySettingsGUI(guiData).open(this)
                 return
             }
 
@@ -140,7 +140,7 @@ class PlayerGUI(guiData: GUIData) : GUI(guiData) {
         }
 
         if (event.slot == getSlots() - 8) {
-            PlayerSelectGUI(guiData).open()
+            guiData.lastGUIListGetLast().open()
         }
     }
 }

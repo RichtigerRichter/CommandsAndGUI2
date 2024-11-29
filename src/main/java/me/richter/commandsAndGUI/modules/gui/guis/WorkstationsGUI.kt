@@ -100,8 +100,7 @@ class WorkstationsGUI(guiData: GUIData) : GUI(guiData) {
         }
 
         if (event.slot == getSlots() - 8) {
-            MainGUI(guiData).open()
-            //TODO remember last gui + the page the gui was on (if paginated gui)
+            guiData.lastGUIListGetLast().open()
         }
     }
 }

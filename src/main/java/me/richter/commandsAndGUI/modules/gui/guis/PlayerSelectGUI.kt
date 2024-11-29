@@ -227,19 +227,18 @@ class PlayerSelectGUI(guiData: GUIData) : GUI(guiData) {
                 inventory.setItem(event.slot, offlinePlayerItem)
             } else {
                 guiData.setSelectedPlayer(Bukkit.getPlayer(uuid)!!)
-                PlayerGUI(guiData).open()
+                PlayerGUI(guiData).open(this)
             }
         }
 
         if (event.slot == getSlots() - 9 && page > 0) {
             page -= 1
-            super.open()
+            super.update()
             //TODO right click to go to first page
         }
 
         if (event.slot == getSlots() - 8) {
-            MainGUI(guiData).open()
-            //TODO remember last gui + the page the gui was on (if paginated gui)
+            guiData.lastGUIListGetLast().update()
         }
 
         if (event.slot == getSlots() - 7) {
@@ -259,12 +258,12 @@ class PlayerSelectGUI(guiData: GUIData) : GUI(guiData) {
 
         if (event.slot == getSlots() - 4) {
             guiData.setPlayerSelectShowSelfFirst(!guiData.getPlayerSelectShowSelfFirst())
-            super.open()
+            super.update()
         }
 
         if (event.slot == getSlots() - 1 && pageMax > page) {
             page += 1
-            super.open()
+            super.update()
             //TODO right click to go to last page
         }
     }

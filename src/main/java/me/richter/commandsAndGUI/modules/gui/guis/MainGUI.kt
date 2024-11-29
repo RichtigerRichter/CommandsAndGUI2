@@ -67,15 +67,15 @@ class MainGUI(guiData: GUIData) : GUI(guiData) {
         val guiOwner = event.whoClicked as Player
 
         if (event.slot == 10) {
-            PlayerSelectGUI(guiData).open()
+            PlayerSelectGUI(guiData).open(this)
         }
 
         if (event.slot == 12) {
-            WorldManagerGUI(guiData).open()
+            WorldManagerGUI(guiData).open(this)
         }
 
         if (event.slot == 14) {
-            WorkstationsGUI(guiData).open()
+            WorkstationsGUI(guiData).open(this)
         }
 
         if (event.slot == 16) {

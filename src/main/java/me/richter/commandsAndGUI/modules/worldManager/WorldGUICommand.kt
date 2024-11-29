@@ -24,7 +24,7 @@ class WorldGUICommand(private val plugin: JavaPlugin) : CommandExecutor, TabComp
         val player = Bukkit.getPlayer(sender.uniqueId)!!
 
         if (args[0] == "gui") {
-            WorldManagerGUI(Main.instance.getGUIData(sender)).open()
+            WorldManagerGUI(Main.instance.getGUIData(sender)).update()
         }
 
         if (args.size == 2 && args[0] == "createTempDevWorld") {

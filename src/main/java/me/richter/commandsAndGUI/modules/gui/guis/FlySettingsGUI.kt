@@ -70,7 +70,7 @@ class FlySettingsGUI(guiData: GUIData) : GUI(guiData) {
             9 * 1 + 6 -> { guiData.getSelectedPlayer().flySpeed = 0.500f }
             9 * 1 + 7 -> { guiData.getSelectedPlayer().flySpeed = 0.750f }
             9 * 1 + 8 -> { guiData.getSelectedPlayer().flySpeed = 1.000f }
-            getSlots() - 8 -> { MainGUI(guiData).open() }
+            getSlots() - 8 -> { guiData.lastGUIListGetLast().open() }
         }
 
         if (event.slot in 9 * 1 + 0..9 * 1 + 8) {
@@ -79,7 +79,7 @@ class FlySettingsGUI(guiData: GUIData) : GUI(guiData) {
             } else {
                 guiData.getOwner().sendMessage(Component.text(Message.getFlySpeedFor((guiData.getSelectedPlayer().flySpeed * 1000).toInt().toString(), guiData.getSelectedPlayer().name)))
             }
-            super.open()
+            super.update()
         }
 
     }
