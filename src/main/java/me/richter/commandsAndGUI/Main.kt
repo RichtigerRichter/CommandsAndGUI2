@@ -42,6 +42,8 @@ import me.richter.commandsAndGUI.module.vanish.PlayerQuitEvent
 import me.richter.commandsAndGUI.module.vanish.VanishCommand
 import me.richter.commandsAndGUI.module.vanish.VanishManager
 import me.richter.commandsAndGUI.module.workstations.OpenCommand
+import me.richter.commandsAndGUI.module.worldGuard2.AdminLogListener
+import me.richter.commandsAndGUI.module.worldGuard2.LogCommand
 import me.richter.commandsAndGUI.module.worldGuard2.LogEverything
 import me.richter.commandsAndGUI.module.worldGuard2.PreventPlayerActionesListener
 import me.richter.commandsAndGUI.module.worldManager.WorldGUICommand
@@ -74,6 +76,9 @@ class Main : JavaPlugin() {
         val trackMap: MutableMap<UUID, MutableMap<String, MutableList<Any>>> = mutableMapOf()
 
         val sitMap: MutableMap<Player, Entity> = mutableMapOf()
+        val layMap: MutableList<Player> = mutableListOf()
+
+
 
         val initWorldCreator: MutableMap<String, WorldCreator> = mutableMapOf()
         val BackpackMap: MutableMap<String, Inventory> = mutableMapOf()
@@ -83,6 +88,8 @@ class Main : JavaPlugin() {
         val showInvisibleItemFrameParticleMap: MutableMap<Player, Boolean> = mutableMapOf()
 
         val animationsCount: MutableMap<String, Int> = mutableMapOf()
+
+        val playersInAdminMode: MutableList<Player> = mutableListOf()
 
         var isPapiEnabled: Boolean = false
 
@@ -153,6 +160,8 @@ class Main : JavaPlugin() {
         getCommand("countdown")!!.setExecutor(CountdownCommand())
         getCommand("testScoreboard")!!.setExecutor(TestScoreboardCommand())
         getCommand("track")!!.setExecutor(TrackCommand())
+        getCommand("adminMode")!!.setExecutor(LogCommand())
+
 
 
 
@@ -177,6 +186,7 @@ class Main : JavaPlugin() {
         server.pluginManager.registerEvents(ElytraFlyListener(), this)
         server.pluginManager.registerEvents(InvisFrameListener(), this)
         server.pluginManager.registerEvents(LogEverything(), this)
+        server.pluginManager.registerEvents(AdminLogListener(), this)
 
 
 

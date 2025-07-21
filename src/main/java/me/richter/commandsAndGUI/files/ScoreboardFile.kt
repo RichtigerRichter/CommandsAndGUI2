@@ -33,7 +33,7 @@ class ScoreboardFile {
 
 			if (textMaybeList != null) {
 				for (text in textMaybeList) {
-					textList.addFirst(text as String)
+					textList.add(0, text as String)
 				}
 			}
 

@@ -29,9 +29,9 @@ class GetItemCommand: CommandExecutor, TabCompleter {
 		p3: Array<out String>?
 	): MutableList<String> {
 		val completions: MutableList<String> = mutableListOf()
-		completions.addLast("FlySoup")
-		completions.addLast("InvisItemFrame")
-		completions.addLast("InvisGlowItemFrame")
+		completions.add("FlySoup")
+		completions.add("InvisItemFrame")
+		completions.add("InvisGlowItemFrame")
 
 
 		return completions

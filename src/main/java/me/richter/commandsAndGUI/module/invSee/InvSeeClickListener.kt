@@ -1,20 +1,23 @@
 package me.richter.commandsAndGUI.module.invSee
 
 import me.richter.commandsAndGUI.Main
+import me.richter.commandsAndGUI.items.ItemBuilder
 import me.richter.commandsAndGUI.items.guiItems.GeneralItems
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.inventory.InventoryDragEvent
+import org.bukkit.inventory.InventoryView
 
 class InvSeeClickListener(): Listener {
     @EventHandler
     fun invSeeGUIClickListener(event: InventoryClickEvent) {
-        if(event.currentItem == null) return
         val player = event.whoClicked
-        val inventory = Main.guiInvSeeMap[player.uniqueId]
-        //if(event.clickedInventory != inventory) { return }
+        val inventories = Main.guiInvSeeMap.values
+        if(!inventories.contains(event.clickedInventory)) { return }
 
         when (event.currentItem) {
             GeneralItems().itemGUIFillerGray() -> { event.isCancelled = true }
@@ -23,7 +26,8 @@ class InvSeeClickListener(): Listener {
 
             GeneralItems().itemGuiClose() -> { event.inventory.close(); event.isCancelled = true }
         }
-
+        if (player.itemOnCursor.type == Material.AIR && ItemBuilder().getCustomTagValue(event.currentItem ?: return, "CAG.gui.item") == "placeholder") event.isCancelled = true
+        if (event.isShiftClick && ItemBuilder().getCustomTagValue(event.currentItem ?: return, "CAG.gui.itme") == "placeholder") event.isCancelled = true
     }
 
 
@@ -120,7 +124,26 @@ class InvSeeClickListener(): Listener {
     fun updateTargetInvOnClick(event: InventoryClickEvent) {
         // Check if the clicked item or inventory is null
         val player = event.whoClicked as Player
-        val inventory = event.clickedInventory ?: return
+        val view: InventoryView = event.whoClicked.openInventory
+        val inventory = view.topInventory
+
+        val target = Bukkit.getPlayer(InvSeeGUI().getTargetFromInv(inventory) ?: return) ?: return
+
+        if (inventory == Main.guiInvSeeMap[target.uniqueId]) {
+            // Run the update directly on the main thread
+            Bukkit.getScheduler().runTask(Main.instance, Runnable {
+                InvSeeGUI().updateTargetInv(target, inventory)
+            })
+        }
+    }
+
+    @EventHandler
+    fun updateTargetInvOnDrag(event: InventoryDragEvent) {
+        // Check if the clicked item or inventory is null
+        val player = event.whoClicked as Player
+        val view: InventoryView = event.whoClicked.openInventory
+        val inventory = view.topInventory
+
         val target = Bukkit.getPlayer(InvSeeGUI().getTargetFromInv(inventory) ?: return) ?: return
 
         if (inventory == Main.guiInvSeeMap[target.uniqueId]) {

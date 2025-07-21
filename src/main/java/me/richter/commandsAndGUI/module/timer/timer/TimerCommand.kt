@@ -90,17 +90,17 @@ class TimerCommand: CommandExecutor, TabCompleter {
 		if (args.isNullOrEmpty()) return emptyList
 		if (args.size == 1) {
 			val completions: MutableList<String> = mutableListOf()
-			completions.addLast("resume")
-			completions.addLast("pause")
-			completions.addLast("set")
-			completions.addLast("reset")
-			completions.addLast("start")
+			completions.add("resume")
+			completions.add("pause")
+			completions.add("set")
+			completions.add("reset")
+			completions.add("start")
 
 			return completions
 		}
 		if (args.size == 2 && args[0] == "set") {
 			val completions: MutableList<String> = mutableListOf()
-			completions.addLast("<hh:mm:ss>")
+			completions.add("<hh:mm:ss>")
 
 			return completions
 		}

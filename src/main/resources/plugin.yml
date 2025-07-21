@@ -114,6 +114,9 @@ commands:
   track:
     description: track a person using a compass
 
+  adminMode:
+    description: enable the admin mode
+
 
 
 
