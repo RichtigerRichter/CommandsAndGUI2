@@ -17,7 +17,7 @@ class SitListener : Listener {
         if (!Main.sitMap.containsKey(player)) return
         val chair = Main.sitMap[player] as Entity
         val position = chair.location.add(0.0, 0.0, 0.0)
-        player.teleport(position)
+        //player.teleport(position)
         chair.remove()
         Main.sitMap.remove(player)
     }

@@ -3,6 +3,7 @@ package me.richter.commandsAndGUI.module.fly.elytra
 import me.richter.commandsAndGUI.files.PlayerDataFile
 import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.entity.Entity
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -17,6 +18,7 @@ class ElytraFlyListener: Listener {
 	fun elytraFlyEvent(event: EntityToggleGlideEvent) {
 		val player = event.entity
 		if (player !is Player) return
+        val playerAsEntity = player as Entity
 
 		if (!PlayerDataFile().getAllowElytralessElytraFlight(player)) return //wenn nicht elytra fliegen darf
 
@@ -29,7 +31,7 @@ class ElytraFlyListener: Listener {
 			} //wenn elytra anhat
 		}
 
-		if (player.isOnGround) {
+		if (playerAsEntity.isOnGround) {
 			PlayerDataFile().setAllowElytralessElytraFlight(player, false)
 			return
 		} //wenn auf dem boden

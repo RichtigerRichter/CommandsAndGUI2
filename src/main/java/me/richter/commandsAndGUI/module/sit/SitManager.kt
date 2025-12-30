@@ -14,8 +14,7 @@ class SitManager {
     }
     fun sitTurtle (player: Player) {
         if (Main.sitMap.containsKey(player)) return
-        if (!player.isOnGround) return
-        if (player.fallDistance != 0f) return
+        if (!(player as Entity).isOnGround) return
         val position = player.location.add(0.0, 0.0, 0.0)
         val tempSpawnLoc = Location(player.world, -10000.0, -10000.0, -10000.0)
         val turtle = position.world.spawnEntity(tempSpawnLoc, EntityType.TURTLE) as Turtle
@@ -48,7 +47,7 @@ class SitManager {
 
     }
 
-    //TODO lay wir sofort 
+    //TODO lay wir sofort gecanceled
     fun layPlayer(player: Player) {
         Main.layMap.add(player)
         player.pose = Pose.SLEEPING
