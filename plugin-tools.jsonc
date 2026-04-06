@@ -4,10 +4,10 @@
   "pluginName": "CommandsAndGUI",
 
   // the folder in which intellij put the compiled jar files
-  "jarFolder": "C:/Users/Richter/Documents/IntelliJ Projekte/Commands and GUI2/target",
+  "jarFolder": "/home/richter/Documents/Intellij/CommandsAndGUI/target",
 
   // the path to the pom.xml which has all of your maven config
-  "pomXML": "C:/Users/Richter/Documents/IntelliJ Projekte/Commands and GUI2/pom.xml",
+  "pomXML": "/home/richter/Documents/Intellij/CommandsAndGUI/pom.xml",
 
   // true		- the script automatically sets the next version in the pom.xml
   // false	- the pom.xml remains untouched
@@ -22,7 +22,7 @@
     "local": {
 
       // put the path of your folder in here
-      "path": "D:/Games/Minecraft/plugin test server/_1.21 plugin/plugins",
+      "path": "/mnt/LinuxGaming/Minecraft/Server/_1.21_plugin/plugins",
 
       // the folder might not be on the local machine and instead on an sftp server
       // set the following options if this is the case
@@ -54,8 +54,8 @@
         "enabled": "true",
         "ip": "192.168.178.89",
         "port": "51002",
-        "username": "richter.55b51a5d",
-        "password": "8F&M%Ge&@Efz7ovpA&65qg3V$yK!X^y3"
+        "username": "un",
+        "password": "pw"
       },
 
       // old		- the script looks for all .jar-files starting with the the name of your plugin and append them with .old
@@ -83,17 +83,18 @@
 
       // it is possible to execute multiple commands
       "command": ["reload confirm"]
-    },
+    }/*,
     "[Richtiger Dino] 52001 - CommandsAndGUI dev": {
 
       // set the rcon options to allow the script to connect to the server
       "enabled": "true",
       "ip": "192.168.178.89",
       "port": "62001",
-      "password": "52001",
+      "password": "pw",
 
       // it is possible to execute multiple commands
       "command": ["reload confirm"]
     }
+      */
   }
 }
