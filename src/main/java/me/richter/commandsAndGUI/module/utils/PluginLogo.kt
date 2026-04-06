@@ -10,7 +10,7 @@ class PluginLogo {
 	private val t = "\u001B[97m" //text => weiß
 
 
-	fun printPluginInfo() {
+    fun printPluginInfo() {
 		printColored("####################################################################################################")
 		printColored("#                                                                                                  #")
 		printColored("#  ██████╗ ██╗ ██████╗██╗  ██╗████████╗███████╗██████╗ ██╗███████╗    ███████╗██╗  ██╗██╗████████╗ #")
