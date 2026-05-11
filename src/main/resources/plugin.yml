@@ -139,3 +139,6 @@ permissions:
 
   commandsAndGUI.world.moveCam:
     default: true
+
+  commandsAndGUI.world.teleport:
+    default: true
