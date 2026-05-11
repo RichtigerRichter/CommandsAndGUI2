@@ -19,21 +19,42 @@ class InvisFrameListener: Listener {
 			for (entity in player.getNearbyEntities(50.0, 50.0, 50.0)) {
 				if (entity.type != EntityType.ITEM_FRAME && entity.type != EntityType.GLOW_ITEM_FRAME) continue
 				if (!entity.isInvisible) continue
-				player.spawnParticle(Particle.COMPOSTER, entity.location, 1)
 
-			}
+                val item = if (entity.type == EntityType.ITEM_FRAME) {
+                    ItemStack(Material.ITEM_FRAME)
+                } else {
+                    ItemStack(Material.GLOW_ITEM_FRAME)
+                }
+
+                player.spawnParticle(Particle.ITEM, entity.location, 1, 0.0, 0.0, 0.0, 0.0, item)
+                //player.spawnParticle(Particle.COMPOSTER, entity.location, 1)
+
+                if (ItemBuilder().getCustomTagValue(player.inventory.itemInMainHand, "cag.item") != "invisibleItemFrame") {
+                    Main.showInvisibleItemFrameParticleMap.remove(player)
+                }
+            }
 		}
 	}
 
 	@EventHandler
 	fun itemFramePlaceEvent(event: HangingPlaceEvent) {
-		if (event.entity.type != EntityType.ITEM_FRAME && event.entity.type != EntityType.GLOW_ITEM_FRAME) return
-		val item = event.itemStack ?: return
+		if (event.entity.type == EntityType.ITEM_FRAME) {
+            val item = event.itemStack ?: return
 
-		if (ItemBuilder().getCustomTagValue(item, "cag.item") == "invisibleItemFrame") {
-			val entity = event.entity as ItemFrame
-			entity.isVisible = false
-		}
+            if (ItemBuilder().getCustomTagValue(item, "cag.item") == "invisibleItemFrame") {
+                val entity = event.entity as ItemFrame
+                entity.isVisible = false
+            }
+        }
+
+        if (event.entity.type == EntityType.GLOW_ITEM_FRAME) {
+            val item = event.itemStack ?: return
+
+            if (ItemBuilder().getCustomTagValue(item, "cag.item") == "invisibleItemFrame") {
+                val entity = event.entity as ItemFrame
+                entity.isVisible = false
+            }
+        }
 
 	}
 
@@ -46,16 +67,23 @@ class InvisFrameListener: Listener {
 
 		// Check if the item frame was invisible
 		if (!entity.isVisible) {
-			event.isCancelled = true // Cancel the default behavior
+			event.isCancelled = true
 
-			val itemFrameItem = InvisibleItemFrameManager().invisibleItemFrameItem()
+            // Cancel the default behavior
+            val itemFrameItem: ItemStack = if (event.entity.type == EntityType.ITEM_FRAME) {
+                InvisibleItemFrameManager().invisibleItemFrameItem()
+            } else {
+                InvisibleItemFrameManager().invisibleGlowItemFrameItem()
+            }
 
 			entity.world.dropItem(entity.location, itemFrameItem)
-			entity.world.dropItem(entity.location, (event.entity as ItemFrame).item)
+			//entity.world.dropItem(entity.location, (event.entity as ItemFrame).item)
 
 			entity.remove()
 		}
-	}
+
+
+    }
 
 	@EventHandler
 	fun onSlotChange(event: PlayerItemHeldEvent) {
