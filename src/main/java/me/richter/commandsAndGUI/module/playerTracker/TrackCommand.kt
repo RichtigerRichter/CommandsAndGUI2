@@ -82,7 +82,7 @@ class TrackCommand : CommandExecutor, TabCompleter {
 
 		when (args.size) {
 			1 -> {
-				completions.add("[TrackingPlayer]")
+				completions.add("[PlayerWhoIsTracking]")
 				completions.addAll(Bukkit.getOnlinePlayers().map { it.name })
 			}
 			2 -> {
