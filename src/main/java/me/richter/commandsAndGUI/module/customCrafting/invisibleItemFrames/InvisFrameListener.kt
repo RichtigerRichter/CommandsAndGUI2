@@ -77,7 +77,7 @@ class InvisFrameListener: Listener {
             }
 
 			entity.world.dropItem(entity.location, itemFrameItem)
-			//entity.world.dropItem(entity.location, (event.entity as ItemFrame).item)
+			entity.world.dropItem(entity.location, entity.item)
 
 			entity.remove()
 		}
